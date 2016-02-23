@@ -13,10 +13,10 @@
         }
     ],
     "require": {
-        "mandarinmedien/mmcmfnodebundle": "0.*",
-        "mandarinmedien/mmcmfroutingbundle": "0.*",
-        "mandarinmedien/mmcmfcontentbundle" : "0.*",
-        "mandarinmedien/mmcmfmenubundle" : "0.*"
+        "mandarinmedien/mmcmfnodebundle": "dev-master",
+        "mandarinmedien/mmcmfroutingbundle": "dev-master",
+        "mandarinmedien/mmcmfcontentbundle" : "dev-master",
+        "mandarinmedien/mmcmfmenubundle" : "dev-master"
     },
     "repositories": [
         {
