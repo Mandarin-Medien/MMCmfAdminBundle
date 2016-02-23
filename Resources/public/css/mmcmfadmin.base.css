@@ -1,0 +1,75 @@
+iframe.edit-iframe {
+  border: 1px solid #ccc;
+  width: 100%;
+  background: #fff;
+  height: 100%;
+  position: relative;
+  transition: all .5s;
+}
+.viewport-switch {
+  text-align: right;
+  margin: -15px;
+}
+.viewport-switch a {
+  display: inline-block;
+  font-size: 30px;
+  padding: 5px;
+  border-right: 1px solid #ccc;
+}
+.admin-menu-list {
+  padding: 0;
+  margin: 0;
+}
+.admin-menu-list .add-sub-item {
+  display: none;
+  color: #aaa;
+  font-size: 12px;
+}
+.admin-menu-list .add-sub-item span.name {
+  color: #999;
+}
+.admin-menu-item {
+  padding: 0px;
+  border-bottom: 1px dotted #ccc;
+  border-top: 1px dotted #ccc;
+  margin-top: -1px;
+  list-style: none;
+  position: relative;
+}
+.admin-menu-item .group {
+  padding: 10px;
+}
+.admin-menu-item span.draggable {
+  display: inline-block;
+  width: 20px;
+  color: #ccc;
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+  transition: all .3s;
+}
+.admin-menu-item span.name {
+  color: #333;
+  display: inline-block;
+  min-width: 30%;
+}
+.admin-menu-item span.route {
+  color: #999;
+}
+.admin-menu-item span.options {
+  float: right;
+}
+.admin-menu-item .admin-menu-item {
+  padding-left: 30px;
+}
+.admin-menu-item .admin-menu-item:before {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  color: #999;
+  font-family: FontAwesome;
+  content: '\f148';
+  display: inline-block;
+  transform: rotate(90deg);
+}

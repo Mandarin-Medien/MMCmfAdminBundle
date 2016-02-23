@@ -1,0 +1,29 @@
+
+    {% for item in items %}
+        <li class="admin-menu-item clearfix" data-menu-item="{{ item.id }}">
+
+            <div class="group">
+                <span class="draggable fa fa-ellipsis-v"></span>
+                <span contenteditable="true" class="name">
+                     {{ item.name }}
+                </span>
+                <span data-route-id="{{ item.nodeRoute.id }}" class="route">{{ item.nodeRoute.route }}</span>
+                <span class="options">
+                    <a><i class="fa fa-trash"></i></a>
+                </span>
+            </div>
+
+
+            <ul class="admin-menu-list">
+                {% if item.items|length %}
+                    {% include "@MMCmfAdmin/Admin/Menu/menu.edit.menu.html.twig" with {'items' : item.items, class: 'admin-submenu-list'} %}
+                {% else %}
+                    <li class="admin-menu-item add-sub-item">
+                        <div class="group">
+                            <span class="name">Unterelement hinzufügen</span>
+                        </div>
+                    </li>
+                {% endif %}
+            </ul>
+        </li>
+    {% endfor %}

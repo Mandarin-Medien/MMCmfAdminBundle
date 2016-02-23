@@ -1,0 +1,34 @@
+<!-- sidebar: style can be found in sidebar.less -->
+<section class="sidebar">
+
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel"></div>
+
+    <!-- search form (Optional) -->
+    {#<form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+    </form>#}
+    <!-- /.search form -->
+
+    <!-- Sidebar Menu -->
+    <ul class="sidebar-menu">
+        {#<li class="header">Verwalten</li>#}
+        <!-- Optionally, you can add icons to the links -->
+
+        {% for item in items %}
+            <li>
+                <a href="{% if item.action %}{{ path(item.action) }}{% endif %}">
+                    <i class="fa fa-{{ item.icon }}"></i> <span>{{ item.name }}</span>
+                </a>
+            </li>
+        {% endfor %}
+
+    </ul>
+    <!-- /.sidebar-menu -->
+</section>

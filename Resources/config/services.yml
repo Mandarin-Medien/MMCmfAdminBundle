@@ -1,0 +1,36 @@
+services:
+
+    mm_cmf_admin.widget_factory:
+        class: MandarinMedien\MMCmfAdminBundle\Admin\WidgetFactory
+
+    mm_cmf_admin.admin_sidebar:
+        class: MandarinMedien\MMCmfAdminBundle\Admin\AdminMenu
+
+
+    mm_cmf_admin.admin_edit:
+        class: MandarinMedien\MMCmfAdminBundle\Admin\Widget
+        factory: ["@mm_cmf_admin.widget_factory", createWidget]
+        arguments: ["Inhalte bearbeiten", "mm_cmf_admin_homepage", "edit"]
+        tags:
+          - {name: mm_cmf_admin.admin_menu}
+
+    mm_cmf_admin.admin_pages:
+        class: MandarinMedien\MMCmfAdminBundle\Admin\Widget
+        factory: ["@mm_cmf_admin.widget_factory", createWidget]
+        arguments: ["Seite", "mm_cmf_admin_page", "file-o"]
+        tags:
+          - {name: mm_cmf_admin.admin_menu}
+
+    mm_cmf_admin.admin_routes:
+        class: MandarinMedien\MMCmfAdminBundle\Admin\Widget
+        factory: ["@mm_cmf_admin.widget_factory", createWidget]
+        arguments: ["Routen", null, "link"]
+        tags:
+          - {name: mm_cmf_admin.admin_menu}
+
+    mm_cmf_admin.admin_menus:
+        class: MandarinMedien\MMCmfAdminBundle\Admin\Widget
+        factory: ["@mm_cmf_admin.widget_factory", createWidget]
+        arguments: ["Menus", "mm_cmf_admin_menu", "bars"]
+        tags:
+          - {name: mm_cmf_admin.admin_menu}

@@ -1,0 +1,47 @@
+{% extends "MMCmfAdminBundle:Admin:admin.html.twig" %}
+
+{% block admin_body_head %}
+    <h1>
+        Menues
+        <small>Optional description</small>
+    </h1>
+{% endblock %}
+
+{% block admin_body_content %}
+    <div class="row">
+        <div class="col-xs-12 col-md-8">
+            <div class="box box-default ">
+                <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-edit"></i> Menues bearbeiten</h3></div>
+                <div class="box-body">
+                    <table class="table table-responsive">
+                        <tbody>
+                        {% for menu in menues %}
+                            <tr>
+                                <td>{{ menu.name }}</td>
+                                <td><a><i class="fa fa-edit"></i></a></td>
+                                <td><a><i class="fa fa-trash"></i></a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <i class="fa fa-plus-circle"></i>
+                         Menü hinzufügen
+                    </h3>
+                </div>
+                <div class="box-body">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse ex quam quasi ratione vero. Ab aperiam aut
+                    autem consectetur debitis dolorum hic illo neque nisi omnis, perspiciatis repellendus similique voluptatibus.
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
