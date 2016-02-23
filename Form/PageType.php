@@ -23,6 +23,7 @@ class PageType extends AbstractType
             ->add('title')
             ->add('parent', 'entity', array(
                 'class' => 'MandarinMedien\MMCmfContentBundle\Entity\Page',
+                'required' => false,
                 'query_builder' => function(EntityRepository $repository) {
                     return $repository->createQueryBuilder('p')
                        ;
