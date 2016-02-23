@@ -1,0 +1,45 @@
+{
+    "name": "mandarinmedien/mmcmfadminbundle",
+    "description": "This SymfonyBundles will combine all MMCmf-SymfonyBundles to a fully functional PageAdminSystem.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christof Hufnagel",
+            "email": "ch@mandarin-medien.de"
+        },
+        {
+            "name": "Toni Gurski",
+            "email": "tg@mandarin-medien.de"
+        }
+    ],
+    "require": {
+        "mandarinmedien/mmcmfnodebundle": "0.*",
+        "mandarinmedien/mmcmfroutingbundle": "0.*",
+        "mandarinmedien/mmcmfcontentbundle" : "0.*",
+        "mandarinmedien/mmcmfmenubundle" : "0.*"
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:Mandarin-Medien/MMCmfRoutingBundle.git"
+        },
+        {
+            "type": "git",
+            "url": "git@github.com:Mandarin-Medien/MMCmfContentBundle.git"
+        },
+        {
+            "type": "git",
+            "url": "git@github.com:Mandarin-Medien/MMCmfMenuBundle.git"
+        },
+        {
+            "type": "git",
+            "url": "git@github.com:Mandarin-Medien/MMCmfNodeBundle.git"
+        }
+    ],
+    "autoload" : {
+        "psr-0" : {
+            "MandarinMedien\\MMCmfAdminBundle" : ""
+        }
+    },
+    "target-dir" : "MandarinMedien/MMCmfAdminBundle"
+}
