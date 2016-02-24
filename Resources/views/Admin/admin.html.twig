@@ -11,24 +11,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
     {%  block stylesheets %}
-        <!-- Bootstrap 3.3.5 -->
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="{{ asset('assets/AdminLte/dist/css/AdminLTE.min.css') }}">
-        <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-              page. However, you can choose any other skin. Make sure you
-              apply the skin class to the body tag so the changes take effect.
-        -->
-        <link rel="stylesheet" href="{{ asset("assets/dragula.js/dist/dragula.min.css") }}">
-        <link rel="stylesheet" href="{{ asset('assets/AdminLte/dist/css/skins/skin-blue.min.css') }}">
-        <link rel="stylesheet" href="{{ asset("bundles/mmcmfadmin/css/mmcmfadmin.base.css") }}">
+        {% stylesheets
+        '@mm_cmf_admin_assets_css'
+        '@mm_cmf_admin_assets_less'
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+
     {% endblock %}
+
+
+
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -176,21 +174,13 @@ desired effect
     <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
-
-<!-- REQUIRED JS SCRIPTS -->
-
-<!-- jQuery 2.1.4 -->
-
 {% block javascripts %}
-    <script src="{{ asset('assets/jquery/dist/jquery.min.js') }}"></script>
-    <!-- Bootstrap 3.3.5 -->
-    <script src="{{ asset('assets/AdminLTE/bootstrap/js/bootstrap.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('assets/AdminLTE/dist/js/app.js') }}"></script>
-
-    <script src="{{ asset("assets/dragula.js/dist/dragula.min.js") }}"></script>
-    <script src="{{ asset('bundles/mmcmfadmin/js/MMCmfAdminEditFrame.js') }}"></script>
-    <script src="{{ asset('bundles/mmcmfadmin/js/core.js') }}"></script>
+    {% javascripts
+    '@mm_cmf_admin_assets_js'
+    '@mm_cmf_content_assets_js' 
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
