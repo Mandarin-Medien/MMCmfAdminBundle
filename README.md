@@ -57,8 +57,8 @@ mm_cmf_routing:
 ```
 ...
 # initates the MMCmfContentBundle
-shell:PROJECT_ROOT: cd vendor/mandarinmedien/mmcmfadminbundle/MandarinMedien/MMCmfContentBundle && bower update && cd ../../../../../ && app/console as:in --symlink && app/console assetic:dump
-
+shell:PROJECT_ROOT: cd  vendor/mandarinmedien/mmcmfcontentbundle/MandarinMedien/MMCmfContentBundle && bower update && cd ../../../../../ && app/console as:in --symlink && app/console assetic:dump
+# initates the MMCmfAdminBundle
 shell:PROJECT_ROOT: cd vendor/mandarinmedien/mmcmfadminbundle/MandarinMedien/MMCmfAdminBundle && bower update && cd ../../../../../ && app/console as:in --symlink && app/console assetic:dump
 shell:PROJECT_ROOT: app/console as:wa
 
