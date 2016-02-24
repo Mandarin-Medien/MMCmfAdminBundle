@@ -1,10 +1,14 @@
 mm_cmf_admin_menu:
     path:     /admin/menu
-    defaults: { _controller: MMCmfAdminBundle:CmfAdmin:menu }
+    defaults: { _controller: MMCmfAdminBundle:CmfAdminMenu:index }
 
 mm_cmf_admin_menu_edit:
     path:     /admin/menu/{id}/edit
-    defaults: { _controller: MMCmfAdminBundle:CmfAdmin:menuEdit }
+    defaults: { _controller: MMCmfAdminBundle:CmfAdminMenu:edit }
+
+mm_cmf_admin_menu_delete:
+    path:     /admin/menu/{id}/delete
+    defaults: { _controller: MMCmfAdminBundle:CmfAdminMenu:delete }
 
 mm_cmf_admin_page:
     path:     /admin/page
@@ -31,6 +35,11 @@ mm_cmf_admin_page_update:
     path:     /admin/page/{id}/update
     defaults: { _controller: MMCmfAdminBundle:CmfAdminPage:update }
 
+
+mm_cmf_admin_homepage_empty:
+    path: /admin/empty
+    defaults: {_controller: MMCmfAdminBundle:CmfAdmin:empty}
+
 mm_cmf_admin_homepage:
     path:     /admin/{route}
-    defaults: { _controller: MMCmfAdminBundle:CmfAdmin:index, route: 1 }
+    defaults: { _controller: MMCmfAdminBundle:CmfAdmin:index, route: null }

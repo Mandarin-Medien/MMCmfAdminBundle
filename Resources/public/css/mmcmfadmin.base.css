@@ -35,6 +35,10 @@ iframe.edit-iframe {
   margin-top: -1px;
   list-style: none;
   position: relative;
+  background: rgba(0, 0, 255, 0.05);
+}
+.admin-menu-item.no-route {
+  background: rgba(139, 0, 0, 0.05);
 }
 .admin-menu-item .group {
   padding: 10px;

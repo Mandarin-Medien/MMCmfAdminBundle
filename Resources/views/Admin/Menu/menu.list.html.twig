@@ -17,9 +17,9 @@
                         <tbody>
                         {% for menu in menues %}
                             <tr>
-                                <td>{{ menu.name }}</td>
-                                <td><a><i class="fa fa-edit"></i></a></td>
-                                <td><a><i class="fa fa-trash"></i></a></td>
+                                <td><a href="{{ path('mm_cmf_admin_menu_edit', {'id': menu.id}) }}">{{ menu.name }}</a></td>
+                                <td><a href="{{ path('mm_cmf_admin_menu_edit', {'id': menu.id}) }}"><i class="fa fa-edit"></i></a></td>
+                                <td><a href="{{ path('mm_cmf_admin_menu_delete', {'id': menu.id}) }}"><i class="fa fa-trash"></i></a></td>
                             </tr>
                         {% endfor %}
                         </tbody>

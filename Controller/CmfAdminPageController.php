@@ -136,10 +136,12 @@ class CmfAdminPageController extends Controller
 
     public function deleteAction(Request $request, $id)
     {
+
+
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        //if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('MMCmfContentBundle:Page')->find($id);
 
@@ -147,9 +149,14 @@ class CmfAdminPageController extends Controller
                 throw $this->createNotFoundException('Unable to find Article entity.');
             }
 
+            if($parent = $entity->getParent())
+            {
+                $parent->removeNode($entity);
+            }
+
             $em->remove($entity);
             $em->flush();
-        }
+        //}
 
         return $this->redirect($this->generateUrl('mm_cmf_admin_page'));
     }

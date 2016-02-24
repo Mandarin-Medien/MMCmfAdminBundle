@@ -1,0 +1,24 @@
+{% block mm_cmf_admin_menu_item_widget %}
+    <div class="group clearfix">
+        <span class="draggable fa fa-ellipsis-v col-xs-1"></span>
+        <span class="name col-xs-5">
+             {{ form_widget(form.name) }}
+        </span>
+        <span class="route col-xs-5">
+            {{ form_widget(form.nodeRoute) }}
+        </span>
+        <span class="options col-xs-1">
+            <a><i class="fa fa-trash"></i></a>
+        </span>
+    </div>
+    {{ form_widget(form.items) }}
+{% endblock %}
+
+{% block mm_cmf_admin_menu_list_type_widget %}
+    <ul class="admin-menu-list">
+        {% for child in form.children %}
+            <li class="admin-menu-item">{{ form_widget(child) }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

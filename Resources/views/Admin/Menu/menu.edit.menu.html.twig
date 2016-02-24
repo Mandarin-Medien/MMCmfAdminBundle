@@ -1,13 +1,13 @@
 
     {% for item in items %}
-        <li class="admin-menu-item clearfix" data-menu-item="{{ item.id }}">
+        <li class="admin-menu-item clearfix {% if iten.nodeRoute is not defined %}no-route{% endif %}" data-menu-item="{{ item.id }}">
 
             <div class="group">
                 <span class="draggable fa fa-ellipsis-v"></span>
                 <span contenteditable="true" class="name">
                      {{ item.name }}
                 </span>
-                <span data-route-id="{{ item.nodeRoute.id }}" class="route">{{ item.nodeRoute.route }}</span>
+                {% if iten.nodeRoute is defined %}<span data-route-id="{{ item.nodeRoute.id }}" class="route">{{ item.nodeRoute.route }}</span>{% endif %}
                 <span class="options">
                     <a><i class="fa fa-trash"></i></a>
                 </span>

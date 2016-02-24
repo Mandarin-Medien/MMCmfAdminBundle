@@ -9,14 +9,33 @@ use Symfony\Component\BrowserKit\Request;
 
 class CmfAdminController extends Controller
 {
-    public function indexAction(NodeRoute $route)
+    public function indexAction(NodeRoute $route = null)
     {
-        return $this->render('MMCmfAdminBundle:Admin:pageedit.html.twig', array(
-            'iframe_path' => $this->get('router')->generate('mm_cmf_node_route', array(
+
+        if($route == null) {
+            $nodeRoutes = $this->getDoctrine()->getRepository('MMCmfRoutingBundle:NodeRoute')->findAll();
+            if(count($nodeRoutes) > 0) {
+                $route = $nodeRoutes[0];
+            }
+        }
+
+        if($route == null) {
+            $path = $this->get('router')->generate('mm_cmf_admin_homepage_empty');
+        } else {
+            $path = $this->get('router')->generate('mm_cmf_node_route', array(
                 'route' => $route
-                )
-            )
+            ));
+        }
+
+        return $this->render('MMCmfAdminBundle:Admin:pageedit.html.twig', array(
+            'iframe_path' => $path
         ));
+    }
+
+
+    public function emptyAction()
+    {
+        return $this->render('@MMCmfAdmin/Admin/page.empty.html.twig');
     }
 
 
