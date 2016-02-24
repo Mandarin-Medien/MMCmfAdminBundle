@@ -1,0 +1,31 @@
+assetic:
+    bundles:
+        - MMCmfAdminBundle
+    assets:
+        mm_cmf_admin_assets_less:
+            filters:
+                  - 'less'
+            inputs:
+                  - '@MMCmfAdminBundle/Resources/less/mmcmfadmin.base.less'
+
+        mm_cmf_admin_assets_js:
+            inputs:
+                  - '@MMCmfAdminBundle/Resources/public/vendor/jquery/dist/jquery.min.js'
+                  - '@MMCmfAdminBundle/Resources/public/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'
+                  - '@MMCmfAdminBundle/Resources/public/vendor/AdminLTE/dist/js/app.js'
+                  - '@MMCmfAdminBundle/Resources/public/vendor/dragula.js/dist/dragula.min.js'
+                  - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdminEditFrame.js'
+                  - '@MMCmfAdminBundle/Resources/public/js/core.js'
+        mm_cmf_admin_assets_css:
+            inputs:
+                  - '@MMCmfAdminBundle/Resources/public/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'
+                  - "@MMCmfAdminBundle/Resources/public/vendor/AdminLte/dist/css/AdminLTE.min.css"
+                  - '@MMCmfAdminBundle/Resources/public/vendor/dragula.js/dist/dragula.min.css'
+                  - '@MMCmfAdminBundle/Resources/public/vendor/AdminLte/dist/css/skins/skin-blue.min.css'
+
+# Twig Configuration
+#twig:
+#    form:
+#        resources:
+#            - MMMediaBundle:Form:mmmedia_upload_collection_widget.html.twig
+#            - MMMediaBundle:Form:mmmedia_upload_widget.html.twig

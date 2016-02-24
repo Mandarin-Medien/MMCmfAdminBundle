@@ -1,0 +1,26 @@
+{
+  "name": "MMCmfAdminBundle",
+  "authors": [
+    "Toni Gurski <tg@mandarin-medien.de>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "~4.5.0",
+    "jquery": "~2.2.0",
+    "AdminLTE": "almasaeed2010/adminlte#~2.3.2",
+    "dragula.js": "dragula#~3.6.6"
+
+  }
+}
