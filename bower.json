@@ -17,7 +17,6 @@
     "tests"
   ],
   "dependencies": {
-    "font-awesome": "~4.5.0",
     "jquery": "~2.2.0",
     "AdminLTE": "almasaeed2010/adminlte#~2.3.2"
   }
