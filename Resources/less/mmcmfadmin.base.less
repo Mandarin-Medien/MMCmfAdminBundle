@@ -28,6 +28,7 @@ iframe.edit-iframe {
 
   padding: 0;
   margin: 0;
+  margin-top: -1px;
 
   .add-sub-item {
     display: none;
@@ -38,40 +39,95 @@ iframe.edit-iframe {
       color: #999;
     }
   }
+
+  .admin-menu-list {
+    margin-left: 60px;
+    /*min-height: 54px;
+    position: relative;
+
+    border-top: 1px dotted #ccc;
+
+
+    &:before {
+      position: absolute;
+      left: -60px;
+      line-height: 54px;
+      top: 0px;
+      width: 55px;
+      text-align: center;
+      color: #3c8dbc;
+      font-family: FontAwesome;
+      content: '\f148';
+      display: inline-block;
+      transform: rotate(90deg);
+    }*/
+  }
 }
+
+
+.admin-menu-options {
+  button.menu-add-item {
+    float: left;
+  }
+
+  button[type=submit] {
+    float: right;
+  }
+}
+
 
 .admin-menu-item {
   padding: 0px;
   border-bottom: 1px dotted #ccc;
   border-top: 1px dotted #ccc;
-  margin-top: -1px;
   list-style: none;
   position: relative;
+  margin-top: -1px;
+  margin-bottom: -1px;
 
   &.gu-mirror {
     visibility: visible !important;
     z-index: 99999999999 !important;
+    ul {
+      display: none;
+    }
   }
 
   &.gu-transit {
-    visibility: hidden;
+    & > * {
+      visibility: hidden;
+    }
+    background: fadeOut(#3c8dbc, 40%);
+    height: 54px;
   }
+
 
   &.showsublist {
     & > ul {
-      min-height: 30px;
+      min-height: 54px;
+      position: relative;
 
-      border: 2px dashed #ccc;
-      margin: 10px;
-      padding: 10px;
+      border-top: 1px dotted #ccc;
+
 
       &:before {
-        content: 'place your subitems here';
+        position: absolute;
+        left: -60px;
+        line-height: 54px;
+        top: 0px;
+        width: 55px;
+        text-align: center;
+        color: #3c8dbc;
+        font-family: FontAwesome;
+        content: '\f148';
+        display: inline-block;
+        transform: rotate(90deg);
       }
     }
   }
 
-  background: fadeOut(blue, 95%);
+
+  //background: fadeOut(blue, 95%);
 
   &.no-route {
     background: fadeOut(darkred, 95%);
@@ -82,14 +138,18 @@ iframe.edit-iframe {
   }
 
   span.draggable {
+    background: #3c8dbc;
+    line-height: 35px;
+    color: #fff;
     display: inline-block;
-    width: 20px;
-    color: #ccc;
+    width: 35px;
+    text-align: center;
     cursor: move;
     cursor: grab;
     cursor: -moz-grab;
     cursor: -webkit-grab;
     transition: all .3s;
+    border-radius: 2px;
   }
 
   span.name {
@@ -104,12 +164,17 @@ iframe.edit-iframe {
 
   span.options {
     float: right;
+    text-align: right;
   }
 
   .admin-menu-item {
-    padding-left: 30px;
+    //padding-left: 55px;
 
-    &:before {
+
+    span.draggable {
+
+    }
+    /*&:before {
       position: absolute;
       left: 10px;
       top: 8px;
@@ -118,6 +183,6 @@ iframe.edit-iframe {
       content: '\f148';
       display: inline-block;
       transform: rotate(90deg);
-    }
+    }*/
   }
 }

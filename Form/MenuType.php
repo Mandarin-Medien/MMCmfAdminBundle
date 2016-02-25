@@ -22,7 +22,9 @@ class MenuType extends AbstractType
         $builder
             ->add('name')
             ->add('items', MenuListType::class)
-            ->add('submit', 'submit')
+            ->add('submit', 'submit', array(
+                'label' => 'speichern'
+            ))
         ;
     }
 

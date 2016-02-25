@@ -12,15 +12,35 @@
                 <a class="menu-remove-item"><i class="fa fa-trash"></i></a>
             </span>
             {{ form_widget(form.position) }}
-            {{ form_widget(form.parent) }}
+            {#{ form_widget(form.parent) }#}
         </div>
         {{ form_widget(form.items) }}
     </li>
 {% endblock %}
 
+{% block mm_cmf_admin_menu_widget %}
+
+    {{ form_row(form.name) }}
+
+    {{ form_row(form.items) }}
+
+    <div class="admin-menu-options form-group">
+        {% if form.items.vars.prototype %}
+            <button class="btn btn-success menu-add-item" data-prototype="{{ form_widget(form.items.vars.prototype)|escape }}"><i class="fa fa-plus"></i> Eintrag hinzufügen</button>
+        {% endif %}
+        {{ form_widget(form.submit) }}
+    </div>
+
+
+{% endblock %}
+
 {% block mm_cmf_admin_menu_list_type_widget %}
 
     {#{ dump(form) }#}
+
+    {#% if form.vars.is_sublist == false and prototype is defined %}
+        <button class="btn btn-success menu-add-item" data-prototype="{{ form_widget(prototype)|escape }}"><i class="fa fa-plus"></i> Eintrag hinzufügen</button>
+    {% endif %#}
 
     <ul
             class="admin-menu-list {%  if form.vars.is_sublist == false %}admin-menu-list-main{% endif %}"
@@ -30,10 +50,6 @@
            {{ form_widget(child) }}
         {% endfor %}
     </ul>
-
-    {% if form.vars.is_sublist == false and prototype is defined %}
-        <button class="btn btn-success menu-add-item" data-prototype="{{ form_widget(prototype)|escape }}"><i class="fa fa-plus"></i> Eintrag hinzufügen</button>
-    {% endif %}
 
 {% endblock %}
 

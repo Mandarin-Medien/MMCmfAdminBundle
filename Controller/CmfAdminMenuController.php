@@ -5,6 +5,7 @@ namespace MandarinMedien\MMCmfAdminBundle\Controller;
 use MandarinMedien\MMCmfMenuBundle\Entity\Menu;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MandarinMedien\MMCmfAdminBundle\Form\MenuType;
+use Symfony\Component\HttpFoundation\Request;
 
 class CmfAdminMenuController extends Controller
 {
@@ -20,6 +21,38 @@ class CmfAdminMenuController extends Controller
                 return get_class($object) == 'MandarinMedien\MMCmfMenuBundle\Entity\Menu';
             })
         ));
+    }
+
+
+    public function newAction()
+    {
+        $entity = new Menu();
+        $form   = $this->createCreateForm($entity);
+
+        return $this->render('MMCmfAdminBundle:Admin/Menu:menu.new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
+
+    public function createAction(Request $request)
+    {
+        $entity = new Menu();
+        $form = $this->createCreateForm($entity);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('mm_cmf_admin_menu'));
+        }
+
+        return array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        );
     }
 
 
@@ -60,9 +93,37 @@ class CmfAdminMenuController extends Controller
         ));
     }
 
-
-    public function deleteAction()
+    public function createCreateForm(Menu $menu)
     {
+        return $this->createForm(new MenuType(), $menu, array(
+            'method' => 'POST',
+            'action' => $this->generateUrl('mm_cmf_admin_menu_create', array(
+                'id' => $menu->getId()
+            ))
+        ));
+    }
+
+
+    public function deleteAction($id)
+    {
+
+        //if ($form->isValid()) {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('MMCmfMenuBundle:Menu')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Menu entity.');
+        }
+
+        if($parent = $entity->getParent())
+        {
+            $parent->removeItem($entity);
+        }
+
+        $em->remove($entity);
+        $em->flush();
+        //}
+
         return $this->redirectToRoute('mm_cmf_admin_menu');
     }
 

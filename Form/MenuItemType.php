@@ -25,12 +25,12 @@ class MenuItemType extends AbstractType
                 )
             ))
             ->add('name')
-            ->add('parent', 'entity_hidden', array(
+            /*->add('parent', 'entity_hidden', array(
                 'class' => 'MandarinMedien\MMCmfMenuBundle\Entity\Menu',
                 'attr' => array(
                     'class' => 'parent-field',
                 )
-            ))
+            ))*/
             #->add('title')
             ->add('nodeRoute')
             ->add('items', MenuListType::class, array(
