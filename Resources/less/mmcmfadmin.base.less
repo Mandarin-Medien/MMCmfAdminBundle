@@ -51,6 +51,29 @@ iframe.edit-iframe {
   list-style: none;
   position: relative;
 
+  &.gu-mirror {
+    visibility: visible !important;
+    z-index: 99999999999 !important;
+  }
+
+  &.gu-transit {
+    visibility: hidden;
+  }
+
+  &.showsublist {
+    & > ul {
+      min-height: 30px;
+
+      border: 2px dashed #ccc;
+      margin: 10px;
+      padding: 10px;
+
+      &:before {
+        content: 'place your subitems here';
+      }
+    }
+  }
+
   background: fadeOut(blue, 95%);
 
   &.no-route {
@@ -69,9 +92,7 @@ iframe.edit-iframe {
     cursor: grab;
     cursor: -moz-grab;
     cursor: -webkit-grab;
-
     transition: all .3s;
-
   }
 
   span.name {

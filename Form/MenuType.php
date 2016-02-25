@@ -32,7 +32,8 @@ class MenuType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MandarinMedien\MMCmfMenuBundle\Entity\Menu'
+            'data_class' => 'MandarinMedien\MMCmfMenuBundle\Entity\Menu',
+            'allow_extra_fields' => true
         ));
     }
 

@@ -14,6 +14,7 @@ assetic:
                   - '@MMCmfAdminBundle/Resources/public/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'
                   - '@MMCmfAdminBundle/Resources/public/vendor/AdminLTE/dist/js/app.js'
                   - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdminEditFrame.js'
+                  - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdminMenu.js'
                   - '@MMCmfAdminBundle/Resources/public/js/core.js'
         mm_cmf_admin_assets_css:
             inputs:

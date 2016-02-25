@@ -2,9 +2,11 @@
 
 namespace MandarinMedien\MMCmfAdminBundle\Form;
 
+use MandarinMedien\MMCmfAdminBundle\Form\Types\EntityHiddenType;
 use MandarinMedien\MMCmfAdminBundle\Form\Types\MenuListType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class MenuItemType extends AbstractType
@@ -17,10 +19,24 @@ class MenuItemType extends AbstractType
     {
 
         $builder
+            ->add('position', 'hidden', array(
+                'attr' => array(
+                    'class' =>'position-field'
+                )
+            ))
             ->add('name')
+            ->add('parent', 'entity_hidden', array(
+                'class' => 'MandarinMedien\MMCmfMenuBundle\Entity\Menu',
+                'attr' => array(
+                    'class' => 'parent-field',
+                )
+            ))
             #->add('title')
             ->add('nodeRoute')
-            ->add('items', MenuListType::class)
+            ->add('items', MenuListType::class, array(
+                'prototype' => false,
+                'is_sublist' => true
+            ))
 
         ;
     }

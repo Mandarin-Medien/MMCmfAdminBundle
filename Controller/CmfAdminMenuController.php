@@ -4,7 +4,6 @@ namespace MandarinMedien\MMCmfAdminBundle\Controller;
 
 use MandarinMedien\MMCmfMenuBundle\Entity\Menu;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Validator\Constraints\Form;
 use MandarinMedien\MMCmfAdminBundle\Form\MenuType;
 
 class CmfAdminMenuController extends Controller
@@ -27,8 +26,37 @@ class CmfAdminMenuController extends Controller
     public function editAction(Menu $menu)
     {
         return $this->render("@MMCmfAdmin/Admin/Menu/menu.edit.html.twig", array(
-            'form' => $this->createForm(new MenuType(), $menu)->createView(),
+            'form' => $this->createEditForm($menu)->createView(),
             'menu' => $menu
+        ));
+    }
+
+
+    public function updateAction(Menu $menu)
+    {
+
+        $form = $this->createEditForm($menu);
+        $form->handleRequest($this->get('request'));
+
+        //var_dump($this->get('request'));die();
+
+        if($form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        return $this->redirectToRoute('mm_cmf_admin_menu_edit', array(
+            'id' => $menu->getId()
+        ));
+    }
+
+
+    public function createEditForm(Menu $menu)
+    {
+        return $this->createForm(new MenuType(), $menu, array(
+            'method' => 'PUT',
+            'action' => $this->generateUrl('mm_cmf_admin_menu_update', array(
+                'id' => $menu->getId()
+            ))
         ));
     }
 

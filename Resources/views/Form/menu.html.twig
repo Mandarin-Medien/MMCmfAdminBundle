@@ -1,24 +1,39 @@
 {% block mm_cmf_admin_menu_item_widget %}
-    <div class="group clearfix">
-        <span class="draggable fa fa-ellipsis-v col-xs-1"></span>
-        <span class="name col-xs-5">
-             {{ form_widget(form.name) }}
-        </span>
-        <span class="route col-xs-5">
-            {{ form_widget(form.nodeRoute) }}
-        </span>
-        <span class="options col-xs-1">
-            <a><i class="fa fa-trash"></i></a>
-        </span>
-    </div>
-    {{ form_widget(form.items) }}
+    <li class="admin-menu-item">
+        <div class="group clearfix">
+            <span class="draggable fa fa-ellipsis-v col-xs-1"></span>
+            <span class="name col-xs-5">
+                 {{ form_widget(form.name) }}
+            </span>
+            <span class="route col-xs-5">
+                {{ form_widget(form.nodeRoute) }}
+            </span>
+            <span class="options col-xs-1">
+                <a class="menu-remove-item"><i class="fa fa-trash"></i></a>
+            </span>
+            {{ form_widget(form.position) }}
+            {{ form_widget(form.parent) }}
+        </div>
+        {{ form_widget(form.items) }}
+    </li>
 {% endblock %}
 
 {% block mm_cmf_admin_menu_list_type_widget %}
-    <ul class="admin-menu-list">
+
+    {#{ dump(form) }#}
+
+    <ul
+            class="admin-menu-list {%  if form.vars.is_sublist == false %}admin-menu-list-main{% endif %}"
+            data-name="{% if form.vars.is_sublist == true %}{{ form.vars.name }}{% else %}{{ form.vars.full_name }}{% endif %}"
+    >
         {% for child in form.children %}
-            <li class="admin-menu-item">{{ form_widget(child) }}</li>
+           {{ form_widget(child) }}
         {% endfor %}
     </ul>
+
+    {% if form.vars.is_sublist == false and prototype is defined %}
+        <button class="btn btn-success menu-add-item" data-prototype="{{ form_widget(prototype)|escape }}"><i class="fa fa-plus"></i> Eintrag hinzufügen</button>
+    {% endif %}
+
 {% endblock %}
 

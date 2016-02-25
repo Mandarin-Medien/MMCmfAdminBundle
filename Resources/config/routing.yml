@@ -6,6 +6,10 @@ mm_cmf_admin_menu_edit:
     path:     /admin/menu/{id}/edit
     defaults: { _controller: MMCmfAdminBundle:CmfAdminMenu:edit }
 
+mm_cmf_admin_menu_update:
+    path:     /admin/menu/{id}/update
+    defaults: { _controller: MMCmfAdminBundle:CmfAdminMenu:update }
+
 mm_cmf_admin_menu_delete:
     path:     /admin/menu/{id}/delete
     defaults: { _controller: MMCmfAdminBundle:CmfAdminMenu:delete }

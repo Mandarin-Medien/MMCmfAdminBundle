@@ -1,3 +1,8 @@
+/**
+ * Variables
+ */
+/*@import "../public/vendor/font-awesome/less/font-awesome.less";
+@fa-font-path: "/bundles/mmcmfadmin/vendor/font-awesome/fonts";*/
 iframe.edit-iframe {
   border: 1px solid #ccc;
   width: 100%;

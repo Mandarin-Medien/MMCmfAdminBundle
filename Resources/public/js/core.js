@@ -1,9 +1,10 @@
 jQuery(document).ready(function() {
 
     $('iframe').MMCmfAdminEditFrame();
+    $('.admin-menu-list-main').MMCmfAdminMenu();
 
 
-    var menu;
+   /* var menu;
 
     var draggablePosition;
 
@@ -27,5 +28,38 @@ jQuery(document).ready(function() {
             })
             .on('dragend', function(s) {
                 $('.add-sub-item').hide();
+
+                updateRelations();
             });
+
+    $('.add-menu-entry').click(function() {
+
+        var prototype = $($(this).data('prototype'));
+
+        $('.admin-menu-list-main').append(prototype);
+
+        updateRelations();
+        return false;
+    });
+
+    $('.admin-menu-item').each(function() {
+        var item = this;
+
+        $(this).find('a.remove').click(function() {
+            $(item).remove();
+        })
+    });
+
+    var updateRelations = function()
+    {
+        $.each($('.admin-menu-list'), function(key, menu) {
+
+            var parent = $(menu).data('menu');
+
+            $.each($(this).children('li'), function(index, item) {
+                $(item).find('.position-field').val(index);
+                $(item).find('.parent-field').val(parent);
+            });
+        });
+    }*/
 });

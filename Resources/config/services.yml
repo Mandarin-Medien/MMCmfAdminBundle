@@ -34,3 +34,9 @@ services:
         arguments: ["Menus", "mm_cmf_admin_menu", "bars"]
         tags:
           - {name: mm_cmf_admin.admin_menu}
+
+    mm_cmf_admin.form_type.entity_hidden:
+              class: MandarinMedien\MMCmfAdminBundle\Form\Types\EntityHiddenType
+              arguments: ["@doctrine.orm.entity_manager"]
+              tags:
+                  - {name: form.type, alias: entity_hidden}
