@@ -1,0 +1,90 @@
+{% extends "MMCmfAdminBundle:Admin:admin.html.twig" %}
+
+{% block admin_body_head %}
+    <h1>
+        Seiten
+        <small>Optional description</small>
+    </h1>
+{% endblock %}
+
+{% block admin_body_content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-default ">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-edit"></i> Additional Routes</h3>
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Neue Route <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            {% for type in types %}
+                                <li><a href="{{ path('mm_cmf_admin_noderoute_new', {'node_route_type' : type}) }}">{{ type }} erstellen</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Pfad</th>
+                                <th>Typ</th>
+                                <th>Ziel</th>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for noderoute in noderoutes %}
+
+                            {% set type = factory.discrimatorByClass(noderoute) %}
+                            {% if type != 'auto' %}
+                                <tr>
+                                    <td>{{ noderoute.route }}</td>
+                                    <td>{{ factory.discrimatorByClass(noderoute) }}</td>
+                                    <td>{% if noderoute.node %}{{ noderoute.node }}{% else %}extern{% endif %}</td>
+                                    <td><a href="{{ path("mm_cmf_admin_noderoute_edit", {"id" : noderoute.id}) }}"><i class="fa fa-edit"></i></a></td>
+                                    <td><a href="{{ path("mm_cmf_admin_noderoute_delete", {"id" : noderoute.id }) }}"><i class="fa fa-trash"></i></a></td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-default">
+                <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-edit"></i>Standard Routen</h3></div>
+                <div class="box-body">
+                    <table class="table table-responsive">
+                        <thead>
+                        <tr>
+                            <th>Pfad</th>
+                            <th>Typ</th>
+                            <th>Ziel</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for noderoute in noderoutes %}
+
+                            {% set type = factory.discrimatorByClass(noderoute) %}
+                            {% if type == 'auto' %}
+                                <tr >
+                                    <td>{{ noderoute.route }}</td>
+                                    <td>{{ factory.discrimatorByClass(noderoute) }}</td>
+                                    <td>{% if noderoute.node %}{{ noderoute.node }}{% else %}extern{% endif %}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -24,13 +24,37 @@ mm_cmf_admin_menu_delete:
     defaults: { _controller: MMCmfAdminBundle:CmfAdminMenu:delete }
 
 
+mm_cmf_admin_noderoute:
+    path:     /admin/route
+    defaults: { _controller: MMCmfAdminBundle:CmfAdminNodeRoute:index }
+
+mm_cmf_admin_noderoute_new:
+    path:     /admin/route/{node_route_type}/new
+    defaults: { _controller: MMCmfAdminBundle:CmfAdminNodeRoute:new, node_route_type: 'alias' }
+
+mm_cmf_admin_noderoute_create:
+    path:     /admin/route/{node_route_type}/create
+    defaults: { _controller: MMCmfAdminBundle:CmfAdminNodeRoute:create, node_route_type: 'alias' }
+
+mm_cmf_admin_noderoute_edit:
+    path:     /admin/route/{id}/edit
+    defaults: { _controller: MMCmfAdminBundle:CmfAdminNodeRoute:edit }
+
+mm_cmf_admin_noderoute_update:
+    path:     /admin/route/{id}/update
+    defaults: { _controller: MMCmfAdminBundle:CmfAdminNodeRoute:update }
+
+mm_cmf_admin_noderoute_delete:
+    path:     /admin/route/{id}/delete
+    defaults: { _controller: MMCmfAdminBundle:CmfAdminNodeRoute:delete }
+
 
 mm_cmf_admin_page:
     path:     /admin/page
     defaults: { _controller: MMCmfAdminBundle:CmfAdminPage:index }
 
 mm_cmf_admin_page_new:
-    path:     /admin/page/new
+    path:     /admin/page/new/
     defaults: { _controller: MMCmfAdminBundle:CmfAdminPage:new }
 
 mm_cmf_admin_page_delete:
