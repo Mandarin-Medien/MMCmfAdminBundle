@@ -2,6 +2,9 @@
 
 namespace MandarinMedien\MMCmfAdminBundle\Controller;
 
+use AppBundle\Entity\ParagraphNode;
+use MandarinMedien\MMCmfContentBundle\Entity\ParagraphContentNode;
+use MandarinMedien\MMCmfContentBundle\Entity\RowContentNode;
 use MandarinMedien\MMCmfMenuBundle\Entity\Menu;
 use MandarinMedien\MMCmfRoutingBundle\Entity\NodeRoute;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -39,27 +42,10 @@ class CmfAdminController extends Controller
     }
 
 
-    public function menuAction()
+    public function nodeAdminTestAction()
     {
-        $menues = $this->getDoctrine()->getRepository('MMCmfMenuBundle:Menu')->findAll();
-
-        return $this->render("MMCmfAdminBundle:Admin/Menu:menu.list.html.twig", array(
-            'menues' => array_filter($menues, function($object) {
-              return get_class($object) == 'MandarinMedien\MMCmfMenuBundle\Entity\Menu';
-            })
-        ));
-    }
-
-    public function pageAction()
-    {
-
-    }
-
-
-    public function menuEditAction(Menu $menu)
-    {
-        return $this->render("MMCmfAdminBundle:Admin/Menu:menu.edit.html.twig", array(
-            'menu' => $menu
+        return $this->render('@MMCmfAdmin/Admin/ContentNode/content.node.edit.html.twig', array(
+            'form' => $this->createForm($this->get('mm_cmf_admin.form_type.content_node'), new ParagraphContentNode())->createView()
         ));
     }
 

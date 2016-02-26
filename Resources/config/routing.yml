@@ -74,6 +74,31 @@ mm_cmf_admin_page_update:
     defaults: { _controller: MMCmfAdminBundle:CmfAdminPage:update }
 
 
+mm_cmf_admin_contentnode:
+    path:     /admin/contentnode
+    defaults: { _controller: MMCmfAdminBundle:CmfAdminContentNode:index}
+
+mm_cmf_admin_contentnode_new:
+    path:     /admin/contentnode/{contentnode_type}/new
+    defaults: { _controller: MMCmfAdminBundle:CmfAdminContentNode:new, contentnode_type: 'contentnode' }
+
+mm_cmf_admin_contentnode_create:
+    path:     /admin/contentnode/{contentnode_type}/create
+    defaults: { _controller: MMCmfAdminBundle:CmfAdminContentNode:create, contentnode_type: 'contentnode' }
+
+mm_cmf_admin_contentnode_edit:
+    path:     /admin/contentnode/{id}/edit
+    defaults: { _controller: MMCmfAdminBundle:CmfAdminContentNode:edit }
+
+mm_cmf_admin_contentnode_update:
+    path:     /admin/contentnode/{id}/update
+    defaults: { _controller: MMCmfAdminBundle:CmfAdminContentNode:update }
+
+mm_cmf_admin_contentnode_delete:
+    path:     /admin/contentnode/{id}/delete
+    defaults: { _controller: MMCmfAdminBundle:CmfAdminContentNode:delete }
+
+
 mm_cmf_admin_homepage_empty:
     path: /admin/empty
     defaults: {_controller: MMCmfAdminBundle:CmfAdmin:empty}
@@ -81,3 +106,6 @@ mm_cmf_admin_homepage_empty:
 mm_cmf_admin_homepage:
     path:     /admin/{route}
     defaults: { _controller: MMCmfAdminBundle:CmfAdmin:index, route: null }
+
+
+
