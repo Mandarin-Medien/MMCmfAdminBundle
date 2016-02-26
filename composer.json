@@ -1,45 +1,28 @@
 {
-    "name": "mandarinmedien/mmcmfadminbundle",
-    "description": "This SymfonyBundles will combine all MMCmf-SymfonyBundles to a fully functional PageAdminSystem.",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Christof Hufnagel",
-            "email": "ch@mandarin-medien.de"
-        },
-        {
-            "name": "Toni Gurski",
-            "email": "tg@mandarin-medien.de"
-        }
-    ],
-    "require": {
-        "mandarinmedien/mmcmfnodebundle": "^0.0",
-        "mandarinmedien/mmcmfroutingbundle": "^0.0",
-        "mandarinmedien/mmcmfcontentbundle" : "^0.0",
-        "mandarinmedien/mmcmfmenubundle" : "^0.0"
+  "name": "mandarinmedien/mmcmfadminbundle",
+  "description": "This SymfonyBundles will combine all MMCmf-SymfonyBundles to a fully functional PageAdminSystem.",
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Christof Hufnagel",
+      "email": "ch@mandarin-medien.de"
     },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "git@github.com:Mandarin-Medien/MMCmfRoutingBundle.git"
-        },
-        {
-            "type": "git",
-            "url": "git@github.com:Mandarin-Medien/MMCmfContentBundle.git"
-        },
-        {
-            "type": "git",
-            "url": "git@github.com:Mandarin-Medien/MMCmfMenuBundle.git"
-        },
-        {
-            "type": "git",
-            "url": "git@github.com:Mandarin-Medien/MMCmfNodeBundle.git"
-        }
-    ],
-    "autoload" : {
-        "psr-0" : {
-            "MandarinMedien\\MMCmfAdminBundle" : ""
-        }
-    },
-    "target-dir" : "MandarinMedien/MMCmfAdminBundle"
+    {
+      "name": "Toni Gurski",
+      "email": "tg@mandarin-medien.de"
+    }
+  ],
+  "autoload": {
+    "psr-0": {
+      "MandarinMedien\\MMCmfAdminBundle": ""
+    }
+  },
+  "target-dir": "MandarinMedien/MMCmfAdminBundle",
+  "require": {
+    "mandarinmedien/mmcmfnodebundle": "^0.0",
+    "mandarinmedien/mmcmfroutingbundle": "^0.0",
+    "mandarinmedien/mmcmfcontentbundle": "^0.0",
+    "mandarinmedien/mmcmfmenubundle": "^0.0"
+  }
 }
