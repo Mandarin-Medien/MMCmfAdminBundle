@@ -21,12 +21,8 @@
         {#<li class="header">Verwalten</li>#}
         <!-- Optionally, you can add icons to the links -->
 
-        {% for item in items %}
-            <li>
-                <a href="{% if item.action %}{{ path(item.action) }}{% endif %}">
-                    <i class="fa fa-{{ item.icon }}"></i> <span>{{ item.name }}</span>
-                </a>
-            </li>
+        {% for widget in widgets %}
+            {{ renderWidget(widget) }}
         {% endfor %}
 
     </ul>

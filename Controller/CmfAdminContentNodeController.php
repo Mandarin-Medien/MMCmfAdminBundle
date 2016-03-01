@@ -94,9 +94,9 @@ class CmfAdminContentNodeController extends Controller
 
         $editForm = $this->createEditForm($entity);
 
-        return $this->render('@MMCmfAdmin/Admin/ContentNode/contentNode.edit.html.twig', array(
+        return $this->render('@MMCmfAdmin/Admin/ContentNode/backend/contentnode.edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
         ));
     }
 

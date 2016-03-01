@@ -1,0 +1,12 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h2 class="box-title">{{ user.username }}</h2>
+        </div>
+        <div class="box-body">
+            {{ user.email }}
+        </div>
+    </div>
+{% endblock fos_user_content %}

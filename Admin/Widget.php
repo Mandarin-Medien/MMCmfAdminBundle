@@ -8,6 +8,7 @@ class Widget
     protected $name;
     protected $action;
     protected $icon;
+    protected $group;
 
     /**
      * @return mixed
@@ -55,5 +56,23 @@ class Widget
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    /**
+     * @param mixed $group
+     * @return Widget
+     */
+    public function setGroup(Group $group)
+    {
+        $this->group = $group;
+        return $this;
     }
 }

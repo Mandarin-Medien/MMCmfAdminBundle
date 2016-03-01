@@ -1,0 +1,12 @@
+{% extends "MMCmfAdminBundle:Admin:admin.html.twig" %}
+
+{% block admin_body_head %}
+    <h1>
+        Seiten
+        <small>Optional description</small>
+    </h1>
+{% endblock %}
+
+{% block admin_body_content %}
+    {% include "@MMCmfAdmin/Admin/ContentNode/frontend/contentnode.list.html.twig" %}
+{% endblock %}

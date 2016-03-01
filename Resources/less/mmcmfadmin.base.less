@@ -1,9 +1,74 @@
 /**
  * Variables
  */
+body {
+
+  &.skin-blue {
+
+    .wrapper {
+      background-color: transparent;
+      background-image: url('/bundles/mmcmfadmin/images/login-screen.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .main-sidebar {
+      background-color: rgba(0, 0, 0, .6);
+
+      .sidebar-menu {
+        li:hover>a,
+        li.active>a {
+          background-color: rgba(0,0,0,.5);
+        }
+
+        .treeview-menu {
+          background-color: rgba(255,255,255,.1);
+        }
+      }
+    }
+
+    .content-wrapper {
+      background-color: rgba(255, 255, 255, 0.1);
+
+      h1 {
+        color: #fff;
+        font-weight: 100;
+
+        & * {
+          color: #fff;
+          font-weight: 400;
+        }
+      }
+
+      .box {
+        box-shadow: 0px 0px 100px rgba(0, 0, 0, .4);
+        background-color: rgba(255,255,255, .95);
+      }
+    }
+
+    .main-header {
+
+      .navbar-static-top {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        background-color: rgba(0, 0, 0, .2);
+      }
+    }
+
+    .main-footer {
+      background-color: rgba(0, 0, 0, 0.1);
+      border-top: none;
+      color: #fff;
+    }
+  }
+
+}
+
 
 iframe.edit-iframe {
-  border: 1px solid #ccc;
+  border: none;
   width: 100%;
   background: #fff;
   height: 100%;
@@ -19,8 +84,23 @@ iframe.edit-iframe {
   a {
     display: inline-block;
     font-size: 30px;
-    padding: 5px;
-    border-right: 1px solid #ccc;
+    padding: 5px 10px;
+    border-right: 1px solid rgba(255,255,255,.2);
+    color: #fff;
+  }
+}
+
+.view-adress-bar {
+  .adressbar {
+    outline: none;
+    display: block;
+    width: 100%;
+  }
+}
+
+.view-navigation {
+  a {
+    color: #fff;
   }
 }
 

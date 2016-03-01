@@ -16,4 +16,9 @@ class MMCmfAdminBundle extends Bundle
         $container->addCompilerPass(new AdminCompilerPass());
     }
 
+    public function getParent()
+    {
+        return 'FOSUserBundle';
+    }
+
 }

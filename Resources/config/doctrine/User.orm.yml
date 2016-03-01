@@ -1,0 +1,24 @@
+MandarinMedien\MMCmfAdminBundle\Entity\User:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+
+    fields:
+        firstname:
+            type: string
+        name:
+            type: string
+
+    oneToOne:
+        image:
+            targetEntity: MandarinMedien\MMMediaBundle\Entity\MediaSortable
+            cascade:
+                - persist
+                - remove
+
+    lifecycleCallbacks: {  }

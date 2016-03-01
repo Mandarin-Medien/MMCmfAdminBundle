@@ -53,7 +53,7 @@ class CmfAdminController extends Controller
     public function renderSidebarAction()
     {
         return $this->render('MMCmfAdminBundle:Admin:sidebar.html.twig', array(
-            'items' => $this->get('mm_cmf_admin.admin_sidebar')->getWidgets()
+            'widgets' => $this->get('mm_cmf_admin.widget_manager')->getWidgets('sidebar')
         ));
     }
 }

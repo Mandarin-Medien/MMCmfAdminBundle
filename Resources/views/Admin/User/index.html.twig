@@ -1,0 +1,45 @@
+{% extends "MMCmfAdminBundle:Admin:admin.html.twig" %}
+
+{% block admin_body_head %}
+    <h1>
+        Benutzer
+        <small>Optional description</small>
+    </h1>
+{% endblock %}
+
+{% block admin_body_content %}
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="box box-default ">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-edit"></i> Benutzer bearbeiten</h3>
+                    <a href="{{ path('mm_cmf_admin_user_new') }}" class="btn btn-success pull-right">
+                        <i class="fa fa-plus"></i>
+                        Benutzer hinzufügen
+                    </a>
+                </div>
+                <div class="box-body">
+                    <table class="table table-responsive">
+                        <tbody>
+                        {% for entity in entities %}
+                            <tr>
+                                <td><a href="{{ path('mm_cmf_admin_user_edit', {'id': entity.id}) }}">{{ entity.username }}</a></td>
+                                <td><a href="{{ path('mm_cmf_admin_user_edit', {'id': entity.id}) }}">{{ entity.email }}</a></td>
+                                <td>
+                                    {% for role in entity.roles %}
+                                        <a href="">{{ role }}</a>,
+                                    {% endfor %}
+                                </td>
+                                <td><a href="{{ path('mm_cmf_admin_user_toggle', {'id': entity.id}) }}"><i class="fa {% if entity.enabled %}fa-check{% else %}fa-ban{% endif %}"></i></a></td>
+                                <td><a href="{{ path('mm_cmf_admin_user_edit', {'id': entity.id}) }}"><i class="fa fa-edit"></i></a></td>
+                                <td><a href="{{ path('mm_cmf_admin_menu_delete', {'id': entity.id}) }}"><i class="fa fa-trash"></i></a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

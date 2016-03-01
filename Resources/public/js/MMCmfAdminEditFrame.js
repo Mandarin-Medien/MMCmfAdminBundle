@@ -69,6 +69,20 @@
                         });
                     });
 
+                    $(options.adressbar).on('keypress,', function(e) {
+
+                        var code = e.which;
+
+                        if(code == 13) {
+                            e.preventDefault(true);
+
+                            var path = ($(this).text());
+                            self.contentWindow.location.pathname = path;
+
+                            return false;
+                        }
+                    });
+
 
                     $(self).height(calculateHeight());
                 });

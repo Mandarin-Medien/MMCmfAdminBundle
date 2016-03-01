@@ -1,0 +1,34 @@
+mm_cmf_admin_user:
+    path:     /
+    defaults: { _controller: "MMCmfAdminBundle:CmfAdminUser:index" }
+
+mm_cmf_admin_user_show:
+    path:     /{id}/show
+    defaults: { _controller: "MMCmfAdminBundle:CmfAdminUser:show" }
+
+mm_cmf_admin_user_new:
+    path:     /new
+    defaults: { _controller: "MMCmfAdminBundle:CmfAdminUser:new" }
+
+mm_cmf_admin_user_create:
+    path:     /create
+    defaults: { _controller: "MMCmfAdminBundle:CmfAdminUser:create" }
+    methods:  POST
+
+mm_cmf_admin_user_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MMCmfAdminBundle:CmfAdminUser:edit" }
+
+mm_cmf_admin_user_update:
+    path:     /{id}/update
+    defaults: { _controller: "MMCmfAdminBundle:CmfAdminUser:update" }
+    methods:  [POST, PUT]
+
+mm_cmf_admin_user_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MMCmfAdminBundle:CmfAdminUser:delete" }
+    methods:  [POST, DELETE]
+
+mm_cmf_admin_user_toggle:
+    path:     /{id}/toggle
+    defaults: { _controller: "MMCmfAdminBundle:CmfAdminUser:toggle" }

@@ -3,13 +3,12 @@
 namespace MandarinMedien\MMCmfAdminBundle\Admin;
 
 
-class WidgetFactory {
+class GroupFactory {
 
-    public function createWidget($name, $action, $icon)
+    public function createGroup($name, $icon)
     {
-        return ((new Widget())
+        return ((new Group())
             ->setName($name)
-            ->setAction($action)
             ->setIcon($icon)
         );
     }

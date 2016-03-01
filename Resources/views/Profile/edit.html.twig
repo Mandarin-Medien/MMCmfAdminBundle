@@ -1,0 +1,17 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h2 class="box-title">Profil bearbeiten</h2>
+        </div>
+        <div class="box-body">
+            <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+                {{ form_widget(form) }}
+                <div>
+                    <button class="btn btn-success" type="submit"><i class="fa fa-save"></i> {{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

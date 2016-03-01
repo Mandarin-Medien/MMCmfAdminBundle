@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+
+    {% block stylesheets %}
+        {% stylesheets
+        '@mm_cmf_admin_assets_css'
+        '@mm_cmf_admin_assets_less'
+        '@mm_cmf_content_assets_css' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+
+    {% endblock %}
+
+    <body class="login-screen">
+        {% block fos_user_content %}
+            {% if error %}
+                <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
+            {% endif %}
+
+            <form action="{{ path("fos_user_security_check") }}" method="post">
+                <h1>MM<b>CMF</b>&alpha;</h1>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+                <div class="form-row clearfix">
+                    <label for="username"><i class="fa fa-user"></i></label>
+                    <input type="text" id="username" name="_username" placeholder="{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}" value="{{ last_username }}" required="required" />
+                </div>
+
+                <div class="form-row clearfix">
+                    <label for="password"><i class="fa fa-lock"></i></label>
+                    <input type="password" id="password" name="_password" placeholder="{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}" required="required" />
+                </div>
+
+                <div class="form-row form-row-remember-me">
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                    <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+                </div>
+
+                <button type="submit" id="_submit" name="_submit">» let me in</button>
+
+                <div class="blur"></div>
+            </form>
+        {% endblock fos_user_content %}
+
+        {% block javascripts %}
+            {% javascripts
+            '@mm_cmf_admin_assets_js'
+            '@mm_cmf_content_assets_js' %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+
+    </body>
+</html>
