@@ -7,35 +7,7 @@ use MandarinMedien\MMCmfAdminBundle\Admin\Widget\WidgetInterface;
 class BaseWidget implements WidgetInterface
 {
 
-    protected $name;
-    protected $icon;
     protected $region;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getIcon()
-    {
-        return $this->icon;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setIcon($icon)
-    {
-        $this->icon = $icon;
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
 
     /**
      * {@inheritdoc}

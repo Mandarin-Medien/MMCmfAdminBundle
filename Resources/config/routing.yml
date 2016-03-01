@@ -123,8 +123,12 @@ fos_user_change_password:
     prefix: /admin/profile
 
 mm_cmf_admin_homepage:
-    path:     /admin/{route}
-    defaults: { _controller: MMCmfAdminBundle:CmfAdmin:index, route: null }
+    path:     /admin
+    defaults: { _controller: MMCmfAdminBundle:CmfAdmin:dashboard }
+
+mm_cmf_admin_live_edit:
+    path: /admin/liveedit/{route}
+    defaults: {_controller: MMCmfAdminBundle:CmfAdmin:liveEdit, route: null}
 
 
 

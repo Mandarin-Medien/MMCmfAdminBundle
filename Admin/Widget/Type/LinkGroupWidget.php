@@ -6,11 +6,29 @@ class LinkGroupWidget extends BaseWidget
 {
 
     protected $linkWidgets;
+    protected $icon;
     protected $value;
 
     public function __construct()
     {
         $linKWidgets = array();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+        return $this;
     }
 
     /**

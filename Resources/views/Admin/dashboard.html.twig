@@ -1,0 +1,14 @@
+{% extends "@MMCmfAdmin/Admin/admin.html.twig" %}
+
+{% block admin_body_head %}
+    <h1>
+        Hallo {{ app.user.firstname }}
+        <small>Dashboard</small>
+    </h1>
+{% endblock %}
+
+{% block admin_body_content %}
+    {% for widget in widgets %}
+        {{ renderWidget(widget) }}
+    {% endfor %}
+{% endblock %}

@@ -9,11 +9,27 @@ services:
         arguments: [@mm_cmf_admin.widget_manager]
 
 
+    mm_cmf_admin.admin_dashboard.time_widget:
+        class: MandarinMedien\MMCmfAdminBundle\Admin\TimeWidget
+        calls:
+          - [setRegion, ['dashboard']]
+        tags:
+            - {name: mm_cmf_admin.admin_widget}
+
+
+
     mm_cmf_admin.twig_widget_extension:
         class: MandarinMedien\MMCmfAdminBundle\Twig\WidgetRenderExtension
         arguments: ["@service_container"]
         tags:
             - {name: twig.extension }
+
+    mm_cmf_admin.admin_dashboard:
+        class: MandarinMedien\MMCmfAdminBundle\Admin\Widget\Type\LinkWidget
+        factory: ["@mm_cmf_admin.widget_factory", createWidget]
+        arguments: ["Dashboard", "mm_cmf_admin_homepage", "th"]
+        tags:
+            - {name: mm_cmf_admin.admin_widget }
 
     mm_cmf_admin.admin_content_group:
         class: MandarinMedien\MMCmfAdminBundle\Admin\Widget\Type\LinkGroupWidget

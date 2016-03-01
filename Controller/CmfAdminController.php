@@ -12,7 +12,18 @@ use Symfony\Component\BrowserKit\Request;
 
 class CmfAdminController extends Controller
 {
-    public function indexAction(NodeRoute $route = null)
+
+    public function dashboardAction()
+    {
+        $widgetManager = $this->get('mm_cmf_admin.widget_manager');
+
+        return $this->render('@MMCmfAdmin/Admin/dashboard.html.twig', array(
+            'widgets' => $widgetManager->getWidgets('dashboard')
+        ));
+    }
+
+
+    public function liveEditAction(NodeRoute $route = null)
     {
 
         if($route == null) {

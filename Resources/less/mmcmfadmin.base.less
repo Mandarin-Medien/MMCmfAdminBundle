@@ -42,7 +42,8 @@ body {
 
       .box {
         box-shadow: 0px 0px 100px rgba(0, 0, 0, .4);
-        background-color: rgba(255,255,255, .95);
+        background-color: rgba(255,255,255, .9);
+        border-radius: 0;
       }
     }
 
@@ -111,7 +112,7 @@ iframe.edit-iframe {
   margin-top: -1px;
 
   .add-sub-item {
-    display: none;
+    //display: none;
     color: #aaa;
     font-size: 12px;
 
@@ -182,9 +183,9 @@ iframe.edit-iframe {
   }
 
 
-  &.showsublist {
+  //&.showsublist {
     & > ul {
-      min-height: 54px;
+      min-height: 24px;
       position: relative;
 
       border-top: 1px dotted #ccc;
@@ -193,7 +194,7 @@ iframe.edit-iframe {
       &:before {
         position: absolute;
         left: -60px;
-        line-height: 54px;
+        line-height: 24px;
         top: 0px;
         width: 55px;
         text-align: center;
@@ -204,7 +205,7 @@ iframe.edit-iframe {
         transform: rotate(90deg);
       }
     }
-  }
+ // }
 
 
   //background: fadeOut(blue, 95%);
@@ -265,4 +266,47 @@ iframe.edit-iframe {
       transform: rotate(90deg);
     }*/
   }
+}
+
+.time-widget {
+
+  text-align: center;
+
+
+
+  span{
+
+    font-family: "Open Sans";
+    color: #fff;
+    font-weight: 100;
+    letter-spacing: -10px;
+
+
+    &.hour,
+    &.min {
+      opacity: .8;
+      font-size: 120px;
+      line-height: 120px;
+       transition: all 1s;
+
+      &.refresh {
+        top: 120px;
+        opacity: 0;
+      }
+    }
+
+    &.min {
+
+      opacity: 1;
+      font-weight: 500;
+    }
+
+    &.date {
+      font-size: 20px;
+      letter-spacing: 0;
+      display: block;
+    }
+
+  }
+
 }

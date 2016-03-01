@@ -32,7 +32,7 @@
                                 </td>
                                 <td><a href="{{ path('mm_cmf_admin_user_toggle', {'id': entity.id}) }}"><i class="fa {% if entity.enabled %}fa-check{% else %}fa-ban{% endif %}"></i></a></td>
                                 <td><a href="{{ path('mm_cmf_admin_user_edit', {'id': entity.id}) }}"><i class="fa fa-edit"></i></a></td>
-                                <td><a href="{{ path('mm_cmf_admin_menu_delete', {'id': entity.id}) }}"><i class="fa fa-trash"></i></a></td>
+                                <td><a href="{{ path('mm_cmf_admin_user_delete', {'id': entity.id}) }}"><i class="fa fa-trash"></i></a></td>
                             </tr>
                         {% endfor %}
                         </tbody>

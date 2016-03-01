@@ -9,6 +9,24 @@ class LinkWidget extends BaseWidget
 
     protected $value;
     protected $action;
+    protected $icon;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+        return $this;
+    }
 
     /**
      * @return mixed
