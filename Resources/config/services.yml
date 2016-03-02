@@ -41,7 +41,7 @@ services:
     mm_cmf_admin.admin_edit:
         class: MandarinMedien\MMCmfAdminBundle\Admin\Widget
         factory: ["@mm_cmf_admin.widget_factory", createWidget]
-        arguments: ["Liveedit", "mm_cmf_admin_homepage", "edit"]
+        arguments: ["Liveedit", "mm_cmf_admin_live_edit", "edit"]
         tags:
           - {name: mm_cmf_admin.admin_content_group}
 
