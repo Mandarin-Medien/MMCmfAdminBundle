@@ -1,6 +1,7 @@
 assetic:
     bundles:
         - MMCmfAdminBundle
+        - FOSUserBundle
     assets:
         mm_cmf_admin_assets_less:
             filters:
