@@ -100,6 +100,9 @@ class CmfAdminPageController extends Controller
         $form = $this->createForm(new PageType(), $entity, array(
             'action' => $this->generateUrl('mm_cmf_admin_page_update', array('id' => $entity->getId())),
             'method' => 'PUT',
+            'attr' => array(
+                'rel' => 'ajax'
+            )
         ));
 
         $form->add('submit', 'submit', array('label' => 'Update'));

@@ -4,6 +4,7 @@ namespace MandarinMedien\MMCmfAdminBundle\Controller;
 
 use MandarinMedien\MMCmfAdminBundle\Form\ContentNodeType;
 use MandarinMedien\MMCmfContentBundle\Entity\ContentNode;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -107,6 +108,9 @@ class CmfAdminContentNodeController extends Controller
         $form = $this->createForm($this->get('mm_cmf_admin.form_type.content_node'), $entity, array(
             'action' => $this->generateUrl('mm_cmf_admin_contentnode_update', array('id' => $entity->getId())),
             'method' => 'PUT',
+            'attr' => array(
+                'rel' => 'ajax'
+            )
         ));
 
         $form->add('submit', 'submit', array('label' => 'Update'));
@@ -132,7 +136,9 @@ class CmfAdminContentNodeController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('mm_cmf_admin_contentnode_edit', array('id' => $id)));
+            return new JsonResponse(array(
+                'success' => true
+            ));
         }
 
         return array(

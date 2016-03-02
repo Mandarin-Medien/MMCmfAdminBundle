@@ -73,47 +73,54 @@ desired effect
 
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top" role="navigation">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                </a>
-                <!-- Navbar Right Menu -->
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                {% if app.user.image.media is defined %}
-                                    {{ app.user.image.media.preview({'html' : {'class': 'user-image'}})|raw }}
-                                {% endif %}
-                                {{ app.user.firstname }}
-                                {{ app.user.name }}
-                            </a>
-                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <ul class="dropdown-menu">
+                {% block admin_header_navbar %}
+                    <!-- Sidebar toggle button-->
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
 
-                                    {% if app.user.image.media is defined %}
-                                    <li>
-                                        {{ app.user.image.media.preview({'html' : {'class': 'img-responsive'}})|raw }}
-                                    </li>
+                    {% block admin_header_navbar_left_menu %}{% endblock %}
+
+                    {% block admin_header_navbar_right_menu %}
+                        <!-- Navbar Right Menu -->
+                        <div class="navbar-custom-menu">
+                            <ul class="nav navbar-nav">
+                                <li class="dropdown user user-menu">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        {% if app.user.image.media is defined %}
+                                            {{ app.user.image.media.preview({'html' : {'class': 'user-image'}})|raw }}
+                                        {% endif %}
+                                        {{ app.user.firstname }}
+                                        {{ app.user.name }}
+                                    </a>
+                                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                        <ul class="dropdown-menu">
+
+                                            {% if app.user.image.media is defined %}
+                                            <li>
+                                                {{ app.user.image.media.preview({'html' : {'class': 'img-responsive'}})|raw }}
+                                            </li>
+                                            {% endif %}
+                                            <li>
+                                                <a href="{{ path("fos_user_profile_edit") }}">
+                                                    <i class="fa fa-user"></i> Profile
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('fos_user_security_logout') }}">
+                                                    <i class="fa fa-power-off"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                                </a>
+                                            </li>
+                                        </ul>
                                     {% endif %}
-                                    <li>
-                                        <a href="{{ path("fos_user_profile_edit") }}">
-                                            <i class="fa fa-user"></i> Profile
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ path('fos_user_security_logout') }}">
-                                            <i class="fa fa-power-off"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                                        </a>
-                                    </li>
-                                </ul>
-                            {% endif %}
-                        </li>
-                        <li>
-                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                        </li>
-                    </ul>
-                </div>
+                                </li>
+                                <li>
+                                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endblock %}
+                {% endblock %}
             </nav>
 
         {% endblock %}

@@ -1,5 +1,7 @@
 jQuery(document).ready(function() {
 
+    $(document).MMCmfAdmin();
+
     $('iframe').MMCmfAdminEditFrame();
     $('.admin-menu-list-main').MMCmfAdminMenu();
 

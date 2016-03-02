@@ -17,6 +17,14 @@ services:
             - {name: mm_cmf_admin.admin_widget}
 
 
+    mm_cmf_admin.admin_live_edit.toolbar_widget:
+        class: MandarinMedien\MMCmfAdminBundle\Admin\LiveEditToolbarWidget
+        calls:
+          - [setRegion, ['header']]
+        tags:
+            - {name: mm_cmf_admin.admin_widget}
+
+
 
     mm_cmf_admin.twig_widget_extension:
         class: MandarinMedien\MMCmfAdminBundle\Twig\WidgetRenderExtension

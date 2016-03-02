@@ -1,26 +1,27 @@
 {% extends "MMCmfAdminBundle:Admin:admin.html.twig" %}
 
 {% block admin_body %}
-    <iframe id="mm_cmf_admin_edit_frame" class="edit-iframe" src="{{ iframe_path }}"></iframe>
-{% endblock %}
-
-{% block admin_footer %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="view-navigation col-xs-1">
-                <a class="history-back"><i class="fa fa-arrow-left"></i></a>
-                <a class="history-forward"><i class="fa fa-arrow-right"></i></a>
-                <a class="reload"><i class="fa fa-refresh"></i></a>
-            </div>
-            <div class="col-xs-7 view-adress-bar">
-                <span class="adressbar" contenteditable><i class="fa fa-globe"></i> /de/agentur/</span>
-            </div>
-            <div class="col-xs-4 viewport-switch">
-                <a class="viewport-toggle" data-viewport="xs"><i class="fa fa-mobile"></i></a>
-                <a class="viewport-toggle" data-viewport="sm"><i class="fa fa-tablet"></i></a>
-                <a class="viewport-toggle" data-viewport="md"><i class="fa fa-laptop"></i></a>
-                <a class="viewport-toggle" data-viewport="lg"><i class="fa fa-desktop"></i></a>
+    <div class="live-edit-toolbar">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="view-navigation col-xs-1">
+                    <a class="history-back"><i class="fa fa-arrow-left"></i></a>
+                    <a class="history-forward"><i class="fa fa-arrow-right"></i></a>
+                    <a class="reload"><i class="fa fa-refresh"></i></a>
+                </div>
+                <div class="col-xs-7 view-adress-bar">
+                    <span class="adressbar" contenteditable><i class="fa fa-globe"></i> /de/agentur/</span>
+                </div>
+                <div class="col-xs-4 viewport-switch">
+                    <a class="viewport-toggle" data-viewport="xs"><i class="fa fa-mobile"></i></a>
+                    <a class="viewport-toggle" data-viewport="sm"><i class="fa fa-tablet"></i></a>
+                    <a class="viewport-toggle" data-viewport="md"><i class="fa fa-laptop"></i></a>
+                    <a class="viewport-toggle" data-viewport="lg"><i class="fa fa-desktop"></i></a>
+                </div>
             </div>
         </div>
     </div>
+    <iframe id="mm_cmf_admin_edit_frame" class="edit-iframe" src="{{ iframe_path }}"></iframe>
 {% endblock %}
+
+{% block admin_footer %}{% endblock %}

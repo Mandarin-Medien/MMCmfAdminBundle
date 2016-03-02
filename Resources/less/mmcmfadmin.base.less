@@ -16,13 +16,13 @@ body {
       background-color: rgba(0, 0, 0, .6);
 
       .sidebar-menu {
-        li:hover>a,
-        li.active>a {
-          background-color: rgba(0,0,0,.5);
+        li:hover > a,
+        li.active > a {
+          background-color: rgba(0, 0, 0, .5);
         }
 
         .treeview-menu {
-          background-color: rgba(255,255,255,.1);
+          background-color: rgba(255, 255, 255, .1);
         }
       }
     }
@@ -42,7 +42,7 @@ body {
 
       .box {
         box-shadow: 0px 0px 100px rgba(0, 0, 0, .4);
-        background-color: rgba(255,255,255, .9);
+        background-color: rgba(255, 255, 255, .9);
         border-radius: 0;
       }
     }
@@ -67,7 +67,6 @@ body {
 
 }
 
-
 iframe.edit-iframe {
   border: none;
   width: 100%;
@@ -77,17 +76,18 @@ iframe.edit-iframe {
   transition: all .5s;
 }
 
-.viewport-switch {
-
-  text-align: right;
-  margin: -15px;
-
-  a {
-    display: inline-block;
-    font-size: 30px;
-    padding: 5px 10px;
-    border-right: 1px solid rgba(255,255,255,.2);
-    color: #fff;
+.live-edit-toolbar {
+  .nav.navbar-nav {
+    & > li {
+      & > a {
+        & > span {
+          display: none;
+          @media (min-width: 946px) {
+            display: inline;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -145,7 +145,6 @@ iframe.edit-iframe {
   }
 }
 
-
 .admin-menu-options {
   button.menu-add-item {
     float: left;
@@ -155,7 +154,6 @@ iframe.edit-iframe {
     float: right;
   }
 }
-
 
 .admin-menu-item {
   padding: 0px;
@@ -182,31 +180,28 @@ iframe.edit-iframe {
     height: 54px;
   }
 
-
   //&.showsublist {
-    & > ul {
-      min-height: 24px;
-      position: relative;
+  & > ul {
+    min-height: 24px;
+    position: relative;
 
-      border-top: 1px dotted #ccc;
+    border-top: 1px dotted #ccc;
 
-
-      &:before {
-        position: absolute;
-        left: -60px;
-        line-height: 24px;
-        top: 0px;
-        width: 55px;
-        text-align: center;
-        color: #3c8dbc;
-        font-family: FontAwesome;
-        content: '\f148';
-        display: inline-block;
-        transform: rotate(90deg);
-      }
+    &:before {
+      position: absolute;
+      left: -60px;
+      line-height: 24px;
+      top: 0px;
+      width: 55px;
+      text-align: center;
+      color: #3c8dbc;
+      font-family: FontAwesome;
+      content: '\f148';
+      display: inline-block;
+      transform: rotate(90deg);
     }
- // }
-
+  }
+  // }
 
   //background: fadeOut(blue, 95%);
 
@@ -251,7 +246,6 @@ iframe.edit-iframe {
   .admin-menu-item {
     //padding-left: 55px;
 
-
     span.draggable {
 
     }
@@ -272,22 +266,19 @@ iframe.edit-iframe {
 
   text-align: center;
 
-
-
-  span{
+  span {
 
     font-family: "Open Sans";
     color: #fff;
     font-weight: 100;
     letter-spacing: -10px;
 
-
     &.hour,
     &.min {
       opacity: .8;
       font-size: 120px;
       line-height: 120px;
-       transition: all 1s;
+      transition: all 1s;
 
       &.refresh {
         top: 120px;
@@ -308,5 +299,19 @@ iframe.edit-iframe {
     }
 
   }
+
+}
+
+.notification {
+
+  position: fixed;
+  top: 60px;
+  right: 0px;
+  z-index: 9999999;
+
+  background: rgba(0, 0, 0, .5);
+  color: #fff;
+  font-weight: 100;
+  padding: 20px;
 
 }

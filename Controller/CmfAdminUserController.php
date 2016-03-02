@@ -71,6 +71,9 @@ class CmfAdminUserController extends Controller
         $form = $this->createForm(new UserType(), $entity, array(
             'action' => $this->generateUrl('mm_cmf_admin_user_create'),
             'method' => 'POST',
+            'attr' => array(
+                'rel' => 'ajax'
+            )
         ));
 
         $form->add('submit', 'submit', array('label' => 'Create'));

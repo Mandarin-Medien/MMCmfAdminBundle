@@ -15,6 +15,8 @@ assetic:
                   - '@MMCmfAdminBundle/Resources/public/vendor/jquery/dist/jquery.min.js'
                   - '@MMCmfAdminBundle/Resources/public/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'
                   - '@MMCmfAdminBundle/Resources/public/vendor/AdminLTE/dist/js/app.js'
+                  - '@MMCmfAdminBundle/Resources/public/js/notify.js'
+                  - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdmin.js'
                   - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdminEditFrame.js'
                   - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdminMenu.js'
                   - '@MMCmfAdminBundle/Resources/public/js/core.js'
@@ -34,6 +36,8 @@ fos_user:
             type: MandarinMedien\MMCmfAdminBundle\Form\UserType
 
 twig:
+    globals:
+        widget_manager: @mm_cmf_admin.widget_manager
     form:
         resources: ['bootstrap_3_layout.html.twig']
 

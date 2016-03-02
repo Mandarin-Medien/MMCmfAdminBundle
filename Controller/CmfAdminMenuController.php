@@ -87,6 +87,9 @@ class CmfAdminMenuController extends Controller
     {
         return $this->createForm(new MenuType(), $menu, array(
             'method' => 'PUT',
+            'attr' => array(
+                'rel' => 'ajax'
+            ),
             'action' => $this->generateUrl('mm_cmf_admin_menu_update', array(
                 'id' => $menu->getId()
             ))

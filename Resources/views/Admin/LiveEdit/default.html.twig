@@ -1,0 +1,9 @@
+{% extends "@MMCmfAdmin/Admin/admin.html.twig" %}
+
+{% block admin_header_navbar_left_menu %}
+    {% include "@MMCmfAdmin/Admin/LiveEdit/toolbar.html.twig" %}
+{% endblock %}
+
+{% block admin_body %}
+    {% include "@MMCmfAdmin/Admin/LiveEdit/iframe.html.twig" %}
+{% endblock %}

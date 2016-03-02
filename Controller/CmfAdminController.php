@@ -41,8 +41,9 @@ class CmfAdminController extends Controller
             ));
         }
 
-        return $this->render('MMCmfAdminBundle:Admin:pageedit.html.twig', array(
-            'iframe_path' => $path
+        return $this->render('MMCmfAdminBundle:Admin/LiveEdit:default.html.twig', array(
+            'iframe_path' => $path,
+            'factory' => $this->get('mm_cmf_content.content_node_factory')
         ));
     }
 

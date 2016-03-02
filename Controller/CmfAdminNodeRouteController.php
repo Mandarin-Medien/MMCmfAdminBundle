@@ -74,7 +74,7 @@ class CmfAdminNodeRouteController extends Controller
     {
         return $this->render("@MMCmfAdmin/Admin/Menu/menu.edit.html.twig", array(
             'form' => $this->createEditForm($nodeRoute)->createView(),
-            'nodeRoute' => $nodeRoute
+            'nodeRoute' => $nodeRoute,
         ));
     }
 
@@ -101,6 +101,9 @@ class CmfAdminNodeRouteController extends Controller
     {
         return $this->createForm(new NodeRouteType(), $nodeRoute, array(
             'method' => 'PUT',
+            'attr' => array(
+                'rel' => 'ajax'
+            ),
             'action' => $this->generateUrl('mm_cmf_admin_noderoute_update', array(
                 'id' => $nodeRoute->getId()
             ))
