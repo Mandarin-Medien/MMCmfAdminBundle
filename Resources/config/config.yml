@@ -33,6 +33,9 @@ fos_user:
         form:
             type: MandarinMedien\MMCmfAdminBundle\Form\UserType
 
+twig:
+    form:
+        resources: ['bootstrap_3_layout.html.twig']
 
 security:
     encoders:
