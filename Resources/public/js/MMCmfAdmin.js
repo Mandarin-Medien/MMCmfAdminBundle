@@ -36,6 +36,12 @@
                 });
             };
 
+
+            /**
+             * general ajax submit for forms in admin
+             * @param e Event
+             * @returns void
+             */
             var ajaxSubmit = function(e) {
 
                 e.preventDefault();
@@ -51,20 +57,48 @@
                     'data' : data,
                     'processData': false,
                     'contentType': false,
-                    'success' : function(response) {
-                        if(data.success = true) {
+
+                    // response success action
+                    'success' : function(response)
+                    {
+
+                        // Validation success
+                        if(response.success == true) {
+
+                            $(form).trigger(createFormEvent('validation:success', response.data));
                             $.notify('<i class="fa fa-check"></i> erfolgreich gespeichert');
-                        } else {
+
+                        }
+
+                        // Validation failure
+                        else {
+
+                            $(form).trigger(createFormEvent('validation:fail', response.data));
                             $.notify('<i class="fa fa-times"></i> speichern fehlgeschlagen');
+
+                            if(response.data.errors) {
+                                for(var name in response.data.errors)
+                                {
+                                    // validation hints the bootstrap way, may not work with other form markup structure
+                                    /* TODO: put validation messages to markup */
+                                    $('[name="'+response.data.form+'['+name+']"]').parent().addClass('has-error');
+                                }
+                            }
                         }
                     },
+
+                    // response error action
                     'error' : function(xhr, text, errorMsg) {
-                        console.log(xhr, text, errorMsg);
+                        $(form).trigger(createFormEvent('validation:fail', data));
                         $.notify('<i class="fa fa-times"></i> '+xhr.status+': '+xhr.statusText);
                     }
                 });
+            };
 
-                return false;
+
+            var createFormEvent = function(event, eventData)
+            {
+                return $.Event('MMCmfAdmin:Form:'+event, eventData);
             };
 
 

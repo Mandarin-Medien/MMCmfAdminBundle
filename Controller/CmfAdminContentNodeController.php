@@ -2,8 +2,10 @@
 
 namespace MandarinMedien\MMCmfAdminBundle\Controller;
 
+use MandarinMedien\MMCmfAdminBundle\Response\JsonFormResponse;
 use MandarinMedien\MMCmfAdminBundle\Form\ContentNodeType;
 use MandarinMedien\MMCmfContentBundle\Entity\ContentNode;
+use MandarinMedien\MMCmfNodeBundle\Entity\Node;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,17 +28,35 @@ class CmfAdminContentNodeController extends Controller
     }
 
 
-    public function newAction($contentnode_type)
+    public function newAction(Request $request, $contentnode_type)
     {
-        $factory = $this->get('mm_cmf_content.content_node_factory');
+        $factory    = $this->get('mm_cmf_content.content_node_factory');
+        $repository = $this->getDoctrine()->getRepository('MMCmfNodeBundle:Node');
 
+        $parent_node = null;
         $entity = $factory->createContentNode($contentnode_type);
-        $form   = $this->createCreateForm($entity);
 
-        return $this->render('MMCmfAdminBundle:Admin/ContentNode:contentnode.new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        if((int) $request->get('parent_node')) {
+            if($parent_node = $repository->find((int)$request->get('parent_node'))) {
+                $entity->setParent($parent_node);
+            }
+        }
+
+        $form   = $this->createCreateForm($entity, $parent_node);
+
+
+        if($request->isXmlHttpRequest()) {
+            return $this->render('@MMCmfAdmin/Admin/ContentNode/content.node.new.modal.html.twig', array(
+                'entity' => $entity,
+                'form' => $form->createView()
+            ));
+        } else {
+
+            return $this->render('MMCmfAdminBundle:Admin/ContentNode:contentnode.new.html.twig', array(
+                'entity' => $entity,
+                'form' => $form->createView(),
+            ));
+        }
     }
 
 
@@ -54,25 +74,29 @@ class CmfAdminContentNodeController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
+        }
+        if($request->isXmlHttpRequest())
+        {
+            return new JsonFormResponse($form);
+        } else {
             return $this->redirect($this->generateUrl('mm_cmf_admin_contentnode'));
         }
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
     }
 
 
     private function createCreateForm(ContentNode $entity)
     {
-        $form = $this->createForm($this->get('mm_cmf_admin.form_type.content_node'), $entity, array(
-            'action' => $this->generateUrl('mm_cmf_admin_contentnode_create', array(
-                'contentnode_type' => $this->get('mm_cmf_content.content_node_factory')->getDiscrimatorByClass($entity)
-            )),
-            'method' => 'POST',
-        ));
+        $form = $this->createForm(
+            $this->get('mm_cmf_admin.form_type.content_node'),
+            $entity,
+            array(
+                'parent_node' => $entity->getParent(),
+                'action' => $this->generateUrl('mm_cmf_admin_contentnode_create',
+                    array('contentnode_type' => $this->get('mm_cmf_content.content_node_factory')->getDiscrimatorByClass($entity)
+                )),
+                'method' => 'POST',
+            )
+        );
 
         $form->add('submit', 'submit', array('label' => 'Create'));
 
@@ -83,7 +107,7 @@ class CmfAdminContentNodeController extends Controller
     /**
      * Displays a form to edit an existing ContentNode entity.
      */
-    public function editAction($id)
+    public function editAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -129,22 +153,21 @@ class CmfAdminContentNodeController extends Controller
             throw $this->createNotFoundException('Unable to find ContentNode entity.');
         }
 
-
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
             $em->flush();
-
-            return new JsonResponse(array(
-                'success' => true
-            ));
         }
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView()
-        );
+        if($request->isXmlHttpRequest())
+        {
+            return new JsonFormResponse($editForm);
+
+        } else {
+            return $this->redirect($this->generateUrl('mm_cmf_admin_contentnode_edit', array('id' => $id)));
+        }
+
     }
 
     public function deleteAction(Request $request, $id)

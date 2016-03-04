@@ -5,7 +5,7 @@
             var defaults = {
 
                 adressbar: '.adressbar',
-                reload: '.reload',
+                reload: '.refresh',
                 historyBack: '.history-back',
                 historyFormward: '.history-forward',
                 viewportsToggle: '.viewport-switch',
@@ -45,6 +45,11 @@
 
 
                     $(self).load(function() {
+                        $(options.reload).find('.fa').removeClass('fa-spin')
+                    });
+
+
+                    $(self).on('onload', function() {
                         var path = this.contentWindow.location.pathname;
                         updateAdressbar(options, path);
                     });
@@ -58,6 +63,8 @@
                     });
 
                     $(options.reload).bind('click', function() {
+
+                        $(this).find('.fa').addClass('fa-spin');
                         reload(self);
                     });
 
@@ -115,6 +122,10 @@
             var reload = function(iframe)
             {
                 iframe.contentWindow.location.reload(true);
+
+                iframe.contentWindow.document.addEventListener('onpageshow', function() {
+                    console.log('jdfhjksnk');
+                })
             };
 
             var updateAdressbar = function(options, path)

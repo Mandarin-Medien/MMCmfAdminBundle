@@ -26,15 +26,23 @@ class CmfAdminPageController extends Controller
     }
 
 
-    public function newAction()
+    public function newAction(Request $request)
     {
         $entity = new Page();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('MMCmfAdminBundle:Admin/Page:page.new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        if($request->isXmlHttpRequest()) {
+            return $this->render('MMCmfAdminBundle:Admin/Page:page.new.modal.html.twig', array(
+                'entity' => $entity,
+                'form'   => $form->createView(),
+            ));
+        } else {
+
+            return $this->render('MMCmfAdminBundle:Admin/Page:page.new.html.twig', array(
+                'entity' => $entity,
+                'form' => $form->createView(),
+            ));
+        }
     }
 
 

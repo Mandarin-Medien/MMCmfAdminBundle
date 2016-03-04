@@ -5,6 +5,8 @@ jQuery(document).ready(function() {
     $('iframe').MMCmfAdminEditFrame();
     $('.admin-menu-list-main').MMCmfAdminMenu();
 
+    $('.node-tree-root').NodeTreeType();
+
 
    /* var menu;
 

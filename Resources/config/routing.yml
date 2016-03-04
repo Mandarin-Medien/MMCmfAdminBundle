@@ -37,7 +37,7 @@ mm_cmf_admin_noderoute_new:
     defaults: { _controller: MMCmfAdminBundle:CmfAdminNodeRoute:new, node_route_type: 'alias' }
 
 mm_cmf_admin_noderoute_create:
-    path:     /admin/route/{node_route_type}/create
+    path:     /admin/route/{node_route_type}/create/{parent_node}
     defaults: { _controller: MMCmfAdminBundle:CmfAdminNodeRoute:create, node_route_type: 'alias' }
 
 mm_cmf_admin_noderoute_edit:
@@ -84,11 +84,15 @@ mm_cmf_admin_contentnode:
 
 mm_cmf_admin_contentnode_new:
     path:     /admin/contentnode/{contentnode_type}/new
-    defaults: { _controller: MMCmfAdminBundle:CmfAdminContentNode:new, contentnode_type: 'contentnode' }
+    defaults:
+        _controller: MMCmfAdminBundle:CmfAdminContentNode:new
+        contentnode_type: 'contentnode'
 
 mm_cmf_admin_contentnode_create:
     path:     /admin/contentnode/{contentnode_type}/create
-    defaults: { _controller: MMCmfAdminBundle:CmfAdminContentNode:create, contentnode_type: 'contentnode' }
+    defaults:
+        _controller: MMCmfAdminBundle:CmfAdminContentNode:create
+        contentnode_type: 'contentnode'
 
 mm_cmf_admin_contentnode_edit:
     path:     /admin/contentnode/{id}/edit
