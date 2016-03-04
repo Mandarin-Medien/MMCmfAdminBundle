@@ -26,7 +26,11 @@
             </a>
             <ul class="dropdown-menu">
                 {% for discrimator in factory.discrimators %}
-                    <li><a href="{{ path('mm_cmf_admin_contentnode_new', {'contentnode_type' : discrimator}) }}" rel="modal" class="viewport-toggle" data-viewport="xs"><i class="fa fa-align-left"></i> <span>{{ discrimator }}</span></a></li>
+                    <li>
+                        <a href="{{ path('mm_cmf_admin_contentnode_new', {'contentnode_type' : discrimator}) }}" rel="modal" data-fetch-root="true">
+                            <i class="fa fa-align-left"></i> <span>{{ discrimator }}</span>
+                        </a>
+                    </li>
                 {% endfor %}
             </ul>
         </li>

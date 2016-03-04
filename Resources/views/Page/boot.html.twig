@@ -1,0 +1,43 @@
+{% block mm_cmf_admin_boot %}
+    <script>
+        if(window.frameElement)
+        {
+
+            var IframeEvent = function(type)
+            {
+                return new CustomEvent(
+                    'iframe:'+type,
+                    {
+                        'bubbles' : true,
+                        'cancelable' : false,
+                        'data' : {
+
+                        }
+                    }
+                );
+
+            };
+
+            document.mm_cmf_admin = {};
+            document.mm_cmf_admin.root_node = {{ node.id }};
+
+          ///window.frameElement.dispatchEvent(new IframeEvent('change'));
+
+            window.onbeforeunload = function(e) {
+               window.frameElement.dispatchEvent(new IframeEvent('beforeunload'));
+            };
+
+            window.onunload = function(e) {
+                window.frameElement.dispatchEvent(new IframeEvent('unload'));
+            };
+
+            window.onpageshow = function(e) {
+               window.frameElement.dispatchEvent(new IframeEvent('pageshow'));
+            };
+
+            window.onpagehide = function(e) {
+               window.frameElement.dispatchEvent(new IframeEvent('pagehide'));
+            };
+        }
+    </script>
+{% endblock %}

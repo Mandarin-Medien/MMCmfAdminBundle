@@ -2,16 +2,14 @@
 
 namespace MandarinMedien\MMCmfAdminBundle\Form;
 
-use MandarinMedien\MMCmfAdminBundle\Form\Types\EntityHiddenType;
-use MandarinMedien\MMCmfAdminBundle\Form\Types\NodeTreeType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+use MandarinMedien\MMCmfContentBundle\Form\FormTypeMetaReader;
 use MandarinMedien\MMCmfNodeBundle\Entity\Node;
+
 
 class ContentNodeType extends AbstractType
 {
@@ -25,9 +23,12 @@ class ContentNodeType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $em = $this->container->get('doctrine')->getManager();
 
-        $metaData = $em->getClassMetadata(get_class($options['data']));
+        $em = $this->container->get('doctrine')->getManager();
+        $className  = get_class($options['data']);
+
+        $metaData = $em->getClassMetadata($className);
+        $formTypeReader = new FormTypeMetaReader();
 
         // loop default fields
         foreach($metaData->getFieldNames() as $field)
@@ -37,7 +38,7 @@ class ContentNodeType extends AbstractType
             ))) continue;
 
 
-            $builder->add($field);
+            $builder->add($field, $formTypeReader->get($className, $field));
 
         }
 
@@ -51,7 +52,7 @@ class ContentNodeType extends AbstractType
                 'routes'
             ))) continue;
 
-            $builder->add($field);
+            $builder->add($field, $formTypeReader->get($className, $field));
         }
 
         $builder->add('parent', $this->container->get('mm_cmf_admin.form_type.node_tree')->setParentNode($options['parent_node']));

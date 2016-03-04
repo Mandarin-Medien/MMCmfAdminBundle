@@ -1,3 +1,5 @@
+var formhandler;
+
 jQuery(document).ready(function() {
 
     $(document).MMCmfAdmin();
@@ -5,7 +7,9 @@ jQuery(document).ready(function() {
     $('iframe').MMCmfAdminEditFrame();
     $('.admin-menu-list-main').MMCmfAdminMenu();
 
-    $('.node-tree-root').NodeTreeType();
+
+    formhandler = new FormHandler();
+    formhandler.init();
 
 
    /* var menu;

@@ -5,11 +5,21 @@
 
             var __construct = function (settings) {
 
+                $(document).on('iframe:pageshow', function(e) {
+                   setRoot(e.target.contentDocument.mm_cmf_admin.root_node);
+                });
+
                 return this.each(function() {
 
                     $(this).on('submit', 'form[rel="ajax"]', false, ajaxSubmit);
                     $(this).on('click', '[rel="modal"]', false, ajaxModal);
+                });
 
+            };
+
+            var setRoot = function(id) {
+                $('a[data-fetch-root="true"]').each(function() {
+                    $(this).data('root', id);
                 });
             };
 
@@ -19,8 +29,17 @@
 
                 var url = e.currentTarget.getAttribute('href');
 
+                var data = null;
+
+                if($(e.currentTarget).data('root')) {
+                    data = {
+                        'parent_node' : $(e.currentTarget).data('root')
+                    }
+                }
+
                 $.ajax({
                     'url' : url,
+                    'data' : data,
                     'success' : function(response) {
                         $('body').append(response);
                         $('.modal')
@@ -28,6 +47,9 @@
                             .on('hidden.bs.modal', function() {
                                 $(this).remove();
                             });
+
+                        // init Formtypes
+                        formhandler.init();
                     },
                     'error' : function(xhr, text, errorMsg) {
                         console.log(xhr, text, errorMsg);
@@ -67,6 +89,9 @@
 
                             $(form).trigger(createFormEvent('validation:success', response.data));
                             $.notify('<i class="fa fa-check"></i> erfolgreich gespeichert');
+
+                            $('.modal').modal('hide');
+                            $(document).trigger('iframe:refresh');
 
                         }
 

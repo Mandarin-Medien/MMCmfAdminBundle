@@ -43,13 +43,21 @@
                     // set options from settings and defaults
                     var options = $.extend(defaults, settings);
 
+                    // bind iframe.* listeners dispatched by boot script
+
+                    $(document).on('iframe:refresh', function(e) {
+                        reload(self);
+                    });
+
+                    $(self).on('iframe:beforeunload', function(e) {
+                        $(options.reload).find('.fa').addClass('fa-spin');
+                    });
 
                     $(self).load(function() {
                         $(options.reload).find('.fa').removeClass('fa-spin')
                     });
 
-
-                    $(self).on('onload', function() {
+                    $(self).on('iframe:pageshow', function() {
                         var path = this.contentWindow.location.pathname;
                         updateAdressbar(options, path);
                     });

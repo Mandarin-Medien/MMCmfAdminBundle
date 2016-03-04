@@ -5,9 +5,11 @@ namespace MandarinMedien\MMCmfAdminBundle\Controller;
 use AppBundle\Entity\ParagraphNode;
 use MandarinMedien\MMCmfContentBundle\Entity\ParagraphContentNode;
 use MandarinMedien\MMCmfContentBundle\Entity\RowContentNode;
+use MandarinMedien\MMCmfContentBundle\Form\FormTypeMetaReader;
 use MandarinMedien\MMCmfMenuBundle\Entity\Menu;
 use MandarinMedien\MMCmfRoutingBundle\Entity\NodeRoute;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use MandarinMedien\MMCmfContentBundle\Entity\ContentNode;
 use Symfony\Component\BrowserKit\Request;
 
 class CmfAdminController extends Controller
@@ -16,6 +18,15 @@ class CmfAdminController extends Controller
     public function dashboardAction()
     {
         $widgetManager = $this->get('mm_cmf_admin.widget_manager');
+
+        $reader = new FormTypeMetaReader();
+
+        //$nodes = $this->getDoctrine()->getRepository('MMCmfContentBundle:ContentNode')->findAll();
+
+
+
+        dump($reader->get(ParagraphContentNode::class, 'text'));
+
 
         return $this->render('@MMCmfAdmin/Admin/dashboard.html.twig', array(
             'widgets' => $widgetManager->getWidgets('dashboard')
