@@ -3,13 +3,18 @@
 namespace MandarinMedien\MMCmfAdminBundle\Controller;
 
 use MandarinMedien\MMCmfMenuBundle\Entity\Menu;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MandarinMedien\MMCmfAdminBundle\Form\MenuType;
 use Symfony\Component\HttpFoundation\Request;
 
-class CmfAdminMenuController extends Controller
+class CmfAdminMenuController extends CmfAdminBaseController
 {
 
+    /**
+     * Menu List Action
+     * gets list of all menus
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
@@ -24,6 +29,12 @@ class CmfAdminMenuController extends Controller
     }
 
 
+    /**
+     * Menu New Action
+     * gets an form for creating new menu
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function newAction()
     {
         $entity = new Menu();
@@ -35,6 +46,14 @@ class CmfAdminMenuController extends Controller
         ));
     }
 
+
+    /**
+     * create Action
+     * handles the new form request
+     *
+     * @param Request $request
+     * @return \MandarinMedien\MMCmfAdminBundle\Response\JsonFormResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function createAction(Request $request)
     {
         $entity = new Menu();
@@ -45,17 +64,19 @@ class CmfAdminMenuController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('mm_cmf_admin_menu'));
         }
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+        return $this->formResponse($form);
     }
 
 
+    /**
+     * edit action
+     * get the form for editing an existing menu
+     *
+     * @param Menu $menu
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function editAction(Menu $menu)
     {
         return $this->render("@MMCmfAdmin/Admin/Menu/menu.edit.html.twig", array(
@@ -65,6 +86,13 @@ class CmfAdminMenuController extends Controller
     }
 
 
+    /**
+     * update action
+     * handles the edit form request
+     *
+     * @param Menu $menu
+     * @return \MandarinMedien\MMCmfAdminBundle\Response\JsonFormResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function updateAction(Menu $menu)
     {
 
@@ -77,12 +105,19 @@ class CmfAdminMenuController extends Controller
             $this->getDoctrine()->getManager()->flush();
         }
 
-        return $this->redirectToRoute('mm_cmf_admin_menu_edit', array(
+        return $this->formResponse($form);
+
+        /*return $this->redirectToRoute('mm_cmf_admin_menu_edit', array(
             'id' => $menu->getId()
-        ));
+        ));*/
     }
 
 
+    /**
+     * create the edit form
+     * @param Menu $menu
+     * @return \Symfony\Component\Form\Form
+     */
     public function createEditForm(Menu $menu)
     {
         return $this->createForm(new MenuType(), $menu, array(
@@ -96,6 +131,13 @@ class CmfAdminMenuController extends Controller
         ));
     }
 
+
+    /**
+     * create the new form
+     *
+     * @param Menu $menu
+     * @return \Symfony\Component\Form\Form
+     */
     public function createCreateForm(Menu $menu)
     {
         return $this->createForm(new MenuType(), $menu, array(

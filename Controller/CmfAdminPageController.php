@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 
-class CmfAdminPageController extends Controller
+class CmfAdminPageController extends CmfAdminBaseController
 {
 
 
@@ -31,18 +31,11 @@ class CmfAdminPageController extends Controller
         $entity = new Page();
         $form   = $this->createCreateForm($entity);
 
-        if($request->isXmlHttpRequest()) {
-            return $this->render('MMCmfAdminBundle:Admin/Page:page.new.modal.html.twig', array(
-                'entity' => $entity,
-                'form'   => $form->createView(),
-            ));
-        } else {
+        return $this->render('MMCmfAdminBundle:Admin/Page:page.new.html.twig', array(
+            'entity' => $entity,
+            'form' => $form->createView(),
+        ));
 
-            return $this->render('MMCmfAdminBundle:Admin/Page:page.new.html.twig', array(
-                'entity' => $entity,
-                'form' => $form->createView(),
-            ));
-        }
     }
 
 
@@ -56,14 +49,9 @@ class CmfAdminPageController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('mm_cmf_admin_page'));
         }
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+        return $this->formResponse($form);
     }
 
 
@@ -135,14 +123,9 @@ class CmfAdminPageController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-
-            return $this->redirect($this->generateUrl('mm_cmf_admin_page_edit', array('id' => $id)));
         }
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView()
-        );
+        return $this->formResponse($editForm);
     }
 
     public function deleteAction(Request $request, $id)

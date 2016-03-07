@@ -15,7 +15,7 @@
             </ul>
         </li>
         <li>
-            <a rel="modal" href="{{ path('mm_cmf_admin_page_new') }}">
+            <a rel="ajax" href="{{ path('mm_cmf_admin_page_new') }}">
                 <i class="fa fa-file-o"></i> <span>Seite hinzufügen</span>
             </a>
 
@@ -27,7 +27,7 @@
             <ul class="dropdown-menu">
                 {% for discrimator in factory.discrimators %}
                     <li>
-                        <a href="{{ path('mm_cmf_admin_contentnode_new', {'contentnode_type' : discrimator}) }}" rel="modal" data-fetch-root="true">
+                        <a href="{{ path('mm_cmf_admin_contentnode_new', {'contentnode_type' : discrimator}) }}" rel="ajax" data-fetch-root="true">
                             <i class="fa fa-align-left"></i> <span>{{ discrimator }}</span>
                         </a>
                     </li>

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 
-class CmfAdminContentNodeController extends Controller
+class CmfAdminContentNodeController extends CmfAdminBaseController
 {
 
 
@@ -44,19 +44,10 @@ class CmfAdminContentNodeController extends Controller
 
         $form   = $this->createCreateForm($entity, $parent_node);
 
-
-        if($request->isXmlHttpRequest()) {
-            return $this->render('@MMCmfAdmin/Admin/ContentNode/content.node.new.modal.html.twig', array(
-                'entity' => $entity,
-                'form' => $form->createView()
-            ));
-        } else {
-
-            return $this->render('MMCmfAdminBundle:Admin/ContentNode:contentnode.new.html.twig', array(
-                'entity' => $entity,
-                'form' => $form->createView(),
-            ));
-        }
+        return $this->render('@MMCmfAdmin/Admin/ContentNode/contentnode.new.html.twig', array(
+            'entity' => $entity,
+            'form' => $form->createView()
+        ));
     }
 
 
@@ -75,13 +66,10 @@ class CmfAdminContentNodeController extends Controller
             $em->persist($entity);
             $em->flush();
         }
-        if($request->isXmlHttpRequest())
-        {
-            return new JsonFormResponse($form);
-        } else {
-            return $this->redirect($this->generateUrl('mm_cmf_admin_contentnode'));
-        }
+
+        return $this->formResponse($form);
     }
+
 
 
     private function createCreateForm(ContentNode $entity)
@@ -117,11 +105,11 @@ class CmfAdminContentNodeController extends Controller
             throw $this->createNotFoundException('Unable to find ContentNode entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
+        $form = $this->createEditForm($entity);
 
-        return $this->render('@MMCmfAdmin/Admin/ContentNode/backend/contentnode.edit.html.twig', array(
+        return $this->render('@MMCmfAdmin/Admin/ContentNode/contentnode.edit.html.twig', array(
             'entity'      => $entity,
-            'form'   => $editForm->createView(),
+            'form'   => $form->createView(),
         ));
     }
 
@@ -153,20 +141,14 @@ class CmfAdminContentNodeController extends Controller
             throw $this->createNotFoundException('Unable to find ContentNode entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
+        $form = $this->createEditForm($entity);
+        $form->handleRequest($request);
 
-        if ($editForm->isValid()) {
+        if ($form->isValid()) {
             $em->flush();
         }
 
-        if($request->isXmlHttpRequest())
-        {
-            return new JsonFormResponse($editForm);
-
-        } else {
-            return $this->redirect($this->generateUrl('mm_cmf_admin_contentnode_edit', array('id' => $id)));
-        }
+       return $this->formResponse($form);
 
     }
 

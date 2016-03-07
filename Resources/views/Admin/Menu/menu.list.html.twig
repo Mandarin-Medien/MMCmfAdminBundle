@@ -1,4 +1,4 @@
-{% extends "MMCmfAdminBundle:Admin:admin.html.twig" %}
+{% extends extends_from %}
 
 {% block admin_body_head %}
     <h1>
@@ -45,5 +45,26 @@
             </div>
         </div>
     </div>
+{% endblock %}
 
+
+{% block xhr_body %}
+    <table class="table table-responsive">
+        <tbody>
+        {% for menu in menues %}
+            <tr>
+                <td><a href="{{ path('mm_cmf_admin_menu_edit', {'id': menu.id}) }}">{{ menu.name }}</a></td>
+                <td><a href="{{ path('mm_cmf_admin_menu_edit', {'id': menu.id}) }}"><i class="fa fa-edit"></i></a></td>
+                <td><a href="{{ path('mm_cmf_admin_menu_delete', {'id': menu.id}) }}"><i class="fa fa-trash"></i></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block xhr_footer %}
+    <a class="btn btn-success" href="{{ path('mm_cmf_admin_menu_new') }}">
+        <i class="fa fa-plus"></i>
+        Menü hinzufügen
+    </a>
 {% endblock %}

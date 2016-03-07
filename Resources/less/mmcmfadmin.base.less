@@ -374,3 +374,38 @@ iframe.edit-iframe {
     }
   }
 }
+
+.content-wrapper {
+  position: relative;
+}
+
+.xhr {
+  border: 15px solid rgba(0,0,0,.5);
+  position: absolute;
+  right: 50%;
+  width: 0%;
+  height: 0%;
+  top: 50%;
+  z-index: 0;
+  opacity: 0;
+  overflow: hidden;
+  //border-radius: 500em;
+
+  transition: all .3s;
+
+  &.visible {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    right: 0%;
+    top: 0%;
+    z-index: 2;
+    //border-radius: 0px;
+  }
+
+  .xhr-container {
+    padding: 30px;
+    min-height: 100%;
+    background: rgba(255,255,255, .99);
+  }
+}

@@ -1,4 +1,4 @@
-{% extends "MMCmfAdminBundle:Admin:admin.html.twig" %}
+{% extends extends_from %}
 
 {% block admin_body_head %}
     <h1>
@@ -48,4 +48,27 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block xhr_body %}
+    <table class="table table-responsive">
+        <tbody>
+        {% for page in pages %}
+            <tr>
+                <td>{{ page.name }}</td>
+                <td><small>{{ page.autoNodeRoute }}</small></td>
+                <td>{% if page.autoNodeRoute %}<a href="{{ path("mm_cmf_admin_homepage", {'route' : page.autoNodeRoute.id} ) }}"><i class="fa fa-eye"></i></a>{% endif %}</td>
+                <td><a href="{{ path("mm_cmf_admin_page_edit", {"id" : page.id}) }}"><i class="fa fa-edit"></i></a></td>
+                <td><a href="{{ path("mm_cmf_admin_page_delete", {"id" : page.id }) }}"><i class="fa fa-trash"></i></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block xhr_footer %}
+    <a href="{{ path('mm_cmf_admin_page_new') }}" class="btn btn-success">
+        <i class="fa fa-plus"></i>
+        Neu Seite hinzufügen
+    </a>
 {% endblock %}

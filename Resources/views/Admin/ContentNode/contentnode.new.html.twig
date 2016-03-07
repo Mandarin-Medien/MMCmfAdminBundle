@@ -1,4 +1,4 @@
-{% extends "MMCmfAdminBundle:Admin:admin.html.twig" %}
+{% extends extends_from %}
 
 {% block admin_body_head %}
     <h1>
@@ -14,5 +14,9 @@
             {{ form(form) }}
         </div>
     </div>
+{% endblock %}
 
+
+{% block xhr_body %}
+            {{ form(form) }}
 {% endblock %}
