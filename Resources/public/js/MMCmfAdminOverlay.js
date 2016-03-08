@@ -1,18 +1,32 @@
 (function($) {
 
-    $.fn.MMCmfAdminOverlay = function(settings)
+    $.fn.MMCmfAdminOverlay = function(options)
     {
         var defaults = {
             target: '.xhr',
             template: '<div class="mmcmfadmin-overlay-container"><a href="#" class="mmcmfadmin-overlay-close"><i class="fa fa-close"></i></a>%contents%'
         };
 
+        var methods = {
+
+            close: function()
+            {
+                this.dispatchEvent('close');
+            }
+        };
+
         return this.each(function()
         {
 
             var self = this;
-            var settings = $.extend(defaults, settings);
+            var settings = this.settings = defaults;
 
+
+            if(typeof options == 'object') {
+                settings = this.settings = $.extend(defaults, options);
+            } else if( typeof options == 'string' && typeof methods[options] != 'undefined') {
+                 return methods[options].apply(this);
+            }
 
             /**
              * ajax call the given href
@@ -39,23 +53,17 @@
                     'data' : data,
                     'success' : function(response)
                     {
-                        dispatchEvent('xhr:success');
+                        self.dispatchEvent('xhr:success');
                         handleResponse(response);
                     },
 
                     'error' : function(xhr, text, errorMsg)
                     {
-                        dispatchEvent('xhr:error', {'xhr' : xhr});
+                        self.dispatchEvent('xhr:error', {'xhr' : xhr});
                     }
                 });
 
-                dispatchEvent('call');
-            };
-
-
-            var close = function(overlay)
-            {
-                $(overlay).remove();
+                self.dispatchEvent('xhr:call');
             };
 
 
@@ -66,9 +74,9 @@
              * @param {string} name Name of the event
              * @param {object=} data additional eventdata
              */
-            var dispatchEvent = function(name, data)
+            this.dispatchEvent = function(name, data)
             {
-                var eventData = $.extend({}, data);
+                var eventData = $.extend({'mmcmfadminoverlay' : self}, data);
                 var event = $.Event('mmcmfadmin:overlay:'+name, eventData);
 
                 $(self).trigger(event);
@@ -89,20 +97,25 @@
                 $(content)
                     .find('.mmcmfadmin-overlay-close')
                     .bind('click', function() {
-                       dispatchEvent('close');
+                        self.dispatchEvent('close');
                     });
 
-                $(document).one('mmcmfadmin:overlay:close', function(e) {
-                    close(content);
+                $(self).on('mmcmfadmin:overlay:close', function(e) {
+                    $(content).remove();
                 });
 
-                dispatchEvent('append');
+                self.dispatchEvent('append');
             };
 
             $(self).bind('click', call);
 
-
         });
+    }
+
+    $.fn.MMCmfAdminOverlay.close = function()
+    {
+
+        console.log(this);
     }
 
 })(jQuery);

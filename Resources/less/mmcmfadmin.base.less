@@ -407,6 +407,13 @@ iframe.edit-iframe {
   height: 100%;
   position: absolute;
   z-index: 2;
+  left: 100%;
+
+  transition: all .5s;
+
+  &.visible {
+    left: 0;
+  }
 }
 
 /*.xhr {

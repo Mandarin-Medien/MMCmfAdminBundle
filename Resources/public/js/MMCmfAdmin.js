@@ -12,13 +12,20 @@
                 return this.each(function() {
 
                     $(this).on('submit', '.xhr form', false, ajaxSubmit);
+
                     $('a[rel="ajax"]')
                         .MMCmfAdminOverlay()
 
                         // init forms on overlay append
                         .on('mmcmfadmin:overlay:append', function(e)
                         {
+                            $(e.mmcmfadminoverlay.settings.target).addClass('visible');
                             formhandler.init();
+                        })
+
+                        .on('mmcmfadmin:overlay:close', function(e)
+                        {
+                            $(e.mmcmfadminoverlay.settings.target).removeClass('visible');
                         })
 
                         // notify user on error
@@ -66,12 +73,16 @@
                     {
 
                         // Validation success
-                        if(response.success == true) {
+                        if(response.success == true)
+                        {
 
                             $(form).trigger(createFormEvent('validation:success', response.data));
                             $.notify('<i class="fa fa-check"></i> erfolgreich gespeichert');
 
-                            $(document).trigger('mmcmfadmin:overlay:close');
+                            // close the overlay
+                            $('a[rel="ajax"]').MMCmfAdminOverlay('close');
+
+                            // reload iframe
                             $(document).trigger('iframe:refresh');
 
                         }
