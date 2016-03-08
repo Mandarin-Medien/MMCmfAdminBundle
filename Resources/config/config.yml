@@ -39,7 +39,9 @@ twig:
     globals:
         widget_manager: @mm_cmf_admin.widget_manager
     form:
-        resources: ['bootstrap_3_layout.html.twig']
+        resources:
+            - bootstrap_3_layout.html.twig
+            - MMCmfAdminBundle:Form:menu.html.twig
 
 monolog:
     handlers:

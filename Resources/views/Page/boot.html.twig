@@ -27,6 +27,10 @@
                window.frameElement.dispatchEvent(new IframeEvent('beforeunload'));
             };
 
+            window.onload = function(e) {
+                window.frameElement.dispatchEvent(new IframeEvent('load'));
+            };
+
             window.onunload = function(e) {
                 window.frameElement.dispatchEvent(new IframeEvent('unload'));
             };

@@ -20,7 +20,7 @@
                         .on('mmcmfadmin:overlay:append', function(e)
                         {
                             $(e.mmcmfadminoverlay.settings.target).addClass('visible');
-                            formhandler.init();
+                            mmFormFieldhandler.init();
                         })
 
                         .on('mmcmfadmin:overlay:close', function(e)
@@ -83,7 +83,7 @@
                             $('a[rel="ajax"]').MMCmfAdminOverlay('close');
 
                             // reload iframe
-                            $(document).trigger('iframe:refresh');
+                            $('iframe').MMCmfAdminEditFrame('reload');
 
                         }
 

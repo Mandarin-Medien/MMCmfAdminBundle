@@ -2,13 +2,21 @@
 
     $.fn.MMCmfAdminOverlay = function(options)
     {
+
+        /**
+         * default options
+         * @type {{target: string, template: string}}
+         */
         var defaults = {
             target: '.xhr',
             template: '<div class="mmcmfadmin-overlay-container"><a href="#" class="mmcmfadmin-overlay-close"><i class="fa fa-close"></i></a>%contents%'
         };
 
+        /**
+         * public methid definition
+         * @type {{close: methods.close}}
+         */
         var methods = {
-
             close: function()
             {
                 this.dispatchEvent('close');
