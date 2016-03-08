@@ -112,6 +112,28 @@
                 });
             };
 
+            var handleXHR = function(response)
+            {
+                var target = $('.xhr');
+
+                $(target).html(response);
+                $(target).one('transitionend', function() {
+                    $(target).addClass('shown');
+                });
+
+                $(target).addClass('visible');
+                $(target).find('button.close').bind('click', function() {
+                    $(target).removeClass('shown');
+                    $(target).removeClass('visible');
+                });
+
+                $(document).on('overlay:close', function(e) {
+                    $(target).removeClass('visible');
+                });
+
+                // init Formtypes
+                mmFormFieldhandler.init();
+            };
 
 
             var createFormEvent = function(event, eventData)

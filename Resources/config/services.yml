@@ -26,16 +26,8 @@ services:
         tags:
             - {name: mm_cmf_admin.admin_widget}
 
-
-
     mm_cmf_admin.twig_widget_extension:
         class: MandarinMedien\MMCmfAdminBundle\Twig\WidgetRenderExtension
-        arguments: ["@service_container"]
-        tags:
-            - {name: twig.extension }
-
-    mm_cmf_admin.twig_node_tree_extension:
-        class: MandarinMedien\MMCmfAdminBundle\Twig\NodeTreeRenderExtension
         arguments: ["@service_container"]
         tags:
             - {name: twig.extension }
@@ -118,27 +110,6 @@ services:
         arguments: ["Rollen", "mm_cmf_admin_menu", "cog"]
         tags:
              - {name: mm_cmf_admin.admin_user_group}
-
-
-
-    ### FORMTYPES ####
-    mm_cmf_admin.form_type.entity_hidden:
-        class: MandarinMedien\MMCmfAdminBundle\Form\Types\EntityHiddenType
-        arguments: ["@doctrine.orm.entity_manager"]
-        tags:
-            - {name: form.type, alias: entity_hidden}
-
-    mm_cmf_admin.form_type.node_tree:
-        class: MandarinMedien\MMCmfAdminBundle\Form\Types\NodeTreeType
-        arguments: ["@doctrine.orm.entity_manager"]
-        tags:
-            - {name: form.type, alias: mm_cmf_admin_node_tree}
-
-    mm_cmf_admin.form_type.content_node:
-        class: MandarinMedien\MMCmfAdminBundle\Form\ContentNodeType
-        arguments: [@service_container]
-        tags:
-            - {name: form.type, alias: mm_cmf_admin_content_node}
 
 
     ### USERCONFIGURATION ###
