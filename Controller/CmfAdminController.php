@@ -72,7 +72,7 @@ class CmfAdminController extends Controller
     public function nodeAdminTestAction()
     {
         return $this->render('@MMCmfAdmin/Admin/ContentNode/content.node.edit.html.twig', array(
-            'form' => $this->createForm($this->get('mm_cmf_admin.form_type.content_node'), new ParagraphContentNode())->createView()
+            'form' => $this->createForm($this->get('mm_cmf_content.form_type.content_node'), new ParagraphContentNode())->createView()
         ));
     }
 

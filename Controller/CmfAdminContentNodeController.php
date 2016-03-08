@@ -75,7 +75,7 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
     private function createCreateForm(ContentNode $entity)
     {
         $form = $this->createForm(
-            $this->get('mm_cmf_admin.form_type.content_node'),
+            $this->get('mm_cmf_content.form_type.content_node'),
             $entity,
             array(
                 'parent_node' => $entity->getParent(),
@@ -117,7 +117,7 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
 
     private function createEditForm(ContentNode $entity)
     {
-        $form = $this->createForm($this->get('mm_cmf_admin.form_type.content_node'), $entity, array(
+        $form = $this->createForm($this->get('mm_cmf_content.form_type.content_node'), $entity, array(
             'action' => $this->generateUrl('mm_cmf_admin_contentnode_update', array('id' => $entity->getId())),
             'method' => 'PUT',
             'attr' => array(

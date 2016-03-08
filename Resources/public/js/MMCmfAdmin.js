@@ -132,7 +132,7 @@
                 });
 
                 // init Formtypes
-                formhandler.init();
+                mmFormFieldhandler.init();
             };
 
 
