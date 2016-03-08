@@ -379,19 +379,41 @@ iframe.edit-iframe {
   position: relative;
 }
 
-.xhr {
+.mmcmfadmin-overlay-container {
   border: 15px solid rgba(0,0,0,.5);
+  background: rgba(255,255,255,.99);
   position: absolute;
-  right: 50%;
-  width: 0%;
-  height: 0%;
-  top: 50%;
-  z-index: 0;
-  opacity: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 2;
   overflow: hidden;
+  transition: all .3s;
+
+  padding: 30px;
+
+  .mmcmfadmin-overlay-close {
+    display: block;
+    position: absolute;
+    colro: red;
+    top: 0;
+    right: 0;
+  }
+}
+
+.xhr {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 2;
+}
+
+/*.xhr {
+
   //border-radius: 500em;
 
-  transition: all .3s;
+
 
   &.shown {
     overflow: auto;
@@ -412,4 +434,4 @@ iframe.edit-iframe {
     min-height: 100%;
     background: rgba(255,255,255, .99);
   }
-}
+}*/

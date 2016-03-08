@@ -20,6 +20,7 @@ assetic:
                   - '@MMCmfAdminBundle/Resources/public/js/form/NodeTreeType.js'
                   - '@MMCmfAdminBundle/Resources/public/js/form/MenuType.js'
                   - '@MMCmfAdminBundle/Resources/public/js/form/FormHandler.js'
+                  - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdminOverlay.js'
                   - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdmin.js'
                   - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdminEditFrame.js'
                   - '@MMCmfAdminBundle/Resources/public/js/core.js'
