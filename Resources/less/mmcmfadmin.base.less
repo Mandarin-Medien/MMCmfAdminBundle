@@ -27,6 +27,18 @@ body {
       }
     }
 
+     .main-header {
+       .navbar {
+         .dropdown-menu {
+           li {
+             a {
+               color: #333;
+             }
+           }
+         }
+       }
+     }
+
     .content-wrapper {
       background-color: rgba(255, 255, 255, 0.1);
 
@@ -100,21 +112,6 @@ body {
     margin: auto;
   }
 
-  .live-edit-toolbar {
-    .nav.navbar-nav {
-      & > li {
-        & > a {
-          & > span {
-            display: none;
-            @media (min-width: 946px) {
-              display: inline;
-            }
-          }
-        }
-      }
-    }
-  }
-
   .view-adress-bar {
     .adressbar {
       outline: none;
@@ -126,6 +123,21 @@ body {
   .view-navigation {
     a {
       color: #fff;
+    }
+  }
+}
+
+.live-edit-toolbar {
+  .nav.navbar-nav {
+    & > li {
+      & > a {
+        & > span {
+          display: none;
+          @media (min-width: 946px) {
+            display: inline;
+          }
+        }
+      }
     }
   }
 }
