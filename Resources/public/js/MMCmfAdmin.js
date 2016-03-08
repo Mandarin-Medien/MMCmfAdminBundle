@@ -82,7 +82,7 @@
                             $(form).trigger(createFormEvent('validation:success', response.data));
                             $.notify('<i class="fa fa-check"></i> erfolgreich gespeichert');
 
-                            $('.modal').modal('hide');
+                            $(document).trigger('overlay:close');
                             $(document).trigger('iframe:refresh');
 
                         }
@@ -117,8 +117,13 @@
                 var target = $('.xhr');
 
                 $(target).html(response);
+                $(target).one('transitionend', function() {
+                    $(target).addClass('shown');
+                });
+
                 $(target).addClass('visible');
                 $(target).find('button.close').bind('click', function() {
+                    $(target).removeClass('shown');
                     $(target).removeClass('visible');
                 });
 

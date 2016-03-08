@@ -34,5 +34,19 @@
                 {% endfor %}
             </ul>
         </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-sitemap"></i> <span>Menüs bearbeiten</span>
+            </a>
+            <ul class="dropdown-menu">
+                {% for menu in menus %}
+                    <li>
+                        <a href="{{ path('mm_cmf_admin_menu_edit', {'id' : menu.id}) }}" rel="ajax" data-fetch-root="true">
+                            <i class="fa fa-edit"></i> <span>{{ menu }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
     </ul>
 </div>

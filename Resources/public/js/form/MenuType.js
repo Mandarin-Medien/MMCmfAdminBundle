@@ -1,6 +1,6 @@
 (function($) {
     $.extend({
-        MMCmfAdminMenu : new function() {
+        MenuType : new function() {
 
             var __construct = function (settings) {
 
@@ -140,7 +140,7 @@
 
             // make plugin callable
             $.fn.extend({
-                MMCmfAdminMenu : __construct
+                MenuType : __construct
             });
         }
     });

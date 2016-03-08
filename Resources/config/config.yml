@@ -18,10 +18,10 @@ assetic:
                   - '@MMCmfAdminBundle/Resources/public/js/notify.js'
                   - '@MMCmfAdminBundle/Resources/public/js/form/HTMLType.js'
                   - '@MMCmfAdminBundle/Resources/public/js/form/NodeTreeType.js'
+                  - '@MMCmfAdminBundle/Resources/public/js/form/MenuType.js'
                   - '@MMCmfAdminBundle/Resources/public/js/form/FormHandler.js'
                   - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdmin.js'
                   - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdminEditFrame.js'
-                  - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdminMenu.js'
                   - '@MMCmfAdminBundle/Resources/public/js/core.js'
         mm_cmf_admin_assets_css:
             inputs:
@@ -43,6 +43,12 @@ twig:
         widget_manager: @mm_cmf_admin.widget_manager
     form:
         resources: ['bootstrap_3_layout.html.twig']
+
+monolog:
+    handlers:
+        console:
+            type: stream
+            level: error
 
 security:
     encoders:
