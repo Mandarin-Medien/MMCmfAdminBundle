@@ -1,7 +1,7 @@
 (function($) {
     $.extend({
-        MMCmfAdmin : new function() {
-
+        MMCmfAdmin : new function()
+        {
 
             var __construct = function (settings) {
 
@@ -12,41 +12,30 @@
                 return this.each(function() {
 
                     $(this).on('submit', '.xhr form', false, ajaxSubmit);
-                    $(this).on('click', 'a[rel="ajax"]', false, ajaxFetch);
+                    $('a[rel="ajax"]')
+                        .MMCmfAdminOverlay()
+
+                        // init forms on overlay append
+                        .on('mmcmfadmin:overlay:append', function(e)
+                        {
+                            formhandler.init();
+                        })
+
+                        // notify user on error
+                        .on('mmcmfadmin:overlay:xhr:error', function(e)
+                        {
+                            if(typeof e.xhr == 'object') {
+                                $.notify('Fehler: '+e.xhr.status +': '+ e.xhr.statusText );
+                            }
+                        });
                 });
 
             };
+
 
             var setRoot = function(id) {
                 $('a[data-fetch-root="true"]').each(function() {
                     $(this).data('root', id);
-                });
-            };
-
-            var ajaxFetch = function(e) {
-
-                e.preventDefault();
-
-                var url = e.currentTarget.getAttribute('href');
-
-                var data = null;
-
-                if($(e.currentTarget).data('root')) {
-                    data = {
-                        'parent_node' : $(e.currentTarget).data('root')
-                    }
-                }
-
-                $.ajax({
-                    'url' : url,
-                    'data' : data,
-                    'success' : function(response) {
-                        handleXHR(response);
-                    },
-                    'error' : function(xhr, text, errorMsg) {
-                        console.log(xhr, text, errorMsg);
-                        $.notify('<i class="fa fa-times"></i> '+xhr.status+': '+xhr.statusText);
-                    }
                 });
             };
 
@@ -82,7 +71,7 @@
                             $(form).trigger(createFormEvent('validation:success', response.data));
                             $.notify('<i class="fa fa-check"></i> erfolgreich gespeichert');
 
-                            $(document).trigger('overlay:close');
+                            $(document).trigger('mmcmfadmin:overlay:close');
                             $(document).trigger('iframe:refresh');
 
                         }
