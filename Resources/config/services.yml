@@ -8,7 +8,7 @@ services:
 
     mm_cmf_admin.widget_factory:
         class: MandarinMedien\MMCmfAdminBundle\Admin\Widget\WidgetFactory
-        arguments: [@mm_cmf_admin.widget_manager]
+        arguments: [@service_container]
 
 
     mm_cmf_admin.admin_dashboard.time_widget:
@@ -39,6 +39,13 @@ services:
         tags:
             - {name: mm_cmf_admin.admin_widget }
 
+    mm_cmf_admin.admin_edit:
+            class: MandarinMedien\MMCmfAdminBundle\Admin\Widget
+            factory: ["@mm_cmf_admin.widget_factory", createWidget]
+            arguments: ["Liveedit", "mm_cmf_admin_live_edit", "eye"]
+            tags:
+              - {name: mm_cmf_admin.admin_widget}
+
     mm_cmf_admin.admin_content_group:
         class: MandarinMedien\MMCmfAdminBundle\Admin\Widget\Type\LinkGroupWidget
         factory: ["@mm_cmf_admin.widget_factory", createGroupWidget]
@@ -46,12 +53,6 @@ services:
         tags:
           - {name: mm_cmf_admin.admin_widget}
 
-    mm_cmf_admin.admin_edit:
-        class: MandarinMedien\MMCmfAdminBundle\Admin\Widget
-        factory: ["@mm_cmf_admin.widget_factory", createWidget]
-        arguments: ["Liveedit", "mm_cmf_admin_live_edit", "edit"]
-        tags:
-          - {name: mm_cmf_admin.admin_content_group}
 
     mm_cmf_admin.admin_pages:
         class: MandarinMedien\MMCmfAdminBundle\Admin\Widget

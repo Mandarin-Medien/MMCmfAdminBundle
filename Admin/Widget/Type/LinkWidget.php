@@ -3,6 +3,8 @@
 namespace MandarinMedien\MMCmfAdminBundle\Admin\Widget\Type;
 
 use MandarinMedien\MMCmfAdminBundle\Admin\Widget\WidgetInterface;
+use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\HTTPFoundation\Request;
 
 class LinkWidget extends BaseWidget
 {
@@ -10,6 +12,14 @@ class LinkWidget extends BaseWidget
     protected $value;
     protected $action;
     protected $icon;
+    protected $request;
+
+
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+    }
+
 
     /**
      * {@inheritdoc}
@@ -62,6 +72,17 @@ class LinkWidget extends BaseWidget
     {
         $this->action = $action;
         return $this;
+    }
+
+    public function isActive()
+    {
+        return $this->getRequest()->attributes->get('_route') == $this->action;
+    }
+
+
+    public function getRequest()
+    {
+        return $this->request;
     }
 
 
