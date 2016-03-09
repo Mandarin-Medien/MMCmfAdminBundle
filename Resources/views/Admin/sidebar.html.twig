@@ -21,6 +21,8 @@
         {#<li class="header">Verwalten</li>#}
         <!-- Optionally, you can add icons to the links -->
 
+        {% set widgets = widget_manager.widgets('sidebar') %}
+
         {% for widget in widgets %}
             {{ renderWidget(widget) }}
         {% endfor %}

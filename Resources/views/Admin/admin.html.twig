@@ -130,9 +130,8 @@ desired effect
     <aside class="main-sidebar">
 
         {% block admin_sidebar %}
-            {{ render(controller('MMCmfAdminBundle:CmfAdmin:renderSidebar')) }}
+            {% include "@MMCmfAdmin/Admin/sidebar.html.twig" %}
         {% endblock %}
-
 
         <!-- /.sidebar -->
     </aside>

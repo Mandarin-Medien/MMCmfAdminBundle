@@ -3,11 +3,10 @@
 namespace MandarinMedien\MMCmfAdminBundle\Admin\Widget;
 
 
-use MandarinMedien\MMCmfAdminBundle\Admin\Widget\Type\BaseWidget;
 use MandarinMedien\MMCmfAdminBundle\Admin\Widget\Type\LinkWidget;
 use MandarinMedien\MMCmfAdminBundle\Admin\Widget\Type\LinkGroupWidget;
 use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\HttpFoundation\Request;
+
 
 class WidgetFactory
 {

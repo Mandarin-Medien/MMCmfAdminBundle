@@ -75,12 +75,4 @@ class CmfAdminController extends Controller
             'form' => $this->createForm($this->get('mm_cmf_content.form_type.content_node'), new ParagraphContentNode())->createView()
         ));
     }
-
-
-    public function renderSidebarAction()
-    {
-        return $this->render('MMCmfAdminBundle:Admin:sidebar.html.twig', array(
-            'widgets' => $this->get('mm_cmf_admin.widget_manager')->getWidgets('sidebar')
-        ));
-    }
 }

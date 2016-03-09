@@ -76,6 +76,9 @@ class LinkWidget extends BaseWidget
 
     public function isActive()
     {
+
+        dump($this->container->get('request'));
+
         return $this->container->get('request')->attributes->get('_route') == $this->action;
     }
 
