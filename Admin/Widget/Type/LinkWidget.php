@@ -12,12 +12,12 @@ class LinkWidget extends BaseWidget
     protected $value;
     protected $action;
     protected $icon;
-    protected $request;
+    protected $container;
 
 
-    public function __construct(Request $request)
+    public function __construct(Container $container)
     {
-        $this->request = $request;
+        $this->container = $container;
     }
 
 
@@ -76,14 +76,9 @@ class LinkWidget extends BaseWidget
 
     public function isActive()
     {
-        return $this->getRequest()->attributes->get('_route') == $this->action;
+        return $this->container->get('request')->attributes->get('_route') == $this->action;
     }
 
-
-    public function getRequest()
-    {
-        return $this->request;
-    }
 
 
     public function getName()
