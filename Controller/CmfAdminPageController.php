@@ -85,7 +85,7 @@ class CmfAdminPageController extends CmfAdminBaseController
 
         return $this->render('@MMCmfAdmin/Admin/Page/page.edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
         ));
     }
 
