@@ -5,7 +5,9 @@ namespace MandarinMedien\MMCmfAdminBundle\Form;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use MandarinMedien\MMCmfRoutingBundle\Entity\ExternalNodeRoute;
+use MandarinMedien\MMCmfRoutingBundle\Entity\RedirectNodeRoute;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -24,6 +26,16 @@ class NodeRouteType extends AbstractType
         if(get_class($options['data']) != ExternalNodeRoute::class) {
             $builder->add('node', null, array(
                 'required' => true
+            ));
+        }
+
+        if(get_class($options['data']) == RedirectNodeRoute::class) {
+            $builder->add('statusCode', ChoiceType::class, array(
+                'required' => true,
+                'choices' => array(
+                    '301' => 301,
+                    '302' => 302
+                )
             ));
         }
 

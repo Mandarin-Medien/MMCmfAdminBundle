@@ -37,7 +37,7 @@ mm_cmf_admin_noderoute_new:
     defaults: { _controller: MMCmfAdminBundle:CmfAdminNodeRoute:new, node_route_type: 'alias' }
 
 mm_cmf_admin_noderoute_create:
-    path:     /admin/route/{node_route_type}/create/{parent_node}
+    path:     /admin/route/{node_route_type}/create
     defaults: { _controller: MMCmfAdminBundle:CmfAdminNodeRoute:create, node_route_type: 'alias' }
 
 mm_cmf_admin_noderoute_edit:

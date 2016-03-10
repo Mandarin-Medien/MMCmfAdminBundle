@@ -2,6 +2,7 @@
 
 namespace MandarinMedien\MMCmfAdminBundle\Controller;
 
+use MandarinMedien\MMCmfAdminBundle\Response\JsonFormResponse;
 use MandarinMedien\MMCmfMenuBundle\Entity\Menu;
 use MandarinMedien\MMCmfRoutingBundle\Entity\NodeRouteInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,7 +11,7 @@ use MandarinMedien\MMCmfAdminBundle\Form\NodeRouteType;
 use MandarinMedien\MMCmfRoutingBundle\Entity\NodeRoute;
 use Symfony\Component\HttpFoundation\Request;
 
-class CmfAdminNodeRouteController extends Controller
+class CmfAdminNodeRouteController extends CmfAdminBaseController
 {
 
     public function indexAction()
@@ -50,23 +51,17 @@ class CmfAdminNodeRouteController extends Controller
         $factory = $this->get('mm_cmf_routing.node_route_factory');
 
         $entity = $factory->createNodeRoute($node_route_type);
-        if($entity) {
-            $form = $this->createCreateForm($entity);
-            $form->handleRequest($request);
 
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($entity);
-                $em->flush();
+        $form = $this->createCreateForm($entity);
+        $form->handleRequest($request);
 
-                return $this->redirect($this->generateUrl('mm_cmf_admin_noderoute'));
-            }
-
-            return array(
-                'entity' => $entity,
-                'form' => $form->createView(),
-            );
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
         }
+
+        return $this->formResponse($form);
     }
 
 
