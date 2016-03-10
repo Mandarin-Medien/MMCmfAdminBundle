@@ -50,8 +50,13 @@
 
 
                 if($(e.currentTarget).data('root')) {
-                    data = {
-                        'parent_node' : $(e.currentTarget).data('root')
+
+                    if(url.indexOf('__root__') >= 0) {
+                        url = url.replace('__root__', $(e.currentTarget).data('root'));
+                    } else {
+                        data = {
+                            'parent_node': $(e.currentTarget).data('root')
+                        }
                     }
                 }
 

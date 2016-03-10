@@ -11,7 +11,7 @@
 
                 return this.each(function() {
 
-                    $(this).on('submit', '.xhr form', false, ajaxSubmit);
+                    $(this).on('submit', '.xhr form, form[rel="ajax"]', false, ajaxSubmit);
 
                     $('a[rel="ajax"]')
                         .MMCmfAdminOverlay()
@@ -91,16 +91,26 @@
                         else {
 
                             $(form).trigger(createFormEvent('validation:fail', response.data));
-                            $.notify('<i class="fa fa-times"></i> speichern fehlgeschlagen');
+
+                            var message = '<div style="margin-bottom: 10px"><i class="fa fa-times"></i> speichern fehlgeschlagen</div>';
+
+                            //$.notify('<i class="fa fa-times"></i> speichern fehlgeschlagen');
 
                             if(response.data.errors) {
+
                                 for(var name in response.data.errors)
                                 {
                                     // validation hints the bootstrap way, may not work with other form markup structure
                                     /* TODO: put validation messages to markup */
                                     $('[name="'+response.data.form+'['+name+']"]').parent().addClass('has-error');
+
+                                    message += '<div><i class="fa fa-warning"></i> '+response.data.errors[name]+'</div>';
+
                                 }
+                                message+= '</ul>';
                             }
+
+                            $.notify(message);
                         }
                     },
 

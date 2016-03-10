@@ -15,10 +15,22 @@
                 <li><a class="viewport-toggle" data-viewport="lg"><i class="fa fa-desktop"></i> <span>Desktop</span></a></li>
             </ul>
         </li>
-        <li>
-            <a rel="ajax" href="{{ path('mm_cmf_admin_page_new') }}">
-                <i class="fa fa-file-o"></i> <span>Seite hinzufügen</span>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-file-o"></i> <span>Seite</span>
             </a>
+            <ul class="dropdown-menu viewport-switch">
+                <li>
+                    <a rel="ajax" href="{{ path('mm_cmf_admin_page_new') }}">
+                        <i class="fa fa-file-o"></i> <span>neue Seite hinzufügen</span>
+                    </a>
+                </li>
+                <li>
+                    <a rel="ajax" data-fetch-root="true" href="{{ path('mm_cmf_admin_page_edit', {id: '__root__'}) }}">
+                        <i class="fa fa-file-o"></i> <span>aktuelle Seite bearbeiten</span>
+                    </a>
+                </li>
+            </ul>
 
         </li>
         <li class="dropdown">
@@ -42,7 +54,7 @@
             <ul class="dropdown-menu">
                 {% for menu in menus %}
                     <li>
-                        <a href="{{ path('mm_cmf_admin_menu_edit', {'id' : menu.id}) }}" rel="ajax" data-fetch-root="true">
+                        <a href="{{ path('mm_cmf_admin_menu_edit', {'id' : menu.id}) }}" rel="ajax">
                             <i class="fa fa-edit"></i> <span>{{ menu }}</span>
                         </a>
                     </li>
