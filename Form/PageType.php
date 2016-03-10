@@ -19,6 +19,7 @@ class PageType extends AbstractType
     {
 
         $builder
+            ->add('visible')
             ->add('name')
             ->add('title')
             ->add('parent', 'entity', array(

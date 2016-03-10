@@ -11,12 +11,32 @@
     <div class="box box-default">
         <div class="box-header"><h2 class="box-title">Seite bearbeiten</h2></div>
         <div class="box-body">
-            {{ form(form) }}
+            {{ form_start(form) }}
+
+            <div class="form-side">
+                {{ form_widget(form.visible) }}
+            </div>
+
+            <div class="form-main">
+                {{ form_rest(form) }}
+                {{ form_errors(form) }}
+            </div>
+            {{ form_end(form) }}
         </div>
     </div>
 
 {% endblock %}
 
 {% block xhr_body %}
-    {{ form(form) }}
+    {{ form_start(form) }}
+
+    <div class="form-side">
+        {{ form_widget(form.visible) }}
+    </div>
+
+    <div class="form-main">
+        {{ form_rest(form) }}
+        {{ form_errors(form) }}
+    </div>
+    {{ form_end(form) }}
 {% endblock %}
