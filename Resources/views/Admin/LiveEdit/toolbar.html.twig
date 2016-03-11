@@ -38,10 +38,10 @@
                 <i class="fa fa-plus"></i> <span>Inhalte hinzufügen</span>
             </a>
             <ul class="dropdown-menu">
-                {% for discrimator in factory.discrimators %}
+                {% for key, discrimator in factory.discrimators %}
                     <li>
                         <a href="{{ path('mm_cmf_admin_contentnode_new', {'contentnode_type' : discrimator}) }}" rel="ajax" data-fetch-root="true">
-                            <i class="fa fa-align-left"></i> <span>{{ discrimator }}</span>
+                            <i class="{{ contentParser.icon(factory.classByDiscrimator(discrimator)) }}"></i> <span>{{ discrimator }}</span>
                         </a>
                     </li>
                 {% endfor %}

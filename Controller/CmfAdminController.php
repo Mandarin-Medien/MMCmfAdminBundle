@@ -55,6 +55,7 @@ class CmfAdminController extends Controller
         return $this->render('MMCmfAdminBundle:Admin/LiveEdit:default.html.twig', array(
             'iframe_path' => $path,
             'factory' => $this->get('mm_cmf_content.content_node_factory'),
+            'contentParser' => $this->get('mm_cmf_content.content_parser'),
             'menus' => array_filter($this->getDoctrine()->getRepository('MMCmfMenuBundle:Menu')->findAll(), function($menu)
             {
                 return get_class($menu) == 'MandarinMedien\MMCmfMenuBundle\Entity\Menu';

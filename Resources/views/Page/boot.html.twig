@@ -1,47 +1,49 @@
 {% block mm_cmf_admin_boot %}
-    <script>
-        if(window.frameElement)
-        {
-
-            var IframeEvent = function(type)
+    {% if node %}
+        <script>
+            if(window.frameElement)
             {
-                return new CustomEvent(
-                    'iframe:'+type,
-                    {
-                        'bubbles' : true,
-                        'cancelable' : false,
-                        'data' : {
 
+                var IframeEvent = function(type)
+                {
+                    return new CustomEvent(
+                        'iframe:'+type,
+                        {
+                            'bubbles' : true,
+                            'cancelable' : false,
+                            'data' : {
+
+                            }
                         }
-                    }
-                );
+                    );
 
-            };
+                };
 
-            document.mm_cmf_admin = {};
-            document.mm_cmf_admin.root_node = {{ node.id }};
+                document.mm_cmf_admin = {};
+                document.mm_cmf_admin.root_node = {{ node.id }};
 
-          ///window.frameElement.dispatchEvent(new IframeEvent('change'));
+              ///window.frameElement.dispatchEvent(new IframeEvent('change'));
 
-            window.onbeforeunload = function(e) {
-               window.frameElement.dispatchEvent(new IframeEvent('beforeunload'));
-            };
+                window.onbeforeunload = function(e) {
+                   window.frameElement.dispatchEvent(new IframeEvent('beforeunload'));
+                };
 
-            window.onload = function(e) {
-                window.frameElement.dispatchEvent(new IframeEvent('load'));
-            };
+                window.onload = function(e) {
+                    window.frameElement.dispatchEvent(new IframeEvent('load'));
+                };
 
-            window.onunload = function(e) {
-                window.frameElement.dispatchEvent(new IframeEvent('unload'));
-            };
+                window.onunload = function(e) {
+                    window.frameElement.dispatchEvent(new IframeEvent('unload'));
+                };
 
-            window.onpageshow = function(e) {
-               window.frameElement.dispatchEvent(new IframeEvent('pageshow'));
-            };
+                window.onpageshow = function(e) {
+                   window.frameElement.dispatchEvent(new IframeEvent('pageshow'));
+                };
 
-            window.onpagehide = function(e) {
-               window.frameElement.dispatchEvent(new IframeEvent('pagehide'));
-            };
-        }
-    </script>
+                window.onpagehide = function(e) {
+                   window.frameElement.dispatchEvent(new IframeEvent('pagehide'));
+                };
+            }
+        </script>
+    {% endif %}
 {% endblock %}
