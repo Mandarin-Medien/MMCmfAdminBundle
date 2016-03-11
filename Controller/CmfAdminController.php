@@ -19,15 +19,6 @@ class CmfAdminController extends Controller
     {
         $widgetManager = $this->get('mm_cmf_admin.widget_manager');
 
-        $reader = new FormTypeMetaReader();
-
-        //$nodes = $this->getDoctrine()->getRepository('MMCmfContentBundle:ContentNode')->findAll();
-
-
-
-        dump($reader->get(ParagraphContentNode::class, 'text'));
-
-
         return $this->render('@MMCmfAdmin/Admin/dashboard.html.twig', array(
             'widgets' => $widgetManager->getWidgets('dashboard')
         ));
