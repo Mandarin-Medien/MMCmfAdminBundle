@@ -77,6 +77,33 @@ body {
     }
   }
 
+  &.sidebar-collapse {
+
+    &.skin-blue {
+
+      .wrapper {
+        background-color: transparent;
+        background-image: url('/bundles/mmcmfadmin/images/login-screen.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+
+      .main-sidebar {
+        background-color: rgba(0, 0, 0, .6);
+
+        .sidebar-menu {
+          li:hover > a,
+          li.active > a {
+            background-color: rgba(0, 0, 0, .8);
+          }
+
+          .treeview-menu {
+            background-color: rgba(255, 255, 255, .95);
+          }
+        }
+      }
+    }
+  }
 }
 
 .mmcmfadmin-editframe-container {
