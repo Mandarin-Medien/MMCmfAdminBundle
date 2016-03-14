@@ -7,10 +7,12 @@ use MandarinMedien\MMCmfContentBundle\Entity\ParagraphContentNode;
 use MandarinMedien\MMCmfContentBundle\Entity\RowContentNode;
 use MandarinMedien\MMCmfContentBundle\Form\FormTypeMetaReader;
 use MandarinMedien\MMCmfMenuBundle\Entity\Menu;
+use MandarinMedien\MMCmfNodeBundle\Entity\Node;
 use MandarinMedien\MMCmfRoutingBundle\Entity\NodeRoute;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MandarinMedien\MMCmfContentBundle\Entity\ContentNode;
-use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CmfAdminController extends Controller
 {
@@ -58,6 +60,16 @@ class CmfAdminController extends Controller
     public function emptyAction()
     {
         return $this->render('@MMCmfAdmin/Admin/page.empty.html.twig');
+    }
+
+    public function toggleVisibilityAction(Node $entity, Request $request)
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $entity->setVisible($entity->isVisible() ? false : true);
+        $manager->flush();
+
+        $referer = $request->headers->get('referer');
+        return $this->redirect($referer);
     }
 
 

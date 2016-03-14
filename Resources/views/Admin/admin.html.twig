@@ -55,7 +55,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
 <div class="wrapper">
 
     <!-- Main Header -->
@@ -89,9 +89,13 @@ desired effect
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         {% if app.user.image.media is defined %}
                                             {{ app.user.image.media.preview({'html' : {'class': 'user-image'}})|raw }}
+                                        {% else %}
+                                            <i class="fa fa-user"></i>
                                         {% endif %}
-                                        {{ app.user.firstname }}
-                                        {{ app.user.name }}
+                                        <span>
+                                            {{ app.user.firstname }}
+                                            {{ app.user.name }}
+                                        </span>
                                     </a>
                                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                         <ul class="dropdown-menu">
@@ -146,14 +150,14 @@ desired effect
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 {% block admin_body_head %}
-                    <h1>
+                    {#<h1>
                         Page Header
                         <small>Optional description</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
                         <li class="active">Here</li>
-                    </ol>
+                    </ol>#}
                 {% endblock %}
             </section>
 

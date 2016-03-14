@@ -111,6 +111,12 @@ mm_cmf_admin_homepage_empty:
     path: /admin/empty
     defaults: {_controller: MMCmfAdminBundle:CmfAdmin:empty}
 
+
+mm_cmf_admin_visibilty_toggle:
+    path: /admin/visibilty/{id}/toggle
+    defaults: {_controller: MMCmfAdminBundle:CmfAdmin:toggleVisibility}
+
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

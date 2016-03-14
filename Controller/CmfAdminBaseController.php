@@ -48,5 +48,4 @@ class CmfAdminBaseController extends Controller
             return $this->redirect($referer);
         }
     }
-
 }

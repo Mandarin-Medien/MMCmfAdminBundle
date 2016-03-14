@@ -156,6 +156,7 @@ class CmfAdminPageController extends CmfAdminBaseController
     }
 
 
+
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()

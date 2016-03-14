@@ -32,7 +32,8 @@
                             <tr>
                                 <td>{{ contentnode.name }}</td>
                                 <td>{{ factory.discrimatorByClass(contentnode) }}</td>
-                                <td><a href="{{ path("mm_cmf_admin_contentnode_edit", {"id" : contentnode.id}) }}"><i class="fa fa-edit"></i></a></td>
+                                <td><a href="{{ path("mm_cmf_admin_visibilty_toggle", {"id" : contentnode.id }) }}">{% if contentnode.visible %}<i class="fa fa-eye"></i> {% else %}<i class="fa fa-eye-slash"></i>{% endif %}</span></a></td>
+                                <td><a href="{{ path("mm_cmf_admin_contentnode_edit", {"id" : contentnode.id }) }}"><i class="fa fa-edit"></i></a></td>
                                 <td><a href="{{ path("mm_cmf_admin_contentnode_delete", {"id" : contentnode.id }) }}"><i class="fa fa-trash"></i></a></td>
                             </tr>
                         {% endfor %}
