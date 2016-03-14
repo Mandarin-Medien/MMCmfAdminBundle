@@ -93,8 +93,12 @@ desired effect
                                             <i class="fa fa-user"></i>
                                         {% endif %}
                                         <span>
-                                            {{ app.user.firstname }}
-                                            {{ app.user.name }}
+                                            {% if app.user.firstname and app.user.name %}
+                                                {{ app.user.firstname }}
+                                                {{ app.user.name }}
+                                            {% else %}
+                                                {{ app.user.username }}
+                                            {% endif %}
                                         </span>
                                     </a>
                                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}

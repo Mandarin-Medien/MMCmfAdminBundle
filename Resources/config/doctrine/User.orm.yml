@@ -11,8 +11,10 @@ MandarinMedien\MMCmfAdminBundle\Entity\User:
     fields:
         firstname:
             type: string
+            nullable: true
         name:
             type: string
+            nullable: true
 
     oneToOne:
         image:
