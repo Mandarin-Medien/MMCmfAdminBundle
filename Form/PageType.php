@@ -4,13 +4,23 @@ namespace MandarinMedien\MMCmfAdminBundle\Form;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class PageType extends AbstractType
 {
+
+    protected $container;
+
+    public function __construct(Container $container)
+    {
+        $this->container = $container;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -34,7 +44,8 @@ class PageType extends AbstractType
             ->add('keywords')
             ->add('description')
             ->add('robots')
-            ->add('author');
+            ->add('author')
+            ->add('template', $this->container->get('mm_cmf_content.form_type.node_template')->setClass('MandarinMedien\MMCmfContentBundle\Entity\Page'))
         ;
     }
 

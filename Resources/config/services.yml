@@ -1,7 +1,5 @@
 services:
 
-
-
     ### WIDGET CONFIGURATION ####
     mm_cmf_admin.widget_manager:
         class: MandarinMedien\MMCmfAdminBundle\Admin\Widget\WidgetManager
@@ -105,14 +103,18 @@ services:
              - {name: mm_cmf_admin.admin_user_group}
 
 
-    mm_cmf_admin.admin_roles:
-        class: MandarinMedien\MMCmfAdminBundle\Admin\Widget
-        factory: ["@mm_cmf_admin.widget_factory", createWidget]
-        arguments: ["Rollen", "mm_cmf_admin_menu", "cog"]
+    #mm_cmf_admin.admin_roles:
+    #    class: MandarinMedien\MMCmfAdminBundle\Admin\Widget
+    #    factory: ["@mm_cmf_admin.widget_factory", createWidget]
+    #    arguments: ["Rollen", "mm_cmf_admin_menu", "cog"]
+    #    tags:
+    #         - {name: mm_cmf_admin.admin_user_group}
+
+    mm_cmf_admin.page_type:
+        class: MandarinMedien\MMCmfAdminBundle\Form\PageType
+        arguments: [@service_container]
         tags:
-             - {name: mm_cmf_admin.admin_user_group}
-
-
+            - { name: form.type, alias: mm_cmf_admin_page }
 
     ### USERCONFIGURATION ###
 
