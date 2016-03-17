@@ -49,6 +49,7 @@ class CmfAdminController extends Controller
             'iframe_path' => $path,
             'factory' => $this->get('mm_cmf_content.content_node_factory'),
             'contentParser' => $this->get('mm_cmf_content.content_parser'),
+            'node' => $route->getNode(),
             'menus' => array_filter($this->getDoctrine()->getRepository('MMCmfMenuBundle:Menu')->findAll(), function($menu)
             {
                 return get_class($menu) == 'MandarinMedien\MMCmfMenuBundle\Entity\Menu';
