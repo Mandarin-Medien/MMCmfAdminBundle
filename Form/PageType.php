@@ -33,9 +33,8 @@ class PageType extends AbstractType
 
 
         $builder
-            ->add('visible')
             ->add('name')
-            ->add('title')
+            ->add('metaTitle')
             ->add('parent', 'entity', array(
                 'class' => 'MandarinMedien\MMCmfContentBundle\Entity\Page',
                 'required' => false,
@@ -45,10 +44,11 @@ class PageType extends AbstractType
                 }
             ))
             //->add('routes', 'collection')
-            ->add('keywords')
-            ->add('description')
-            ->add('robots')
-            ->add('author')
+            ->add('metaKeywords')
+            ->add('metaDescription')
+            ->add('metaRobots')
+            ->add('metaAuthor')
+            ->add('visible')
             ->add('template', $this->container->get('mm_cmf_content.form_type.node_template')->setClass($class))
         ;
     }
