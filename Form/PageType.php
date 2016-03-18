@@ -28,6 +28,10 @@ class PageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
+        // get class of the current entity for template selection
+        $class = get_class($options['data']);
+
+
         $builder
             ->add('visible')
             ->add('name')
@@ -45,7 +49,7 @@ class PageType extends AbstractType
             ->add('description')
             ->add('robots')
             ->add('author')
-            ->add('template', $this->container->get('mm_cmf_content.form_type.node_template')->setClass('MandarinMedien\MMCmfContentBundle\Entity\Page'))
+            ->add('template', $this->container->get('mm_cmf_content.form_type.node_template')->setClass($class))
         ;
     }
 
