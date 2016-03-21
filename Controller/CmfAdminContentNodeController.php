@@ -78,7 +78,7 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
             $this->get('mm_cmf_content.form_type.content_node'),
             $entity,
             array(
-                'parent_node' => $entity->getParent(),
+                'root_node' => $entity->getParent(),
                 'action' => $this->generateUrl('mm_cmf_admin_contentnode_create',
                     array('contentnode_type' => $this->get('mm_cmf_content.content_node_factory')->getDiscrimatorByClass($entity)
                 )),
