@@ -23,8 +23,8 @@ assetic:
         mm_cmf_admin_assets_css:
             inputs:
                   - '@MMCmfAdminBundle/Resources/public/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'
-                  - "@MMCmfAdminBundle/Resources/public/vendor/AdminLte/dist/css/AdminLTE.min.css"
-                  - '@MMCmfAdminBundle/Resources/public/vendor/AdminLte/dist/css/skins/skin-blue.min.css'
+                  - "@MMCmfAdminBundle/Resources/public/vendor/AdminLTE/dist/css/AdminLTE.min.css"
+                  - '@MMCmfAdminBundle/Resources/public/vendor/AdminLTE/dist/css/skins/skin-blue.min.css'
 
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
