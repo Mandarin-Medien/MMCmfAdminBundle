@@ -175,10 +175,11 @@ desired effect
     </div>
     <!-- /.content-wrapper -->
 
+    {% block admin_footer %}
     <!-- Main Footer -->
     <footer class="main-footer">
 
-        {% block admin_footer %}
+        {% block admin_footer_content   %}
             <!-- To the right -->
             <div class="pull-right hidden-xs">
                 Mandarin Medien Content Management Framework
@@ -188,6 +189,8 @@ desired effect
 
         {% endblock %}
     </footer>
+
+    {% endblock %}
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -228,7 +231,6 @@ desired effect
 {% block javascripts %}
     {% javascripts
     '@mm_cmf_admin_assets_js'
-    '@mm_cmf_content_assets_js'
     '@mmmedia_assets_js'
     %}
     <script src="{{ asset_url }}"></script>
