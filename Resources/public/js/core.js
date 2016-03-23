@@ -1,4 +1,10 @@
+// admin form field types
+var mmFormFieldhandler;
+
 jQuery(document).ready(function() {
+
+    mmFormFieldhandler = new FormHandler();
+    mmFormFieldhandler.init();
 
     $(document).MMCmfAdmin();
 

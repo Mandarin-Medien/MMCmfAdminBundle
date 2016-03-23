@@ -13,15 +13,28 @@ assetic:
         mm_cmf_admin_assets_js:
             inputs:
                   - '@MMCmfAdminBundle/Resources/public/vendor/jquery/dist/jquery.min.js'
+
                   - '@MMCmfAdminBundle/Resources/public/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'
                   - '@MMCmfAdminBundle/Resources/public/vendor/AdminLTE/dist/js/app.js'
                   - '@MMCmfAdminBundle/Resources/public/js/notify.js'
+
+
+                  - '@MMCmfContentBundle/Resources/public/js/summernote/summernote.js'
+
+                  #formType Types
+                  - '@MMCmfContentBundle/Resources/public/js/form/HTMLType.js'
+                  - '@MMCmfContentBundle/Resources/public/js/form/NodeTreeType.js'
+                  - '@MMCmfContentBundle/Resources/public/js/form/MenuType.js'
+                  - '@MMCmfContentBundle/Resources/public/js/form/FormHandler.js'
+
+
                   - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdminOverlay.js' 
                   - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdmin.js'
                   - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdminEditFrame.js'
                   - '@MMCmfAdminBundle/Resources/public/js/core.js'
         mm_cmf_admin_assets_css:
             inputs:
+                  - '@MMCmfContentBundle/Resources/public/vendor/summernote/dist/summernote.css'
                   - '@MMCmfAdminBundle/Resources/public/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'
                   - "@MMCmfAdminBundle/Resources/public/vendor/AdminLTE/dist/css/AdminLTE.min.css"
                   - '@MMCmfAdminBundle/Resources/public/vendor/AdminLTE/dist/css/skins/skin-blue.min.css'
