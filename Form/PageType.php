@@ -48,6 +48,7 @@ class PageType extends AbstractType
             ->add('metaDescription')
             ->add('metaRobots')
             ->add('metaAuthor')
+            ->add('metaImage')
             ->add('visible')
             ->add('template', $this->container->get('mm_cmf_content.form_type.node_template')->setClass($class))
         ;
