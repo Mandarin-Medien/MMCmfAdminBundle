@@ -15,12 +15,12 @@
                 },
 
                 'sm': {
-                    width: 720,
+                    width: 780,
                     height: 1080
                 },
 
                 'md': {
-                    width: 1080,
+                    width: 1020,
                     height: 720
                 },
 
