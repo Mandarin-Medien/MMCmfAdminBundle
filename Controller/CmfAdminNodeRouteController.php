@@ -23,7 +23,7 @@ class CmfAdminNodeRouteController extends CmfAdminBaseController
         return $this->render("MMCmfAdminBundle:Admin/NodeRoute:noderoute.list.html.twig", array(
             'noderoutes' => $entities,
             'factory' => $this->get('mm_cmf_routing.node_route_factory'),
-            'types' => $this->get('mm_cmf_routing.node_route_factory')->getDiscrimators()
+            'types' => $this->get('mm_cmf_routing.node_route_factory')->getDiscriminators()
         ));
     }
 
@@ -111,7 +111,7 @@ class CmfAdminNodeRouteController extends CmfAdminBaseController
             'method' => 'POST',
             'action' => $this->generateUrl('mm_cmf_admin_noderoute_create', array(
                 'node_route_type' => $this->get('mm_cmf_routing.node_route_factory')
-                    ->getDiscrimatorByClass($nodeRoute)
+                    ->getDiscriminatorByClass($nodeRoute)
             ))
         ));
     }

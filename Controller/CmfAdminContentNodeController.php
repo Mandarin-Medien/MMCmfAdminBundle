@@ -80,7 +80,7 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
             array(
                 'root_node' => $entity->getParent(),
                 'action' => $this->generateUrl('mm_cmf_admin_contentnode_create',
-                    array('contentnode_type' => $this->get('mm_cmf_content.content_node_factory')->getDiscrimatorByClass($entity)
+                    array('contentnode_type' => $this->get('mm_cmf_content.content_node_factory')->getDiscriminatorByClass($entity)
                 )),
                 'method' => 'POST',
             )

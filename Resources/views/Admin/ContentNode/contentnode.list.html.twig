@@ -19,7 +19,7 @@
                             Neuen Inhalt <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            {% for type in factory.discrimators %}
+                            {% for type in factory.discriminators %}
                                 <li><a href="{{ path('mm_cmf_admin_contentnode_new', {'contentnode_type' : type}) }}">{{ type }} erstellen</a></li>
                             {% endfor %}
                         </ul>
@@ -31,7 +31,7 @@
                         {% for contentnode in contentnodes %}
                             <tr>
                                 <td>{{ contentnode.name }}</td>
-                                <td>{{ factory.discrimatorByClass(contentnode) }}</td>
+                                <td>{{ factory.discriminatorByClass(contentnode) }}</td>
                                 <td><a href="{{ path("mm_cmf_admin_visibilty_toggle", {"id" : contentnode.id }) }}">{% if contentnode.visible %}<i class="fa fa-eye"></i> {% else %}<i class="fa fa-eye-slash"></i>{% endif %}</span></a></td>
                                 <td><a href="{{ path("mm_cmf_admin_contentnode_edit", {"id" : contentnode.id }) }}"><i class="fa fa-edit"></i></a></td>
                                 <td><a href="{{ path("mm_cmf_admin_contentnode_delete", {"id" : contentnode.id }) }}"><i class="fa fa-trash"></i></a></td>
