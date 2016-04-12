@@ -24,11 +24,15 @@
 
     {{ form_row(form.items) }}
 
-    <div class="admin-menu-options form-group">
+    <div class="admin-menu-options form-actions clearfix">
         {% if form.items.vars.prototype %}
             <button class="btn btn-success menu-add-item" data-prototype="{{ form_widget(form.items.vars.prototype)|escape }}"><i class="fa fa-plus"></i> Eintrag hinzufügen</button>
         {% endif %}
         {{ form_widget(form.submit) }}
+
+        <a href="{{ path('mm_cmf_admin_menu') }}" class="btn btn-warning btn-abort" >
+            <i class="fa fa-close"></i> abbrechen
+        </a>
     </div>
 
 
@@ -52,4 +56,3 @@
     </ul>
 
 {% endblock %}
-

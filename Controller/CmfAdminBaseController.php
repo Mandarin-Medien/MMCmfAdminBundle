@@ -44,8 +44,20 @@ class CmfAdminBaseController extends Controller
         {
             return new JsonFormResponse($form);
         } else {
-            $referer = $request->headers->get('referer');
-            return $this->redirect($referer);
+
+            if($form->has('save_and_add') && $form->get('save_and_add')->isClicked()) {
+                $redirect = $form->get('save_and_add')->getConfig()->getOption('attr')['data-target'];
+            }
+
+            elseif($form->has('save_and_back') &&  $form->get('save_and_back')->isClicked()) {
+                $redirect = $form->get('save_and_back')->getConfig()->getOption('attr')['data-target'];
+            }
+
+            else {
+                $redirect = $request->headers->get('referer');
+            }
+
+            return $this->redirect($redirect);
         }
     }
 }

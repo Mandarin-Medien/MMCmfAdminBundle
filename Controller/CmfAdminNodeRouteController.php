@@ -67,7 +67,7 @@ class CmfAdminNodeRouteController extends CmfAdminBaseController
 
     public function editAction(NodeRoute $nodeRoute)
     {
-        return $this->render("@MMCmfAdmin/Admin/Menu/menu.edit.html.twig", array(
+        return $this->render("@MMCmfAdmin/Admin/NodeRoute/noderoute.edit.html.twig", array(
             'form' => $this->createEditForm($nodeRoute)->createView(),
             'nodeRoute' => $nodeRoute,
         ));

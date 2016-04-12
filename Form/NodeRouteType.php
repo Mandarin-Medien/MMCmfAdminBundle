@@ -20,6 +20,9 @@ class NodeRouteType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+        $container = $options['container'];
+
         $builder
             ->add('route');
 
@@ -40,8 +43,16 @@ class NodeRouteType extends AbstractType
         }
 
         $builder
-            ->add('submit', 'submit', array(
-                'label' => 'speichern'
+            ->add('submit', 'submit', array('label' => 'save'))
+            ->add('save_and_add', 'submit', array(
+                'attr' => array(
+                    'data-target' => $container->get('router')->generate('mm_cmf_admin_noderoute_new')
+                ),
+            ))
+            ->add('save_and_back', 'submit', array(
+                'attr' => array(
+                    'data-target' => $container->get('router')->generate('mm_cmf_admin_noderoute')
+                )
             ));
     }
 
@@ -54,6 +65,13 @@ class NodeRouteType extends AbstractType
             'data_class' => 'MandarinMedien\MMCmfRoutingBundle\Entity\NodeRoute'
         ));
     }
+
+
+    public function getParent()
+    {
+        return 'container_aware_type';
+    }
+
 
     /**
      * @return string

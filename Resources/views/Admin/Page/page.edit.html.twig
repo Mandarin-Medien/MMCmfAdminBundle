@@ -13,6 +13,18 @@
         <div class="box-body">
             {{ form_start(form) }}
 
+            {% set buttongroup %}
+                <div class="form-actions clearfix">
+                    {{ form_widget(form.submit) }}
+                    {{ form_widget(form.save_and_add) }}
+                    {{ form_widget(form.save_and_back) }}
+
+                    <a class="btn btn-warning btn-abort" href="{{ path('mm_cmf_admin_page') }}">
+                        <i class="fa fa-close"></i> abbrechen
+                    </a>
+                </div>
+            {% endset %}
+
             <div class="form-side">
                 {{ form_widget(form.visible) }}
             </div>
@@ -20,7 +32,9 @@
             <div class="form-main">
                 {{ form_rest(form) }}
                 {{ form_errors(form) }}
+                {{ buttongroup }}
             </div>
+
             {{ form_end(form) }}
         </div>
     </div>
@@ -36,7 +50,18 @@
 
     <div class="form-main">
         {{ form_rest(form) }}
+
+        <div class="form-actions">
+            {% if form.submit %}{{ form_widget(form.submit) }}{% endif %}
+            {% if form.save_and_add %}{{ form_widget(form.save_and_add) }}{% endif %}
+            {% if form.save_and_back %}{{ form_widget(form.save_and_back) }}{% endif %}
+        </div>
         {{ form_errors(form) }}
     </div>
     {{ form_end(form) }}
+{% endblock %}
+
+
+{% block submit_widget %}
+    ashfjksnjklfsnljk
 {% endblock %}

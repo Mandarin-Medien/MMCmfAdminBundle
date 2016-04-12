@@ -76,6 +76,11 @@
                         if(response.success == true)
                         {
 
+                            if(response.data.redirect) {
+                                window.location.href = response.data.redirect;
+                            }
+
+
                             $(form).trigger(createFormEvent('validation:success', response.data));
                             $.notify('<i class="fa fa-check"></i> erfolgreich gespeichert');
 

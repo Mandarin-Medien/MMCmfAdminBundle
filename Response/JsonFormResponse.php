@@ -10,14 +10,29 @@ class JsonFormResponse extends JsonResponse
 
     public function __construct(Form $form, $status = 200, $headers = array())
     {
+
+        $responseData =  array(
+            'success' => $form->isValid(),
+            'data' => array(
+                'form' => $form->getName(),
+                'errors' => $this->getErrorMessages($form)
+            )
+        );
+
+        if($form->has('save_and_add') && $form->get('save_and_add')->isClicked()) {
+
+            $redirect = $form->get('save_and_add')->getConfig()->getOption('attr')['data-target'];
+            $responseData['data']['redirect'] = $redirect;
+        }
+
+        elseif($form->has('save_and_back') && $form->get('save_and_back')->isClicked()) {
+
+            $redirect = $form->get('save_and_back')->getConfig()->getOption('attr')['data-target'];
+            $responseData['data']['redirect'] = $redirect;
+        }
+
         parent::__construct(
-            array(
-                'success' => $form->isValid(),
-                'data' => array(
-                    'form' => $form->getName(),
-                    'errors' => $this->getErrorMessages($form)
-                )
-            ),
+            $responseData,
             $status,
             $headers
         );

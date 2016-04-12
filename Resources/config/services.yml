@@ -110,6 +110,13 @@ services:
     #    tags:
     #         - {name: mm_cmf_admin.admin_user_group}
 
+    mm_cmf_admin.container_aware_type:
+        class: MandarinMedien\MMCmfAdminBundle\Form\ContainerAwareType
+        calls:
+            - [setContainer, ['@service_container']]
+        tags:
+            - { name: form.type, alias: 'container_aware_type' }
+
     mm_cmf_admin.page_type:
         class: MandarinMedien\MMCmfAdminBundle\Form\PageType
         arguments: [@service_container]

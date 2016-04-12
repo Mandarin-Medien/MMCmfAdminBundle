@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Routing\Router;
 
 class PageType extends AbstractType
 {
@@ -31,6 +32,11 @@ class PageType extends AbstractType
         // get class of the current entity for template selection
         $class = get_class($options['data']);
 
+        /**
+         * @var Router $router
+         */
+        $router = $this->container->get('router');
+
 
         $builder
             ->add('name')
@@ -51,6 +57,18 @@ class PageType extends AbstractType
             ->add('metaImage')
             ->add('visible')
             ->add('template', $this->container->get('mm_cmf_content.form_type.node_template')->setClass($class))
+
+            ->add('submit', 'submit', array('label' => 'save'))
+            ->add('save_and_add', 'submit', array(
+                'attr' => array(
+                    'data-target' => $router->generate('mm_cmf_admin_page_new')
+                ),
+            ))
+            ->add('save_and_back', 'submit', array(
+                'attr' => array(
+                    'data-target' => $router->generate('mm_cmf_admin_page')
+                )
+            ))
         ;
     }
 

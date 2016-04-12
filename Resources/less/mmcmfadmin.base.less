@@ -219,13 +219,13 @@ li.user-menu {
 }
 
 .admin-menu-options {
-  button.menu-add-item {
+  /*button.menu-add-item {
     float: left;
   }
 
   button[type=submit] {
     float: right;
-  }
+  }*/
 }
 
 .admin-menu-item {
@@ -428,6 +428,24 @@ li.user-menu {
 
   &.visible {
     left: 0;
+  }
+}
+
+.form-actions {
+  border-top: 1px solid #ccc;
+  margin-left: -10px;
+  margin-right: -10px;
+  margin-bottom: -10px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.1);
+
+  button {
+    background: #3c8dbc;
+    color: #fff;
+  }
+
+  .btn-abort {
+    float: right;
   }
 }
 
