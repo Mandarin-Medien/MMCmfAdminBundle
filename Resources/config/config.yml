@@ -98,3 +98,9 @@ doctrine:
             visibility_filter:
                 class: MandarinMedien\MMCmfNodeBundle\Doctrine\Filter\VisibilityFilter
                 enabled: true
+
+mm_cmf_content:
+    page_nodes:
+        MandarinMedien\MMCmfContentBundle\Entity\Page:
+            templates:
+                - { name: 'default', template: 'MMCmfAdminBundle:cmf:Page/default.html.twig' }
