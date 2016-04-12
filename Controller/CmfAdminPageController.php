@@ -4,6 +4,7 @@ namespace MandarinMedien\MMCmfAdminBundle\Controller;
 
 use MandarinMedien\MMCmfAdminBundle\Form\PageType;
 use MandarinMedien\MMCmfContentBundle\Entity\Page;
+use MandarinMedien\MMCmfRoutingBundle\Form\Type\NodeRouteType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -82,6 +83,7 @@ class CmfAdminPageController extends CmfAdminBaseController
         }
 
         $editForm = $this->createEditForm($entity);
+
 
         return $this->render('@MMCmfAdmin/Admin/Page/page.edit.html.twig', array(
             'entity'      => $entity,

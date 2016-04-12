@@ -4,13 +4,16 @@ namespace MandarinMedien\MMCmfAdminBundle\Form;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use MandarinMedien\MMCmfAdminBundle\Form\Types\NodeRouteInlineType;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Routing\Router;
+use MandarinMedien\MMCmfAdminBundle\Form\NodeRouteType;
 
 class PageType extends AbstractType
 {

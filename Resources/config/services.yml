@@ -117,6 +117,7 @@ services:
         tags:
             - { name: form.type, alias: 'container_aware_type' }
 
+
     mm_cmf_admin.page_type:
         class: MandarinMedien\MMCmfAdminBundle\Form\PageType
         arguments: [@service_container]

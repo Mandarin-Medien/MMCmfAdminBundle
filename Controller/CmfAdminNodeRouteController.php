@@ -2,13 +2,16 @@
 
 namespace MandarinMedien\MMCmfAdminBundle\Controller;
 
+use MandarinMedien\MMCmfAdminBundle\Form\Types\NodeRouteInlineType;
 use MandarinMedien\MMCmfAdminBundle\Response\JsonFormResponse;
+use MandarinMedien\MMCmfContentBundle\Entity\Page;
 use MandarinMedien\MMCmfMenuBundle\Entity\Menu;
 use MandarinMedien\MMCmfRoutingBundle\Entity\NodeRouteInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MandarinMedien\MMCmfAdminBundle\Form\MenuType;
 use MandarinMedien\MMCmfAdminBundle\Form\NodeRouteType;
 use MandarinMedien\MMCmfRoutingBundle\Entity\NodeRoute;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class CmfAdminNodeRouteController extends CmfAdminBaseController
@@ -28,13 +31,22 @@ class CmfAdminNodeRouteController extends CmfAdminBaseController
     }
 
 
-    public function newAction($node_route_type)
+    public function newAction(Request $request, $node_route_type)
     {
+
+        $page = null;
+
+        if($page_id = (int) $request->get('page'))
+        {
+            $page = $this->getDoctrine()->getRepository('MMCmfContentBundle:Page')->find($page_id);
+        }
 
         $factory = $this->get('mm_cmf_routing.node_route_factory');
 
         $entity = $factory->createNodeRoute($node_route_type);
-        if($entity){
+        $entity->setNode($page);
+
+        if ($entity) {
 
             $form = $this->createCreateForm($entity);
 
@@ -65,8 +77,11 @@ class CmfAdminNodeRouteController extends CmfAdminBaseController
     }
 
 
-    public function editAction(NodeRoute $nodeRoute)
+    public function editAction($id)
     {
+
+        $nodeRoute = $this->getDoctrine()->getRepository('MMCmfRoutingBundle:NodeRoute')->find($id);
+
         return $this->render("@MMCmfAdmin/Admin/NodeRoute/noderoute.edit.html.twig", array(
             'form' => $this->createEditForm($nodeRoute)->createView(),
             'nodeRoute' => $nodeRoute,
@@ -82,7 +97,7 @@ class CmfAdminNodeRouteController extends CmfAdminBaseController
 
         //var_dump($this->get('request'));die();
 
-        if($form->isValid()) {
+        if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
         }
 
@@ -92,8 +107,10 @@ class CmfAdminNodeRouteController extends CmfAdminBaseController
     }
 
 
-    public function createEditForm(NodeRouteInterface $nodeRoute)
+    public function createEditForm(NodeRoute $nodeRoute)
     {
+        dump($nodeRoute);
+
         return $this->createForm(new NodeRouteType(), $nodeRoute, array(
             'method' => 'PUT',
             'attr' => array(
@@ -114,6 +131,26 @@ class CmfAdminNodeRouteController extends CmfAdminBaseController
                     ->getDiscriminatorByClass($nodeRoute)
             ))
         ));
+    }
+
+
+    public function getInlineFormAction($node_route_type, Page $page)
+    {
+
+        $factory = $this->container->get('mm_cmf_routing.node_route_factory');
+        $nodeRoute = $factory->createNodeRoute($node_route_type);
+
+        $form = $this->createForm(NodeRouteInlineType::class, $nodeRoute);
+        $parent = $this->createForm($this->container->get('mm_cmf_admin.page_type'), $page);
+
+
+        return new JsonResponse(
+            array(
+                'content' => $this->renderView('@MMCmfAdmin/Admin/Page/page.route.html.twig', array(
+                    'form' => $form->createView($parent->createView())
+                ))
+            )
+        );
     }
 
 

@@ -51,11 +51,13 @@ fos_user:
 twig:
     globals:
         widget_manager: @mm_cmf_admin.widget_manager
+        node_route_factory: @mm_cmf_routing.node_route_factory
     form:
         resources:
             - bootstrap_3_layout.html.twig
             - MMCmfAdminBundle:Form:menu.html.twig
             - MMCmfAdminBundle:Form:form.base.html.twig
+            - MMCmfAdminBundle:Form:noderoute.inline.html.twig
 
 monolog:
     handlers:

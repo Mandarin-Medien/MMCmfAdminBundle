@@ -32,7 +32,6 @@
                                 <th>Typ</th>
                                 <th>Ziel</th>
                                 <th>&nbsp;</th>
-                                <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,9 +42,13 @@
                                 <tr>
                                     <td>{{ noderoute.route }}</td>
                                     <td>{{ factory.discriminatorByClass(noderoute) }}</td>
-                                    <td>{% if noderoute.node %}{{ noderoute.node }}{% else %}extern{% endif %}</td>
-                                    <td><a href="{{ path("mm_cmf_admin_noderoute_edit", {"id" : noderoute.id}) }}"><i class="fa fa-edit"></i></a></td>
-                                    <td><a href="{{ path("mm_cmf_admin_noderoute_delete", {"id" : noderoute.id }) }}"><i class="fa fa-trash"></i></a></td>
+                                    <td>{% if noderoute.node %}<a href="{{ path("mm_cmf_admin_page_edit", {'id' : noderoute.node.id}) }}">{{ noderoute.node }}</a>{% else %}extern{% endif %}</td>
+                                    <td align="right">
+                                        {% spaceless %}
+                                        <a class="btn btn-default" href="{{ path("mm_cmf_admin_noderoute_edit", {"id" : noderoute.id}) }}"><i class="fa fa-edit"></i></a>
+                                        <a class="btn btn-danger" href="{{ path("mm_cmf_admin_noderoute_delete", {"id" : noderoute.id }) }}"><i class="fa fa-trash"></i></a>
+                                        {% endspaceless %}
+                                    </td>
                                 </tr>
                             {% endif %}
                         {% endfor %}
@@ -76,7 +79,7 @@
                                 <tr >
                                     <td>{{ noderoute.route }}</td>
                                     <td>{{ factory.discriminatorByClass(noderoute) }}</td>
-                                    <td>{% if noderoute.node %}{{ noderoute.node }}{% else %}extern{% endif %}</td>
+                                    <td>{% if noderoute.node %}<a href="{{ path("mm_cmf_admin_page_edit", {'id' : noderoute.node.id}) }}">{{ noderoute.node }}</a>{% else %}extern{% endif %}</td>
                                 </tr>
                             {% endif %}
                         {% endfor %}
