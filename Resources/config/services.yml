@@ -30,6 +30,7 @@ services:
         tags:
             - {name: twig.extension }
 
+
     mm_cmf_admin.admin_dashboard:
         class: MandarinMedien\MMCmfAdminBundle\Admin\Widget\Type\LinkWidget
         factory: ["@mm_cmf_admin.widget_factory", createWidget]
@@ -130,3 +131,4 @@ services:
         class: MandarinMedien\MMCmfAdminBundle\Form\UserType
         tags:
             - {name: form.type, alias: app_user_edit}
+

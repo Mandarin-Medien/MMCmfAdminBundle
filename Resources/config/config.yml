@@ -28,7 +28,8 @@ assetic:
                   - '@MMCmfContentBundle/Resources/public/js/form/FormHandler.js'
 
 
-                  - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdminOverlay.js' 
+                  - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdminSidebarTabs.js'
+                  - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdminXHR.js'
                   - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdmin.js'
                   - '@MMCmfAdminBundle/Resources/public/js/MMCmfAdminEditFrame.js'
                   - '@MMCmfAdminBundle/Resources/public/js/core.js'

@@ -1,40 +1,18 @@
 (function($) {
 
-    $.fn.MMCmfAdminOverlay = function(options)
+    $.fn.MMCmfAdminXHR = function(options)
     {
 
-        /**
-         * default options
-         * @type {{target: string, template: string}}
-         */
         var defaults = {
-            target: '.xhr',
-            template: '<div class="mmcmfadmin-overlay-container"><a href="#" class="mmcmfadmin-overlay-close"><i class="fa fa-close"></i></a>%contents%'
-        };
-
-        /**
-         * public methid definition
-         * @type {{close: methods.close}}
-         */
-        var methods = {
-            close: function()
-            {
-                this.dispatchEvent('close');
-            }
+            success: function() {},
+            error: function() {}
         };
 
         return this.each(function()
         {
 
             var self = this;
-            var settings = this.settings = defaults;
-
-
-            if(typeof options == 'object') {
-                settings = this.settings = $.extend(defaults, options);
-            } else if( typeof options == 'string' && typeof methods[options] != 'undefined') {
-                 return methods[options].apply(this);
-            }
+            var settings = this.settings = $.extend(defaults, options);
 
             /**
              * ajax call the given href
@@ -47,6 +25,9 @@
                 var url = e.currentTarget.getAttribute('href');
 
                 var data = null;
+
+
+                console.log(settings);
 
 
                 if($(e.currentTarget).data('root')) {
@@ -67,12 +48,13 @@
                     'success' : function(response)
                     {
                         self.dispatchEvent('xhr:success');
-                        handleResponse(response);
+                        if(typeof settings.success == 'function') settings.success.call(this, response);
                     },
 
                     'error' : function(xhr, text, errorMsg)
                     {
                         self.dispatchEvent('xhr:error', {'xhr' : xhr});
+                        if(typeof settings.error == 'function') settings.error.call(this, xhr, text, errorMsg);
                     }
                 });
 
@@ -95,41 +77,9 @@
                 $(self).trigger(event);
             };
 
-
-            /**
-             * handle the ajax response
-             * @param {string} response
-             */
-            var handleResponse = function(response)
-            {
-                var content = $(settings.template.replace('%contents%', response));
-
-                $(settings.target).find('.tabs-list').append('<li><a href="#"><i class="fa fa-close"><span>item</span></li>')
-
-                $(settings.target).find('.tabs').append(content);
-
-                $(content)
-                    .find('.mmcmfadmin-overlay-close')
-                    .bind('click', function() {
-                        self.dispatchEvent('close');
-                    });
-
-                $(self).on('mmcmfadmin:overlay:close', function(e) {
-                    $(content).remove();
-                });
-
-                self.dispatchEvent('append');
-            };
-
             $(self).bind('click', call);
 
         });
-    }
-
-    $.fn.MMCmfAdminOverlay.close = function()
-    {
-
-        console.log(this);
     }
 
 })(jQuery);

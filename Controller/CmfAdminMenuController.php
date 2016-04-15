@@ -21,10 +21,10 @@ class CmfAdminMenuController extends CmfAdminBaseController
 
         $entities = $em->getRepository('MMCmfMenuBundle:Menu')->findAll();
 
-        return $this->render("MMCmfAdminBundle:Admin/Menu:menu.list.html.twig", array(
+        return $this->renderAdmin("MMCmfAdminBundle:Admin/Menu:menu.list.html.twig", array(
             'menues' => array_filter($entities, function($object) {
                 return get_class($object) == 'MandarinMedien\MMCmfMenuBundle\Entity\Menu';
-            })
+            }),
         ));
     }
 
@@ -40,7 +40,7 @@ class CmfAdminMenuController extends CmfAdminBaseController
         $entity = new Menu();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('MMCmfAdminBundle:Admin/Menu:menu.new.html.twig', array(
+        return $this->renderAdmin('MMCmfAdminBundle:Admin/Menu:menu.new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -79,10 +79,10 @@ class CmfAdminMenuController extends CmfAdminBaseController
      */
     public function editAction(Menu $menu)
     {
-        return $this->render("@MMCmfAdmin/Admin/Menu/menu.edit.html.twig", array(
+        return $this->renderAdmin("@MMCmfAdmin/Admin/Menu/menu.edit.html.twig", array(
             'form' => $this->createEditForm($menu)->createView(),
             'menu' => $menu
-        ));
+        ), $menu->getName().' bearbeiten', 'sitemap');
     }
 
 

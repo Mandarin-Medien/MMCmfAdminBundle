@@ -13,28 +13,48 @@
 
                     $(this).on('submit', '.xhr form, form[rel="ajax"]', false, ajaxSubmit);
 
-                    $('a[rel="ajax"]')
-                        .MMCmfAdminOverlay()
-
-                        // init forms on overlay append
-                        .on('mmcmfadmin:overlay:append', function(e)
-                        {
-                            $(e.mmcmfadminoverlay.settings.target).addClass('visible');
-                            mmFormFieldhandler.init();
+                    // init tabs
+                    $('.xhr')
+                        .MMCmfAdminSidebarTabs()
+                        .on('mmcmfadmin:tabs:add:first', function(e) {
+                            $('.xhr').addClass('visible');
                         })
-
-                        .on('mmcmfadmin:overlay:close', function(e)
-                        {
-                            $(e.mmcmfadminoverlay.settings.target).removeClass('visible');
+                        .on('mmcmfadmin:tabs:close:last', function(e) {
+                            $('.xhr').removeClass('visible');
                         })
+                        .on('mmcmfadmin:tabs:add', function(e) {
 
-                        // notify user on error
-                        .on('mmcmfadmin:overlay:xhr:error', function(e)
-                        {
-                            if(typeof e.xhr == 'object') {
-                                $.notify('Fehler: '+e.xhr.status +': '+ e.xhr.statusText );
-                            }
+                            // overwrite abort button
+                            $(e.tabdata.tab).find('.btn-abort').bind('click', function(e) {
+                                e.preventDefault();
+                                $(this).trigger('tab:close');
+                            });
+
+                            // overwrite save and add button
+                           // $(e.tabdata.tab).find('button')
                         });
+
+                    // bind xhr
+                    $('a[rel=ajax]').MMCmfAdminXHR({
+                        'success' : function(response) {
+
+                            if(response.success) {
+
+                                $('.xhr').MMCmfAdminSidebarTabs('add', {
+                                    icon: response.data.icon,
+                                    name: response.data.name,
+                                    content: response.data.content
+                                });
+
+
+                                mmFormFieldhandler.init();
+                            }
+                        },
+                        'error' : function(xhr, text, errorMsg) {
+                            $.notify('Fehler: '+xhr.status +': '+ xhr.statusText );
+                        }
+                    });
+
                 });
 
             };
@@ -85,7 +105,7 @@
                             $.notify('<i class="fa fa-check"></i> erfolgreich gespeichert');
 
                             // close the overlay
-                            $('a[rel="ajax"]').MMCmfAdminOverlay('close');
+                            $(form).trigger('tab:close');
 
                             // reload iframe
                             $('iframe').MMCmfAdminEditFrame('reload');

@@ -23,7 +23,7 @@ class CmfAdminNodeRouteController extends CmfAdminBaseController
 
         $entities = $em->getRepository('MMCmfRoutingBundle:NodeRoute')->findAll();
 
-        return $this->render("MMCmfAdminBundle:Admin/NodeRoute:noderoute.list.html.twig", array(
+        return $this->renderAdmin("MMCmfAdminBundle:Admin/NodeRoute:noderoute.list.html.twig", array(
             'noderoutes' => $entities,
             'factory' => $this->get('mm_cmf_routing.node_route_factory'),
             'types' => $this->get('mm_cmf_routing.node_route_factory')->getDiscriminators()
@@ -50,7 +50,7 @@ class CmfAdminNodeRouteController extends CmfAdminBaseController
 
             $form = $this->createCreateForm($entity);
 
-            return $this->render('MMCmfAdminBundle:Admin/NodeRoute:noderoute.new.html.twig', array(
+            return $this->renderAdmin('MMCmfAdminBundle:Admin/NodeRoute:noderoute.new.html.twig', array(
                 'entity' => $entity,
                 'form' => $form->createView(),
             ));
@@ -82,7 +82,7 @@ class CmfAdminNodeRouteController extends CmfAdminBaseController
 
         $nodeRoute = $this->getDoctrine()->getRepository('MMCmfRoutingBundle:NodeRoute')->find($id);
 
-        return $this->render("@MMCmfAdmin/Admin/NodeRoute/noderoute.edit.html.twig", array(
+        return $this->renderAdmin("@MMCmfAdmin/Admin/NodeRoute/noderoute.edit.html.twig", array(
             'form' => $this->createEditForm($nodeRoute)->createView(),
             'nodeRoute' => $nodeRoute,
         ));
@@ -101,16 +101,17 @@ class CmfAdminNodeRouteController extends CmfAdminBaseController
             $this->getDoctrine()->getManager()->flush();
         }
 
-        return $this->redirectToRoute('mm_cmf_admin_noderoute_edit', array(
+
+        return $this->formResponse($form);
+
+        /*return $this->redirectToRoute('mm_cmf_admin_noderoute_edit', array(
             'id' => $nodeRoute->getId()
-        ));
+        ));*/
     }
 
 
     public function createEditForm(NodeRoute $nodeRoute)
     {
-        dump($nodeRoute);
-
         return $this->createForm(new NodeRouteType(), $nodeRoute, array(
             'method' => 'PUT',
             'attr' => array(

@@ -11,26 +11,24 @@
     <div class="box box-default">
         <div class="box-header"><h2 class="box-title">Seite erstellen</h2></div>
         <div class="box-body">
-            {% set buttongroup %}
-                <div class="form-actions clearfix">
-                    {{ form_widget(form.submit) }}
-                    {{ form_widget(form.save_and_add) }}
-                    {{ form_widget(form.save_and_back) }}
+            {% block admin_content %}
+                {% set buttongroup %}
+                    <div class="form-actions clearfix">
+                        {{ form_widget(form.submit) }}
+                        {{ form_widget(form.save_and_add) }}
+                        {{ form_widget(form.save_and_back) }}
 
-                    <a class="btn btn-warning btn-abort" href="{{ path('mm_cmf_admin_page') }}">
-                        <i class="fa fa-close"></i> abbrechen
-                    </a>
-                </div>
-            {% endset %}
-            {{ form_start(form) }}
-            {{ form_rest(form) }}
-            {{ buttongroup }}
-            {{ form_end(form) }}
+                        <a class="btn btn-warning btn-abort" href="{{ path('mm_cmf_admin_page') }}">
+                            <i class="fa fa-close"></i> abbrechen
+                        </a>
+                    </div>
+                {% endset %}
+                {{ form_start(form) }}
+                <div class="form-main col-xs-12">{{ form_rest(form) }}</div>
+                <div class="form-foot col-xs-12">{{ buttongroup }}</div>
+                {{ form_end(form) }}
+            {% endblock %}
         </div>
     </div>
-
 {% endblock %}
 
-{% block xhr_body %}
-    {{ form(form) }}
-{% endblock %}

@@ -64,7 +64,7 @@ desired effect
         {% block admin_header %}
 
             <!-- Logo -->
-            <a href="index2.html" class="logo">
+            <a href="{{ path('mm_cmf_admin_homepage') }}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>MM</b></span>
                 <!-- logo for regular state and mobile devices -->
@@ -147,7 +147,14 @@ desired effect
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
 
-        <div class="xhr"></div>
+        <div class="xhr">
+            <ul class="tabs-list sidebar-menu">
+                <li class="close-all"><a href="#"><i class="fa fa-close"></i> <span>alle schließen</span></a></li>
+            </ul>
+            <div class="tabs">
+
+            </div>
+        </div>
 
         {% block admin_body %}
 

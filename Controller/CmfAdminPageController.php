@@ -19,7 +19,7 @@ class CmfAdminPageController extends CmfAdminBaseController
 
         $entities = $em->getRepository('MMCmfContentBundle:Page')->findAll();
 
-        return $this->render("MMCmfAdminBundle:Admin/Page:page.list.html.twig", array(
+        return $this->renderAdmin("MMCmfAdminBundle:Admin/Page:page.list.html.twig", array(
             'pages' => array_filter($entities, function($object) {
                 return get_class($object) == 'MandarinMedien\MMCmfContentBundle\Entity\Page';
             })
@@ -32,10 +32,15 @@ class CmfAdminPageController extends CmfAdminBaseController
         $entity = new Page();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('MMCmfAdminBundle:Admin/Page:page.new.html.twig', array(
-            'entity' => $entity,
-            'form' => $form->createView(),
-        ));
+        return $this->renderAdmin(
+            'MMCmfAdminBundle:Admin/Page:page.new.html.twig',
+            array(
+                'entity' => $entity,
+                'form' => $form->createView(),
+            ),
+            'Seite erstellen',
+            'file-o'
+        );
 
     }
 
@@ -85,10 +90,15 @@ class CmfAdminPageController extends CmfAdminBaseController
         $editForm = $this->createEditForm($entity);
 
 
-        return $this->render('@MMCmfAdmin/Admin/Page/page.edit.html.twig', array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
-        ));
+        return $this->renderAdmin(
+            '@MMCmfAdmin/Admin/Page/page.edit.html.twig',
+            array(
+                'entity' => $entity,
+                'form'   => $editForm->createView(),
+            ),
+            $entity->getName(),
+            'file-o'
+        );
     }
 
 

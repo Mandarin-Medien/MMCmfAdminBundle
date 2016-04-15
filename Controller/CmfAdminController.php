@@ -14,14 +14,14 @@ use MandarinMedien\MMCmfContentBundle\Entity\ContentNode;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class CmfAdminController extends Controller
+class CmfAdminController extends CmfAdminBaseController
 {
 
     public function dashboardAction()
     {
         $widgetManager = $this->get('mm_cmf_admin.widget_manager');
 
-        return $this->render('@MMCmfAdmin/Admin/dashboard.html.twig', array(
+        return $this->renderAdmin('@MMCmfAdmin/Admin/dashboard.html.twig', array(
             'widgets' => $widgetManager->getWidgets('dashboard')
         ));
     }
@@ -33,6 +33,7 @@ class CmfAdminController extends Controller
         if($route == null) {
             $nodeRoutes = $this->getDoctrine()->getRepository('MMCmfRoutingBundle:NodeRoute')->findAll();
             if(count($nodeRoutes) > 0) {
+                dump($nodeRoutes[0]);
                 $route = $nodeRoutes[0];
             }
         }
@@ -45,7 +46,7 @@ class CmfAdminController extends Controller
             ));
         }
 
-        return $this->render('MMCmfAdminBundle:Admin/LiveEdit:default.html.twig', array(
+        return $this->renderAdmin('MMCmfAdminBundle:Admin/LiveEdit:default.html.twig', array(
             'iframe_path' => $path,
             'factory' => $this->get('mm_cmf_content.content_node_factory'),
             'contentParser' => $this->get('mm_cmf_content.content_parser'),

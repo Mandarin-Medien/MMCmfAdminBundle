@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * User controller.
  *
  */
-class CmfAdminUserController extends Controller
+class CmfAdminUserController extends CmfAdminBaseController
 {
 
     /**
@@ -26,9 +26,12 @@ class CmfAdminUserController extends Controller
 
         $entities = $em->getRepository('MMCmfAdminBundle:User')->findAll();
 
-        return $this->render('MMCmfAdminBundle:Admin/User:index.html.twig', array(
-            'entities' => $entities,
-        ));
+        return $this->renderAdmin(
+            'MMCmfAdminBundle:Admin/User:index.html.twig',
+            array(
+                'entities' => $entities,
+            )
+        );
     }
     /**
      * Creates a new User entity.
@@ -44,19 +47,13 @@ class CmfAdminUserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
-            //$entity->setPlainPassword(12345678);
             $userManager->updateCanonicalFields($entity);
             $userManager->updatePassword($entity);
             $userManager->updateUser($entity);
-
-            return $this->redirect($this->generateUrl('mm_cmf_admin_user_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('MMCmfAdminBundle:Admin/User:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+
+        return $this->formResponse($form);
     }
 
     /**
@@ -90,7 +87,7 @@ class CmfAdminUserController extends Controller
         $entity = new User();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('MMCmfAdminBundle:Admin/User:new.html.twig', array(
+        return $this->renderAdmin('MMCmfAdminBundle:Admin/User:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -112,7 +109,7 @@ class CmfAdminUserController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('MMCmfAdminBundle:Admin/User:show.html.twig', array(
+        return $this->renderAdmin('MMCmfAdminBundle:Admin/User:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -134,7 +131,7 @@ class CmfAdminUserController extends Controller
         $editForm = $this->createEditForm($user);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('MMCmfAdminBundle:Admin/User:edit.html.twig', array(
+        return $this->renderAdmin('MMCmfAdminBundle:Admin/User:edit.html.twig', array(
             'entity'      => $user,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -182,11 +179,15 @@ class CmfAdminUserController extends Controller
             return $this->redirect($this->generateUrl('mm_cmf_admin_user_edit', array('id' => $id)));
         }
 
-        return $this->render('MMCmfAdminBundle:Admin/User:edit.html.twig', array(
+
+        return $this->formResponse($editForm);
+
+
+        /*return $this->render('MMCmfAdminBundle:Admin/User:edit.html.twig', array(
             'entity'      => $user,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ));*/
     }
     /**
      * Deletes a User entity.
@@ -209,7 +210,9 @@ class CmfAdminUserController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('mm_cmf_admin_user'));
+        return $this->formResponse($form);
+
+        //return $this->redirect($this->generateUrl('mm_cmf_admin_user'));
     }
 
     /**

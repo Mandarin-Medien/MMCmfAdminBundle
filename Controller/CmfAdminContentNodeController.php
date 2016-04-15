@@ -21,7 +21,7 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
 
         $entities = $em->getRepository('MMCmfContentBundle:ContentNode')->findAll();
 
-        return $this->render("MMCmfAdminBundle:Admin/ContentNode:contentnode.list.html.twig", array(
+        return $this->renderAdmin("MMCmfAdminBundle:Admin/ContentNode:contentnode.list.html.twig", array(
             'contentnodes' => $entities,
             'factory' => $this->get('mm_cmf_content.content_node_factory')
         ));
@@ -32,6 +32,7 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
     {
         $factory    = $this->get('mm_cmf_content.content_node_factory');
         $repository = $this->getDoctrine()->getRepository('MMCmfNodeBundle:Node');
+        $contentParser = $this->container->get('mm_cmf_content.content_parser');
 
         $parent_node = null;
         $entity = $factory->createContentNode($contentnode_type);
@@ -44,10 +45,15 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
 
         $form   = $this->createCreateForm($entity, $parent_node);
 
-        return $this->render('@MMCmfAdmin/Admin/ContentNode/contentnode.new.html.twig', array(
-            'entity' => $entity,
-            'form' => $form->createView()
-        ));
+        return $this->renderAdmin(
+            '@MMCmfAdmin/Admin/ContentNode/contentnode.new.html.twig',
+            array(
+                'entity' => $entity,
+                'form' => $form->createView()
+            ),
+            'Neue '.$contentnode_type,
+            $contentParser->getIcon(get_class($entity))
+        );
     }
 
 
@@ -74,6 +80,9 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
 
     private function createCreateForm(ContentNode $entity)
     {
+
+        $contentNodeFactory = $this->get('mm_cmf_content.content_node_factory');
+
         $form = $this->createForm(
             $this->get('mm_cmf_content.form_type.content_node'),
             $entity,
@@ -86,7 +95,20 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
             )
         );
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form
+            ->add('submit', 'submit', array('label' => 'save'))
+            ->add('save_and_add', 'submit', array(
+                'attr' => array(
+                    'data-target' => $this->container->get('router')->generate('mm_cmf_admin_contentnode_new', array(
+                        'discriminator' => $contentNodeFactory->getDiscriminatorByClass($entity)
+                    ))
+                ),
+            ))
+            ->add('save_and_back', 'submit', array(
+                'attr' => array(
+                    'data-target' => $this->container->get('router')->generate('mm_cmf_admin_noderoute')
+                )
+            ));
 
         return $form;
     }
@@ -107,7 +129,7 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
 
         $form = $this->createEditForm($entity);
 
-        return $this->render('@MMCmfAdmin/Admin/ContentNode/contentnode.edit.html.twig', array(
+        return $this->renderAdmin('@MMCmfAdmin/Admin/ContentNode/contentnode.edit.html.twig', array(
             'entity'      => $entity,
             'form'   => $form->createView(),
         ));
@@ -117,6 +139,9 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
 
     private function createEditForm(ContentNode $entity)
     {
+
+        $contentNodeFactory = $this->get('mm_cmf_content.content_node_factory');
+
         $form = $this->createForm($this->get('mm_cmf_content.form_type.content_node'), $entity, array(
             'action' => $this->generateUrl('mm_cmf_admin_contentnode_update', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -125,7 +150,20 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
             )
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form
+            ->add('submit', 'submit', array('label' => 'save'))
+            ->add('save_and_add', 'submit', array(
+                'attr' => array(
+                    'data-target' => $this->container->get('router')->generate('mm_cmf_admin_contentnode_new', array(
+                        'discriminator' => $contentNodeFactory->getDiscriminatorByClass($entity)
+                    ))
+                ),
+            ))
+            ->add('save_and_back', 'submit', array(
+                'attr' => array(
+                    'data-target' => $this->container->get('router')->generate('mm_cmf_admin_noderoute')
+                )
+            ));
 
         return $form;
     }
