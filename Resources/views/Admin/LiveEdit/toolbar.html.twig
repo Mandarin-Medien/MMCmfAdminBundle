@@ -1,33 +1,33 @@
 <div class="navbar-custom-menu pull-left live-edit-toolbar">
     <ul class="nav navbar-nav">
         <li>
-            <a href="#" class="refresh"><i class="fa fa-refresh"></i> <span>Refresh</span></a>
+            <a href="#" class="refresh"><i class="fa fa-refresh"></i> <span>{{ 'Refresh'|trans }}</span></a>
         </li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-arrows"></i> <span>Endgerät simulieren</span>
+                <i class="fa fa-arrows"></i> <span>{{ 'Simulate device'|trans }}</span>
             </a>
             <ul class="dropdown-menu viewport-switch">
-                <li><a class="viewport-reset"><i class="fa fa-arrows-alt"></i> <span>zurücksetzen</span></a></li>
-                <li><a class="viewport-toggle" data-viewport="xs"><i class="fa fa-mobile"></i> <span>Smartphone</span></a></li>
-                <li><a class="viewport-toggle" data-viewport="sm"><i class="fa fa-tablet"></i> <span>Tablet</span></a></li>
-                <li><a class="viewport-toggle" data-viewport="md"><i class="fa fa-laptop"></i> <span>Laptop</span></a></li>
-                <li><a class="viewport-toggle" data-viewport="lg"><i class="fa fa-desktop"></i> <span>Desktop</span></a></li>
+                <li><a class="viewport-reset"><i class="fa fa-arrows-alt"></i> <span>{{ 'Reset'|trans }}</span></a></li>
+                <li><a class="viewport-toggle" data-viewport="xs"><i class="fa fa-mobile"></i> <span>{{ 'Smartphone'|trans }}</span></a></li>
+                <li><a class="viewport-toggle" data-viewport="sm"><i class="fa fa-tablet"></i> <span>{{ 'Tablet'|trans }}</span></a></li>
+                <li><a class="viewport-toggle" data-viewport="md"><i class="fa fa-laptop"></i> <span>{{ 'Laptop'|trans }}</span></a></li>
+                <li><a class="viewport-toggle" data-viewport="lg"><i class="fa fa-desktop"></i> <span>{{ 'Desktop'|trans }}</span></a></li>
             </ul>
         </li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-file-o"></i> <span>Seite</span>
+                <i class="fa fa-file-o"></i> <span>{{ 'Page'|trans }}</span>
             </a>
             <ul class="dropdown-menu viewport-switch">
                 <li>
                     <a rel="ajax" href="{{ path('mm_cmf_admin_page_new') }}">
-                        <i class="fa fa-file-o"></i> <span>neue Seite hinzufügen</span>
+                        <i class="fa fa-plus"></i> <span>{{ 'add new Page'|trans }}</span>
                     </a>
                 </li>
                 <li>
                     <a rel="ajax" data-fetch-root="true" href="{{ path('mm_cmf_admin_page_edit', {id: '__root__'}) }}">
-                        <i class="fa fa-file-o"></i> <span>aktuelle Seite bearbeiten</span>
+                        <i class="fa fa-pencil"></i> <span>{{ 'edit current Page'|trans }}</span>
                     </a>
                 </li>
             </ul>
@@ -35,13 +35,13 @@
         </li>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-plus"></i> <span>Inhalte hinzufügen</span>
+                <i class="fa fa-plus"></i> <span>{{ 'Add Content'|trans }}</span>
             </a>
             <ul class="dropdown-menu">
                 {% for key, discriminator in factory.discriminators %}
                     <li>
                         <a href="{{ path('mm_cmf_admin_contentnode_new', {'contentnode_type' : discriminator}) }}" rel="ajax" data-fetch-root="true">
-                            <i class="{{ contentParser.icon(factory.classByDiscriminator(discriminator)) }}"></i> <span>{{ discriminator }}</span>
+                            <i class="{{ contentParser.icon(factory.classByDiscriminator(discriminator)) }}"></i> <span>{{ discriminator|trans }}</span>
                         </a>
                     </li>
                 {% endfor %}
@@ -49,7 +49,7 @@
         </li>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-sitemap"></i> <span>Menüs bearbeiten</span>
+                <i class="fa fa-sitemap"></i> <span>{{ 'Edit Menu' }}</span>
             </a>
             <ul class="dropdown-menu">
                 {% for menu in menus %}

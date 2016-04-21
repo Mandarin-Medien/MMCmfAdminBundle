@@ -4,7 +4,6 @@ Save and add: speichern & neu
 Save and back: speichern & zurück
 abort: abbrechen
 
-
 routes: Routen
 new route: Neue Route
 alias: Alias
@@ -16,5 +15,17 @@ additional routes: Zusätzliche Routen
 
 Contents: Inhalte
 Edit Content: Inhalte bearbeiten
+Add Content: Inhalte hinzufügen
 Create new Content: Neuen Inhalt erstellen
 Content Actions: Inhalte Aktionen
+
+Simulate device: Endgerät simulieren
+Refresh: Refresh
+Reset: zurücksetzen
+
+add new Page: neue Seite hinzufügen
+edit Page: Seite bearbeiten
+edit current Page: aktuelle Seite bearbeiten
+
+Edit Menu: Menüs bearbeiten
+Add Menu: Menü hinzufügen
