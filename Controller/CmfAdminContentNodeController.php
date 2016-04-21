@@ -23,7 +23,8 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
 
         return $this->renderAdmin("MMCmfAdminBundle:Admin/ContentNode:contentnode.list.html.twig", array(
             'contentnodes' => $entities,
-            'factory' => $this->get('mm_cmf_content.content_node_factory')
+            'contentParser' => $this->get('mm_cmf_content.content_parser'),
+            'contentNodeFactory' => $this->get('mm_cmf_content.content_node_factory')
         ));
     }
 
