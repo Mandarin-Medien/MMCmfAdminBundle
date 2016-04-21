@@ -8,6 +8,9 @@
 {% endblock %}
 
 {% block admin_body_content %}
+
+    {% set entity = form.vars.data %}
+
     <div class="box box-default">
         <div class="box-header"><h2 class="box-title">Seite bearbeiten</h2></div>
         <div class="box-body">
@@ -21,8 +24,7 @@
                         {{ form_widget(form.save_and_back) }}
 
                         <a class="btn btn-warning btn-abort" href="{{ path('mm_cmf_admin_page') }}">
-                            <i class="fa fa-close"></i> abbrechen
-                        </a>
+                            <i class="fa fa-close"></i> {{ 'abort'|trans }}</a>
                     </div>
                 {% endset %}
 
@@ -35,6 +37,7 @@
                 </div>
 
                 <div class="form-sub col-xs-4">
+
                     <div class="form-group">
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -52,7 +55,7 @@
                                 <a class="list-group-item" rel="ajax" href="{{ path('mm_cmf_admin_noderoute_edit', {id: route.id}) }}">
                                     {{ route.route }}
                                     {% set discr = node_route_factory.getDiscriminatorByClass(route) %}
-                                    <span class="pull-right label label-{% if discr == 'auto' %}primary{% else %}default{% endif %}">{{ node_route_factory.getDiscriminatorByClass(route) }}</span>
+                                    <span class="pull-right label label-{% if discr == 'auto' %}primary{% else %}default{% endif %}">{{ node_route_factory.getDiscriminatorByClass(route)|trans }}</span>
                                 </a>
                             {% endfor %}
                         </div>

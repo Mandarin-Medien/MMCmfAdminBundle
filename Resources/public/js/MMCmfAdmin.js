@@ -30,33 +30,44 @@
                                 $(this).trigger('tab:close');
                             });
 
+                            // bind xhr
+                            $(e.tabdata.tab).find('a[rel=ajax]').MMCmfAdminXHR({
+                                'success' : xhrSuccessCallback,
+                                'error' : xhrErrorCallback
+                            });
+
                             // overwrite save and add button
                            // $(e.tabdata.tab).find('button')
                         });
 
                     // bind xhr
                     $('a[rel=ajax]').MMCmfAdminXHR({
-                        'success' : function(response) {
-
-                            if(response.success) {
-
-                                $('.xhr').MMCmfAdminSidebarTabs('add', {
-                                    icon: response.data.icon,
-                                    name: response.data.name,
-                                    content: response.data.content
-                                });
-
-
-                                mmFormFieldhandler.init();
-                            }
-                        },
-                        'error' : function(xhr, text, errorMsg) {
-                            $.notify('Fehler: '+xhr.status +': '+ xhr.statusText );
-                        }
+                        'success' : xhrSuccessCallback,
+                        'error' : xhrErrorCallback
                     });
 
                 });
 
+            };
+
+
+            var xhrSuccessCallback = function(response) {
+
+                if(response.success) {
+
+                    $('.xhr').MMCmfAdminSidebarTabs('add', {
+                        icon: response.data.icon,
+                        name: response.data.name,
+                        content: response.data.content
+                    });
+
+
+                    mmFormFieldhandler.init();
+                }
+            };
+
+            var xhrErrorCallback = function(xhr, text, errorMsg) {
+                $.notify('Fehler: '+xhr.status +': '+ xhr.statusText );
             };
 
 

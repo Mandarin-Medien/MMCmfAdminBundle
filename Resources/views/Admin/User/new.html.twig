@@ -9,7 +9,32 @@
                 </div>
                 <div class="box-body">
                     <div class="admin-menu-form">
-                        {{ form(form) }}
+                        {% block admin_content %}
+
+                            {{ form_start(form) }}
+
+                            {% set buttongroup %}
+                                <div class="form-actions clearfix">
+                                    {{ form_widget(form.submit) }}
+                                    {{ form_widget(form.save_and_add) }}
+                                    {{ form_widget(form.save_and_back) }}
+
+                                    <a class="btn btn-warning btn-abort" href="{{ path('mm_cmf_admin_user') }}">
+                                        <i class="fa fa-close"></i> abbrechen
+                                    </a>
+                                </div>
+                            {% endset %}
+
+                            <div class="form-main col-xs-12">
+                                {{ form_rest(form) }}
+                            </div>
+
+                            <div class="form-foot col-xs-12">
+                                {{ buttongroup }}
+                            </div>
+
+                            {{ form_end(form) }}
+                        {% endblock %}
                     </div>
                 </div>
             </div>

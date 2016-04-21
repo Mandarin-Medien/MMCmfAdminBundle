@@ -65,7 +65,7 @@ class PageType extends AbstractType
             ->add('save_and_add', 'submit', array(
                 'attr' => array(
                     'data-target' => $router->generate('mm_cmf_admin_page_new')
-                ),
+                )
             ))
             ->add('save_and_back', 'submit', array(
                 'attr' => array(

@@ -10,32 +10,33 @@
     <div class="box box-default">
         <div class="box-header"><h2 class="box-title">Route bearbeiten</h2></div>
         <div class="box-body">
-            {{ form_start(form) }}
+            {% block admin_content %}
+                {{ form_start(form) }}
 
-            {% set buttongroup %}
-                <div class="form-actions clearfix">
-                    {{ form_widget(form.submit) }}
-                    {{ form_widget(form.save_and_add) }}
-                    {{ form_widget(form.save_and_back) }}
+                {% set buttongroup %}
+                    <div class="form-actions clearfix">
+                        {{ form_widget(form.submit) }}
+                        {{ form_widget(form.save_and_add) }}
+                        {{ form_widget(form.save_and_back) }}
 
-                    <a class="btn btn-warning btn-abort" href="{{ path('mm_cmf_admin_noderoute') }}">
-                        <i class="fa fa-close"></i> abbrechen
-                    </a>
+                        <a class="btn btn-warning btn-abort" href="{{ path('mm_cmf_admin_noderoute') }}">
+                            <i class="fa fa-close"></i> abbrechen
+                        </a>
+                    </div>
+                {% endset %}
+
+                <div class="form-main">
+                    {{ form_rest(form) }}
+                    {{ form_errors(form) }}
                 </div>
-            {% endset %}
 
-            <div class="form-main">
-                {{ form_rest(form) }}
-                {{ form_errors(form) }}
-                {{ buttongroup }}
-            </div>
+                <div class="form-foot">
+                    {{ buttongroup }}
+                </div>
 
-            {{ form_end(form) }}
+                {{ form_end(form) }}
+            {% endblock %}
         </div>
     </div>
 
-{% endblock %}
-
-{% block xhr_body %}
-    {{ form(form) }}
 {% endblock %}

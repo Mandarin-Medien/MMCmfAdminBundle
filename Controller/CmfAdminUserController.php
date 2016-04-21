@@ -65,6 +65,8 @@ class CmfAdminUserController extends CmfAdminBaseController
      */
     private function createCreateForm(UserInterface $entity)
     {
+        $router = $this->get('router');
+
         $form = $this->createForm(new UserType(), $entity, array(
             'action' => $this->generateUrl('mm_cmf_admin_user_create'),
             'method' => 'POST',
@@ -73,7 +75,18 @@ class CmfAdminUserController extends CmfAdminBaseController
             )
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form
+            ->add('submit', 'submit', array('label' => 'save'))
+            ->add('save_and_add', 'submit', array(
+                'attr' => array(
+                    'data-target' => $router->generate('mm_cmf_admin_user_new')
+                ),
+            ))
+            ->add('save_and_back', 'submit', array(
+                'attr' => array(
+                    'data-target' => $router->generate('mm_cmf_admin_user')
+                )
+            ));
 
         return $form;
     }
@@ -128,12 +141,12 @@ class CmfAdminUserController extends CmfAdminBaseController
             throw $this->createNotFoundException('Unable to find User.');
         }
 
-        $editForm = $this->createEditForm($user);
+        $form = $this->createEditForm($user);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->renderAdmin('MMCmfAdminBundle:Admin/User:edit.html.twig', array(
             'entity'      => $user,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -147,12 +160,26 @@ class CmfAdminUserController extends CmfAdminBaseController
     */
     private function createEditForm(UserInterface $entity)
     {
+
+        $router = $this->get('router');
+
         $form = $this->createForm(new UserType(), $entity, array(
             'action' => $this->generateUrl('mm_cmf_admin_user_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form
+            ->add('submit', 'submit', array('label' => 'save'))
+            ->add('save_and_add', 'submit', array(
+                'attr' => array(
+                    'data-target' => $router->generate('mm_cmf_admin_user_new')
+                ),
+            ))
+            ->add('save_and_back', 'submit', array(
+                'attr' => array(
+                    'data-target' => $router->generate('mm_cmf_admin_user')
+                )
+            ));
 
         return $form;
     }

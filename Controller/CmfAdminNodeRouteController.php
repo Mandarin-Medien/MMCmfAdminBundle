@@ -53,7 +53,7 @@ class CmfAdminNodeRouteController extends CmfAdminBaseController
             return $this->renderAdmin('MMCmfAdminBundle:Admin/NodeRoute:noderoute.new.html.twig', array(
                 'entity' => $entity,
                 'form' => $form->createView(),
-            ));
+            ), 'Route erstellen', 'link');
         }
     }
 
@@ -85,7 +85,7 @@ class CmfAdminNodeRouteController extends CmfAdminBaseController
         return $this->renderAdmin("@MMCmfAdmin/Admin/NodeRoute/noderoute.edit.html.twig", array(
             'form' => $this->createEditForm($nodeRoute)->createView(),
             'nodeRoute' => $nodeRoute,
-        ));
+        ), 'Route bearbeiten', 'link');
     }
 
 
