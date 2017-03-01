@@ -15,7 +15,7 @@ class CmfAdminBaseController extends Controller
     public function renderAdmin($view, array $parameters = array(), $title = 'Node beabeiten', $icon = 'edit')
     {
 
-        $request    = $this->get('request');
+        $request    = $this->get('request_stack')->getCurrentRequest();
         $twig       = $this->get('twig');
         $translator = $this->get('translator');
 
@@ -51,7 +51,7 @@ class CmfAdminBaseController extends Controller
      */
     public function formResponse(Form $form)
     {
-        $request = $this->get('request');
+        $request = $this->get('request_stack')->getCurrentRequest();
 
         if ($request->isXmlHttpRequest()) {
             return new JsonFormResponse($form);
