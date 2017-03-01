@@ -6,7 +6,7 @@ services:
 
     mm_cmf_admin.widget_factory:
         class: MandarinMedien\MMCmfAdminBundle\Admin\Widget\WidgetFactory
-        arguments: [@service_container]
+        arguments: ["@service_container"]
 
 
     mm_cmf_admin.admin_dashboard.time_widget:
@@ -121,7 +121,7 @@ services:
 
     mm_cmf_admin.page_type:
         class: MandarinMedien\MMCmfAdminBundle\Form\PageType
-        arguments: [@service_container]
+        arguments: ["@service_container"]
         tags:
             - { name: form.type, alias: mm_cmf_admin_page }
 

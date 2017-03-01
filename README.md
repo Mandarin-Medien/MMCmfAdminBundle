@@ -12,6 +12,10 @@
             new MandarinMedien\MMCmfRoutingBundle\MMCmfRoutingBundle(),
             new MandarinMedien\MMCmfContentBundle\MMCmfContentBundle(),
             new MandarinMedien\MMCmfAdminBundle\MMCmfAdminBundle(),
+            new \FOS\UserBundle\FOSUserBundle(),
+            
+            # Symfony 3 extra
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             ...
             );
     ....
@@ -25,8 +29,18 @@
 ...
 imports:
     - ...
+    
+    # Symfony 2
     - { resource: '@MMCmfAdminBundle/Resources/config/config.yml' }
+    #   OR    
+    # Symfony 3
+    - { resource: '@MMCmfAdminBundle/Resources/config/config_symfony3.yml' }
+    
+    # Symfony 2
     - { resource: '@MMCmfContentBundle/Resources/config/config.yml' }
+    #   OR    
+    # Symfony 3
+    - { resource: '@MMCmfContentBundle/Resources/config/config_symfony3.yml' }
     - ...   
 ...
 ```
@@ -52,7 +66,7 @@ mm_cmf_routing:
 ...
 ```
 
-### install and initiate assets
+### install and initiate assets - Symfony 2
 
 ```
 ...
@@ -61,6 +75,19 @@ shell:PROJECT_ROOT: cd vendor/mandarinmedien/mmcmfcontentbundle/MandarinMedien/M
 # initates the MMCmfAdminBundle
 shell:PROJECT_ROOT: cd vendor/mandarinmedien/mmcmfadminbundle/MandarinMedien/MMCmfAdminBundle && bower update && cd ../../../../../ && app/console as:in --symlink && app/console assetic:dump
 shell:PROJECT_ROOT: app/console as:wa
+
+...
+```
+
+### install and initiate assets - Symfony 3
+
+```
+...
+# initates the MMCmfContentBundle
+shell:PROJECT_ROOT: cd vendor/mandarinmedien/mmcmfcontentbundle/MandarinMedien/MMCmfContentBundle && bower update && cd ../../../../../ && bin/console as:in --symlink && bin/console assetic:dump
+# initates the MMCmfAdminBundle
+shell:PROJECT_ROOT: cd vendor/mandarinmedien/mmcmfadminbundle/MandarinMedien/MMCmfAdminBundle && bower update && cd ../../../../../ && bin/console as:in --symlink && bin/console assetic:dump
+shell:PROJECT_ROOT: bin/console as:wa
 
 ...
 ```
