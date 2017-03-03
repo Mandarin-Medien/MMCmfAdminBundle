@@ -22,11 +22,12 @@
   "require": {
     "mandarinmedien/mmcmfnodebundle": "^0.0",
     "mandarinmedien/mmcmfroutingbundle": "^0.0",
-    "mandarinmedien/mmcmfcontentbundle": "^0.0",
+    "mandarinmedien/mmcmfcontentbundle": "^0.10",
     "mandarinmedien/mmcmfmenubundle": "^0.0",
+    "mandarinmedien/mmmmediabundle": ">2.0.3|<3",
+
     "friendsofsymfony/user-bundle": "^1.0|^2.0",
     "symfony/assetic-bundle": "^2.8",
-    "mandarinmedien/mmmmediabundle": ">2.0.3|<3",
     "knplabs/knp-paginator-bundle": "^2.5"
   },
   "suggest": {
