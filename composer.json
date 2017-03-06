@@ -20,13 +20,13 @@
   },
   "target-dir": "MandarinMedien/MMCmfAdminBundle",
   "require": {
-    "mandarinmedien/mmcmfnodebundle": "^0.0",
-    "mandarinmedien/mmcmfroutingbundle": "^0.0",
-    "mandarinmedien/mmcmfcontentbundle": "^0.0",
-    "mandarinmedien/mmcmfmenubundle": "^0.0",
+    "mandarinmedien/mmcmfnodebundle": "^0.1",
+    "mandarinmedien/mmcmfroutingbundle": "^0.1",
+    "mandarinmedien/mmcmfcontentbundle": "^0.1",
+    "mandarinmedien/mmcmfmenubundle": "^0.1",
     "mandarinmedien/mmmmediabundle": ">2.0.3|<3",
 
-    "friendsofsymfony/user-bundle": "^1.0|^2.0",
+    "friendsofsymfony/user-bundle": "^1.0|^2.0@dev",
     "symfony/assetic-bundle": "^2.8",
     "knplabs/knp-paginator-bundle": "^2.5"
   },
