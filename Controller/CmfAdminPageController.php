@@ -5,6 +5,7 @@ namespace MandarinMedien\MMCmfAdminBundle\Controller;
 use MandarinMedien\MMCmfAdminBundle\Form\PageType;
 use MandarinMedien\MMCmfContentBundle\Entity\Page;
 use MandarinMedien\MMCmfRoutingBundle\Form\Type\NodeRouteType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -63,7 +64,7 @@ class CmfAdminPageController extends CmfAdminBaseController
 
     private function createCreateForm(Page $entity)
     {
-        $form = $this->createForm($this->container->get('mm_cmf_admin.page_type'), $entity, array(
+        $form = $this->createForm(PageType::class, $entity, array(
             'action' => $this->generateUrl('mm_cmf_admin_page_create'),
             'method' => 'POST',
         ));
@@ -81,7 +82,7 @@ class CmfAdminPageController extends CmfAdminBaseController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MMCmfContentBundle:Page')->find($id);
+        $entity = $em->getRepository('MMCmfContentBundle:Page')->findOneBy(array('id'=>$id));
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Page entity.');
@@ -105,7 +106,7 @@ class CmfAdminPageController extends CmfAdminBaseController
 
     private function createEditForm(Page $entity)
     {
-        $form = $this->createForm($this->container->get('mm_cmf_admin.page_type'), $entity, array(
+        $form = $this->createForm(PageType::class, $entity, array(
             'action' => $this->generateUrl('mm_cmf_admin_page_update', array('id' => $entity->getId())),
             'method' => 'PUT',
             'attr' => array(
@@ -113,7 +114,7 @@ class CmfAdminPageController extends CmfAdminBaseController
             )
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }

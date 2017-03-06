@@ -2,6 +2,7 @@
 
 namespace MandarinMedien\MMCmfAdminBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -39,7 +40,6 @@ class CmfAdminUserController extends CmfAdminBaseController
      */
     public function createAction(Request $request)
     {
-
         $userManager = $this->get('fos_user.user_manager');
 
         $entity = $userManager->createUser();
@@ -67,7 +67,7 @@ class CmfAdminUserController extends CmfAdminBaseController
     {
         $router = $this->get('router');
 
-        $form = $this->createForm(new UserType(), $entity, array(
+        $form = $this->createForm(UserType::class, $entity, array(
             'action' => $this->generateUrl('mm_cmf_admin_user_create'),
             'method' => 'POST',
             'attr' => array(
@@ -76,13 +76,13 @@ class CmfAdminUserController extends CmfAdminBaseController
         ));
 
         $form
-            ->add('submit', 'submit', array('label' => 'save'))
-            ->add('save_and_add', 'submit', array(
+            ->add('submit', SubmitType::class, array('label' => 'save'))
+            ->add('save_and_add', SubmitType::class, array(
                 'attr' => array(
                     'data-target' => $router->generate('mm_cmf_admin_user_new')
                 ),
             ))
-            ->add('save_and_back', 'submit', array(
+            ->add('save_and_back', SubmitType::class, array(
                 'attr' => array(
                     'data-target' => $router->generate('mm_cmf_admin_user')
                 )
@@ -163,19 +163,19 @@ class CmfAdminUserController extends CmfAdminBaseController
 
         $router = $this->get('router');
 
-        $form = $this->createForm(new UserType(), $entity, array(
+        $form = $this->createForm(UserType::class, $entity, array(
             'action' => $this->generateUrl('mm_cmf_admin_user_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
         $form
-            ->add('submit', 'submit', array('label' => 'save'))
-            ->add('save_and_add', 'submit', array(
+            ->add('submit', SubmitType::class, array('label' => 'save'))
+            ->add('save_and_add',SubmitType::class, array(
                 'attr' => array(
                     'data-target' => $router->generate('mm_cmf_admin_user_new')
                 ),
             ))
-            ->add('save_and_back', 'submit', array(
+            ->add('save_and_back', SubmitType::class, array(
                 'attr' => array(
                     'data-target' => $router->generate('mm_cmf_admin_user')
                 )
@@ -254,7 +254,7 @@ class CmfAdminUserController extends CmfAdminBaseController
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('mm_cmf_admin_user_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

@@ -22,7 +22,7 @@ class CmfAdminMenuController extends CmfAdminBaseController
         $entities = $em->getRepository('MMCmfMenuBundle:Menu')->findAll();
 
         return $this->renderAdmin("MMCmfAdminBundle:Admin/Menu:menu.list.html.twig", array(
-            'menues' => array_filter($entities, function($object) {
+            'menues' => array_filter($entities, function ($object) {
                 return get_class($object) == 'MandarinMedien\MMCmfMenuBundle\Entity\Menu';
             }),
         ));
@@ -38,11 +38,11 @@ class CmfAdminMenuController extends CmfAdminBaseController
     public function newAction()
     {
         $entity = new Menu();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->renderAdmin('MMCmfAdminBundle:Admin/Menu:menu.new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -82,7 +82,7 @@ class CmfAdminMenuController extends CmfAdminBaseController
         return $this->renderAdmin("@MMCmfAdmin/Admin/Menu/menu.edit.html.twig", array(
             'form' => $this->createEditForm($menu)->createView(),
             'menu' => $menu
-        ), $menu->getName().' bearbeiten', 'sitemap');
+        ), $menu->getName() . ' bearbeiten', 'sitemap');
     }
 
 
@@ -97,11 +97,11 @@ class CmfAdminMenuController extends CmfAdminBaseController
     {
 
         $form = $this->createEditForm($menu);
-        $form->handleRequest($this->get('request'));
+        $form->handleRequest($this->get('request_stack')->getCurrentRequest());
 
         //var_dump($this->get('request'));die();
 
-        if($form->isValid()) {
+        if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
         }
 
@@ -120,7 +120,7 @@ class CmfAdminMenuController extends CmfAdminBaseController
      */
     public function createEditForm(Menu $menu)
     {
-        return $this->createForm(new MenuType(), $menu, array(
+        return $this->createForm(MenuType::class, $menu, array(
             'method' => 'PUT',
             'attr' => array(
                 'rel' => 'ajax'
@@ -140,7 +140,7 @@ class CmfAdminMenuController extends CmfAdminBaseController
      */
     public function createCreateForm(Menu $menu)
     {
-        return $this->createForm(new MenuType(), $menu, array(
+        return $this->createForm(MenuType::class, $menu, array(
             'method' => 'POST',
             'action' => $this->generateUrl('mm_cmf_admin_menu_create', array(
                 'id' => $menu->getId()
@@ -160,8 +160,7 @@ class CmfAdminMenuController extends CmfAdminBaseController
             throw $this->createNotFoundException('Unable to find Menu entity.');
         }
 
-        if($parent = $entity->getParent())
-        {
+        if ($parent = $entity->getParent()) {
             $parent->removeItem($entity);
         }
 

@@ -6,6 +6,7 @@ use MandarinMedien\MMCmfAdminBundle\Response\JsonFormResponse;
 use MandarinMedien\MMCmfAdminBundle\Form\ContentNodeType;
 use MandarinMedien\MMCmfContentBundle\Entity\ContentNode;
 use MandarinMedien\MMCmfNodeBundle\Entity\Node;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -44,7 +45,7 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
             }
         }
 
-        $form   = $this->createCreateForm($entity, $parent_node);
+        $form   = $this->createCreateForm($entity);
 
         return $this->renderAdmin(
             '@MMCmfAdmin/Admin/ContentNode/contentnode.new.html.twig',
@@ -85,7 +86,7 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
         $contentNodeFactory = $this->get('mm_cmf_content.content_node_factory');
 
         $form = $this->createForm(
-            $this->get('mm_cmf_content.form_type.content_node'),
+            \MandarinMedien\MMCmfContentBundle\Form\ContentNodeType::class,
             $entity,
             array(
                 'root_node' => $entity->getParent(),
@@ -97,15 +98,15 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
         );
 
         $form
-            ->add('submit', 'submit', array('label' => 'save'))
-            ->add('save_and_add', 'submit', array(
+            ->add('submit', SubmitType::class, array('label' => 'save'))
+            ->add('save_and_add', SubmitType::class, array(
                 'attr' => array(
                     'data-target' => $this->container->get('router')->generate('mm_cmf_admin_contentnode_new', array(
                         'discriminator' => $contentNodeFactory->getDiscriminatorByClass($entity)
                     ))
                 ),
             ))
-            ->add('save_and_back', 'submit', array(
+            ->add('save_and_back', SubmitType::class, array(
                 'attr' => array(
                     'data-target' => $this->container->get('router')->generate('mm_cmf_admin_noderoute')
                 )
@@ -143,7 +144,9 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
 
         $contentNodeFactory = $this->get('mm_cmf_content.content_node_factory');
 
-        $form = $this->createForm($this->get('mm_cmf_content.form_type.content_node'), $entity, array(
+        $form = $this->createForm(
+            \MandarinMedien\MMCmfContentBundle\Form\ContentNodeType::class,
+            $entity, array(
             'action' => $this->generateUrl('mm_cmf_admin_contentnode_update', array('id' => $entity->getId())),
             'method' => 'PUT',
             'attr' => array(
@@ -152,15 +155,15 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
         ));
 
         $form
-            ->add('submit', 'submit', array('label' => 'save'))
-            ->add('save_and_add', 'submit', array(
+            ->add('submit', SubmitType::class, array('label' => 'save'))
+            ->add('save_and_add', SubmitType::class, array(
                 'attr' => array(
                     'data-target' => $this->container->get('router')->generate('mm_cmf_admin_contentnode_new', array(
                         'discriminator' => $contentNodeFactory->getDiscriminatorByClass($entity)
                     ))
                 ),
             ))
-            ->add('save_and_back', 'submit', array(
+            ->add('save_and_back', SubmitType::class, array(
                 'attr' => array(
                     'data-target' => $this->container->get('router')->generate('mm_cmf_admin_noderoute')
                 )
@@ -224,7 +227,7 @@ class CmfAdminContentNodeController extends CmfAdminBaseController
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('mm_cmf_admin_contentnode_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
             ;
     }

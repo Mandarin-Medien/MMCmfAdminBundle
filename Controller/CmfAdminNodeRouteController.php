@@ -93,7 +93,7 @@ class CmfAdminNodeRouteController extends CmfAdminBaseController
     {
 
         $form = $this->createEditForm($nodeRoute);
-        $form->handleRequest($this->get('request'));
+        $form->handleRequest($this->get('request_stack')->getCurrentRequest());
 
         //var_dump($this->get('request'));die();
 
@@ -112,7 +112,7 @@ class CmfAdminNodeRouteController extends CmfAdminBaseController
 
     public function createEditForm(NodeRoute $nodeRoute)
     {
-        return $this->createForm(new NodeRouteType(), $nodeRoute, array(
+        return $this->createForm( NodeRouteType::class, $nodeRoute, array(
             'method' => 'PUT',
             'attr' => array(
                 'rel' => 'ajax'
@@ -125,7 +125,7 @@ class CmfAdminNodeRouteController extends CmfAdminBaseController
 
     public function createCreateForm(NodeRouteInterface $nodeRoute)
     {
-        return $this->createForm(new NodeRouteType(), $nodeRoute, array(
+        return $this->createForm(NodeRouteType::class, $nodeRoute, array(
             'method' => 'POST',
             'action' => $this->generateUrl('mm_cmf_admin_noderoute_create', array(
                 'node_route_type' => $this->get('mm_cmf_routing.node_route_factory')

@@ -5,15 +5,19 @@ namespace MandarinMedien\MMCmfAdminBundle\Form;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use MandarinMedien\MMCmfAdminBundle\Form\Types\NodeRouteInlineType;
+use MandarinMedien\MMCmfContentBundle\Form\Type\TemplatableNodeTemplateType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Forms;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\Router;
 use MandarinMedien\MMCmfAdminBundle\Form\NodeRouteType;
+use MandarinMedien\MMCmfContentBundle\Entity\Page;
 
 class PageType extends AbstractType
 {
@@ -44,8 +48,8 @@ class PageType extends AbstractType
         $builder
             ->add('name')
             ->add('metaTitle')
-            ->add('parent', 'entity', array(
-                'class' => 'MandarinMedien\MMCmfContentBundle\Entity\Page',
+            ->add('parent', EntityType::class, array(
+                'class' => Page::class,
                 'required' => false,
                 'query_builder' => function(EntityRepository $repository) {
                     return $repository->createQueryBuilder('p')
@@ -59,15 +63,15 @@ class PageType extends AbstractType
             ->add('metaAuthor')
             ->add('metaImage')
             ->add('visible')
-            ->add('template', $this->container->get('mm_cmf_content.form_type.node_template')->setClass($class))
+            ->add('template', TemplatableNodeTemplateType::class, array('className' => $class ))
 
-            ->add('submit', 'submit', array('label' => 'save'))
-            ->add('save_and_add', 'submit', array(
+            ->add('submit', SubmitType::class, array('label' => 'save'))
+            ->add('save_and_add', SubmitType::class, array(
                 'attr' => array(
                     'data-target' => $router->generate('mm_cmf_admin_page_new')
                 )
             ))
-            ->add('save_and_back', 'submit', array(
+            ->add('save_and_back', SubmitType::class, array(
                 'attr' => array(
                     'data-target' => $router->generate('mm_cmf_admin_page')
                 )
@@ -76,19 +80,19 @@ class PageType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MandarinMedien\MMCmfContentBundle\Entity\Page'
+            'data_class' => Page::class
         ));
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'mm_cmf_admin_page';
     }

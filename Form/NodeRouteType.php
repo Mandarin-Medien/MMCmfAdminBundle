@@ -5,12 +5,14 @@ namespace MandarinMedien\MMCmfAdminBundle\Form;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use MandarinMedien\MMCmfRoutingBundle\Entity\ExternalNodeRoute;
+use MandarinMedien\MMCmfRoutingBundle\Entity\NodeRoute;
 use MandarinMedien\MMCmfRoutingBundle\Entity\RedirectNodeRoute;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Forms;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class NodeRouteType extends AbstractType
 {
@@ -45,13 +47,13 @@ class NodeRouteType extends AbstractType
 
 
         $builder
-            ->add('submit', 'submit', array('label' => 'save'))
-            ->add('save_and_add', 'submit', array(
+            ->add('submit', SubmitType::class, array('label' => 'save'))
+            ->add('save_and_add', SubmitType::class, array(
                 'attr' => array(
                     'data-target' => $container->get('router')->generate('mm_cmf_admin_noderoute_new')
                 ),
             ))
-            ->add('save_and_back', 'submit', array(
+            ->add('save_and_back', SubmitType::class, array(
                 'attr' => array(
                     'data-target' => $container->get('router')->generate('mm_cmf_admin_noderoute')
                 )
@@ -59,26 +61,26 @@ class NodeRouteType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MandarinMedien\MMCmfRoutingBundle\Entity\NodeRoute'
+            'data_class' => NodeRoute::class
         ));
     }
 
 
     public function getParent()
     {
-        return 'container_aware_type';
+        return ContainerAwareType::class;
     }
 
 
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'mm_cmf_admin_noderoute';
     }

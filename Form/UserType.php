@@ -2,11 +2,13 @@
 
 namespace MandarinMedien\MMCmfAdminBundle\Form;
 
+use MandarinMedien\MMCmfAdminBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserType extends AbstractType
 {
@@ -21,12 +23,12 @@ class UserType extends AbstractType
             ->add('email')
             ->add('roles', ChoiceType::class, array(
                 'choices' => array(
-                    'ROLE_USER' => 'Benutzer',
-                    'ROLE_ADMIN' => 'Admin'
+                    'Benutzer'=>'ROLE_USER',
+                    'Admin' => 'ROLE_ADMIN'
                 ),
                 'multiple' => true
             ))
-            ->add('plain_password', 'password', array(
+            ->add('plain_password', PasswordType::class, array(
                 'label' => 'Password',
                 'required' => false
             ))
@@ -34,19 +36,19 @@ class UserType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MandarinMedien\MMCmfAdminBundle\Entity\User'
+            'data_class' => User::class
         ));
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'mm_cmf_admin_user';
     }

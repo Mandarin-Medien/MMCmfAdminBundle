@@ -6,7 +6,8 @@ use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContainerAwareType extends AbstractType implements ContainerAwareInterface
 {
@@ -17,17 +18,17 @@ class ContainerAwareType extends AbstractType implements ContainerAwareInterface
         $this->container = $container;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
             'container' => $this->container
         ));
     }
 
-    public function getName() {
+    public function getBlockPrefix() {
         return 'container_aware_type';
     }
 
     public function getParent() {
-        return 'form';
+        return FormType::class;
     }
 }

@@ -5,10 +5,12 @@ namespace MandarinMedien\MMCmfAdminBundle\Form;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use MandarinMedien\MMCmfAdminBundle\Form\Types\MenuListType;
+use MandarinMedien\MMCmfMenuBundle\Entity\Menu;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Forms;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MenuType extends AbstractType
 {
@@ -22,19 +24,19 @@ class MenuType extends AbstractType
         $builder
             ->add('name')
             ->add('items', MenuListType::class)
-            ->add('submit', 'submit', array(
+            ->add('submit', SubmitType::class, array(
                 'label' => 'speichern'
             ))
         ;
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MandarinMedien\MMCmfMenuBundle\Entity\Menu',
+            'data_class' => Menu::class,
             'allow_extra_fields' => true
         ));
     }
@@ -42,7 +44,7 @@ class MenuType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'mm_cmf_admin_menu';
     }

@@ -7,6 +7,7 @@ use MandarinMedien\MMCmfRoutingBundle\Entity\RedirectNodeRoute;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class NodeRouteInlineType extends AbstractType
@@ -33,16 +34,16 @@ class NodeRouteInlineType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MandarinMedien\MMCmfRoutingBundle\Entity\NodeRoute'
+            'data_class' => \MandarinMedien\MMCmfRoutingBundle\Entity\NodeRoute::class
         ));
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'mm_cmf_admin_noderoute_inline';
     }

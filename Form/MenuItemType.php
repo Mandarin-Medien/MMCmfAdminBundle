@@ -2,12 +2,11 @@
 
 namespace MandarinMedien\MMCmfAdminBundle\Form;
 
-use MandarinMedien\MMCmfAdminBundle\Form\Types\EntityHiddenType;
 use MandarinMedien\MMCmfAdminBundle\Form\Types\MenuListType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class MenuItemType extends AbstractType
 {
@@ -19,7 +18,7 @@ class MenuItemType extends AbstractType
     {
 
         $builder
-            ->add('position', 'hidden', array(
+            ->add('position', HiddenType::class, array(
                 'attr' => array(
                     'class' =>'position-field'
                 )
@@ -42,9 +41,9 @@ class MenuItemType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'MandarinMedien\MMCmfMenuBundle\Entity\MenuItem'
@@ -54,7 +53,7 @@ class MenuItemType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'mm_cmf_admin_menu_item';
     }
