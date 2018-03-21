@@ -47,7 +47,7 @@ class PageType extends AbstractType
             if (in_array($field, $this->hiddenFields)) continue;
 
 
-            $builder->add($field, $formTypeReader->get($class, $field));
+            $builder->add($field, $formTypeReader->get($class, $field), $formTypeReader->getOptions($class, $field));
 
         }
 
